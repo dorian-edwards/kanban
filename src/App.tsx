@@ -1,3 +1,9 @@
+import MobileNav from './components/MobileNav'
+
 export default function App() {
-  return <>Hello World</>
+  return (
+    <main className=''>
+      <MobileNav />
+    </main>
+  )
 }

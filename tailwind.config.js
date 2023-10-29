@@ -52,6 +52,7 @@ module.exports = {
     borderRadius: {
       sm: '0.4rem',
       lg: '2.4rem',
+      xl: '10rem',
     },
   },
   plugins: [],

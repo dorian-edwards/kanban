@@ -10,26 +10,33 @@ export default function App() {
 
   return (
     <>
-      <nav className=''>
+      <nav className='main-nav flex bg-white'>
         <div
-          className={`side-nav float-left bg-med-gray h-[100vh] ${
-            sidePanelVisible ? 'w-[26rem] pl-[2.8rem] mr-[2.4rem]' : 'w-0'
-          } pt-[2.8rem] overflow-x-hidden transition-[width,_padding,_margin] ease-in-out duration-1000 whitespace-nowrap`}
+          className={`logo-wrapper py-[2.8rem] pl-[2.6rem] border-r-[1px] border-lavendar transition-[padding] duration-1000 ${
+            sidePanelVisible ? 'pr-[8rem]' : 'pr-[2.4rem]'
+          }`}
         >
           <NavDark />
         </div>
-        <div className='main-nav py-[2.8rem] bg-red-hover pl-[2.8rem]'>
-          Main Nav
-        </div>
+        <h1 className='py-[2.8rem] pl-[2.5rem]'>Main Nav</h1>
       </nav>
-      <main className='h-[calc(100vh-80px)] flex justify-center items-center'>
-        <button
-          className='bg-red text-white px-[1rem] py-[0.5rem] rounded-sm'
-          onClick={handleClick}
+      <div className='flex'>
+        <nav
+          className={`side-nav h-[calc(100vh-8.2rem)] bg-white overflow-x-hidden transition-[width] duration-1000 whitespace-nowrap ${
+            sidePanelVisible ? 'w-[26rem]' : 'w-0'
+          } border-r-[1px] border-lavendar`}
         >
-          Press Here
-        </button>
-      </main>
+          Side Nav
+        </nav>
+        <main className='flex flex-grow justify-center items-center border-t-[1px] border-lavendar'>
+          <button
+            className='py-[1rem] px-[2rem] bg-red-hover text-white rounded-sm'
+            onClick={handleClick}
+          >
+            Click Me
+          </button>
+        </main>
+      </div>
     </>
   )
 }

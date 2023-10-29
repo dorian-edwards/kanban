@@ -46,6 +46,7 @@ module.exports = {
       white: '#FFFFFF',
       red: '#EA5555',
       'red-hover': '#FF9898',
+      'battleship-gray': '#979797',
     },
     borderRadius: {
       sm: '0.4rem',

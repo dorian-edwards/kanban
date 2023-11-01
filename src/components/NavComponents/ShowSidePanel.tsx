@@ -1,4 +1,4 @@
-import ShowIcon from './icons/ShowIcon'
+import ShowIcon from '../icons/ShowIcon'
 
 export default function ShowSidePanel({
   showSidePanel,

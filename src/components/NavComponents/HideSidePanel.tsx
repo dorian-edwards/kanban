@@ -1,5 +1,5 @@
-import HideIcon from './icons/HideIcon'
-import { useSidePanel } from '../contexts/SidePanelContext'
+import HideIcon from '../icons/HideIcon'
+import { useSidePanel } from '../../contexts/SidePanelContext'
 
 export default function HideSidePanel() {
   const { toggleSidePanel } = useSidePanel()

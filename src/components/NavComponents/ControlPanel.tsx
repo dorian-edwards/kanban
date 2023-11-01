@@ -1,7 +1,7 @@
 import DarkModeToggle from './DarkModeToggle'
 import HideSidePanel from './HideSidePanel'
-import DarkTheme from './icons/DarkTheme'
-import LightTheme from './icons/LightTheme'
+import DarkTheme from '../icons/DarkTheme'
+import LightTheme from '../icons/LightTheme'
 
 export default function ControlPanel() {
   return (

@@ -1,7 +1,7 @@
-import MobileNavIcon from './icons/MobileNavIcon'
-import ChevronDown from './icons/ChevronDown'
-import VerticalEllipsis from './icons/VerticalEllipsis'
-import AddTask from './icons/AddTask'
+import MobileNavIcon from '../icons/MobileNavIcon'
+import ChevronDown from '../icons/ChevronDown'
+import VerticalEllipsis from '../icons/VerticalEllipsis'
+import AddTask from '../icons/AddTask'
 
 export default function MobileNav() {
   return (

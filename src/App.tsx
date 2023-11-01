@@ -1,6 +1,6 @@
-import MainNav from './components/MainNav'
-import ShowSidePanel from './components/ShowSidePanel'
-import SidePanel from './components/SidePanel'
+import MainNav from './components/NavComponents/MainNav'
+import ShowSidePanel from './components/NavComponents/ShowSidePanel'
+import SidePanel from './components/NavComponents/SidePanel'
 import { useSidePanel } from './contexts/SidePanelContext'
 
 export default function App() {

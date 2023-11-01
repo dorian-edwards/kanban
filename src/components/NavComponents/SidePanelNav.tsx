@@ -1,4 +1,4 @@
-import BoardIcon from './icons/BoardIcon'
+import BoardIcon from '../icons/BoardIcon'
 
 export default function SidePanelNav() {
   return (

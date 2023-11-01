@@ -1,5 +1,5 @@
 import DarkModeToggle from './DarkModeToggle'
-import SidebarToggle from './SidebarToggle'
+import HideSidePanel from './HideSidePanel'
 import DarkTheme from './icons/DarkTheme'
 import LightTheme from './icons/LightTheme'
 
@@ -13,7 +13,7 @@ export default function ControlPanel() {
           <DarkTheme />
         </div>
       </div>
-      <SidebarToggle />
+      <HideSidePanel />
     </div>
   )
 }

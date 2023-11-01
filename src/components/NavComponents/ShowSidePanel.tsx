@@ -7,7 +7,7 @@ export default function ShowSidePanel({
 }) {
   return (
     <button
-      className='absolute pl-[2rem] flex items-center rounded-r-xl w-[5.6rem] h-[4.8rem] bottom-[3.2rem] left-0 bg-main-purple-hover'
+      className='absolute pl-[2rem] flex items-center rounded-r-xl w-[5.6rem] h-[4.8rem] bottom-[4.6rem] left-0 bg-main-purple hover:bg-main-purple-hover'
       onClick={showSidePanel}
     >
       <ShowIcon />

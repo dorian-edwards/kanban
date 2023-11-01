@@ -8,7 +8,7 @@ export default function MainNav({
   return (
     <nav className='main-nav flex bg-white'>
       <div
-        className={`logo-wrapper py-[2.8rem] pl-[2.6rem] border-r-[1px] border-lavendar transition-[padding] duration-1000 ${
+        className={`logo-wrapper py-[2.8rem] pl-[2.6rem] border-r-[1px] border-lavender transition-[padding] duration-1000 ${
           sidePanelVisible ? 'pr-[8rem]' : 'pr-[2.4rem]'
         }`}
       >

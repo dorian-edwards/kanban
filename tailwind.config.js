@@ -42,7 +42,7 @@ module.exports = {
       'dark-gray': '#2B2C37',
       'lines-dark': '#3E3F4E',
       'med-gray': '#828FA3',
-      lavendar: '#E4EBFA',
+      lavender: '#E4EBFA',
       'lgt-gray': '#F4F7FD',
       white: '#FFFFFF',
       red: '#EA5555',

@@ -12,7 +12,7 @@ export default function MainNav({
       <div className='flex'>
         <div
           className={`logo-wrapper py-[2.8rem] pl-[2.6rem] border-r-[1px] border-lavender transition-[padding] duration-1000 ${
-            sidePanelVisible ? 'pr-[8rem]' : 'pr-[2.4rem]'
+            sidePanelVisible ? 'pr-[8rem] desktop:pr-[12.05rem]' : 'pr-[2.4rem]'
           }`}
         >
           <NavDark />

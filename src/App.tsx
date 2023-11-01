@@ -9,12 +9,12 @@ export default function App() {
   return (
     <>
       <MainNav sidePanelVisible={sidePanelVisible} />
-      <div className='flex relative'>
+      <section className='primary-display flex relative'>
         <SidePanel sidePanelVisible={sidePanelVisible} />
         <main className='flex flex-grow justify-center items-center border-t-[1px] border-lavender bg-lgt-gray dark:bg-very-dark-gray'>
           <ShowSidePanel showSidePanel={toggleSidePanel} />
         </main>
-      </div>
+      </section>
     </>
   )
 }

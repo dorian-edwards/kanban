@@ -6,7 +6,7 @@ export default function SidePanelNav() {
       <h2 className='text-xs tracking-wide text-med-gray font-bold mb-[1.2rem] pl-[2.4rem]'>
         {'All Boards (3)'}
       </h2>
-      <nav className='side-panel-nav min-w-[24rem]'>
+      <nav className='side-panel-nav min-w-[24rem] desktop:min-w-[28rem]'>
         <ul>
           <li className='text-med-gray'>
             <div className='link-wrapper pl-[2.4rem] rounded-r-xl bg-main-purple text-white py-[1.2rem]'>

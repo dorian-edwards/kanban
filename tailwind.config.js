@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
@@ -11,10 +12,8 @@ module.exports = {
       },
     },
     screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '976px',
-      xl: '1440px',
+      tablet: '768px',
+      desktop: '1440px',
     },
     fontFamily: {
       sans: ['Plus Jakarta Sans', 'sans-serif'],
@@ -28,7 +27,8 @@ module.exports = {
       sm: '1.3rem',
       med: '1.5rem',
       lg: '1.8rem',
-      xl: '2.4rem',
+      xl: '2rem',
+      '2xl': '2.4rem',
     },
     letterSpacing: {
       wide: '.24rem',
@@ -41,15 +41,17 @@ module.exports = {
       'dark-gray': '#2B2C37',
       'lines-dark': '#3E3F4E',
       'med-gray': '#828FA3',
-      lavendar: '#E4EBFA',
+      lavender: '#E4EBFA',
       'lgt-gray': '#F4F7FD',
       white: '#FFFFFF',
       red: '#EA5555',
       'red-hover': '#FF9898',
+      'battleship-gray': '#979797',
     },
     borderRadius: {
       sm: '0.4rem',
       lg: '2.4rem',
+      xl: '10rem',
     },
   },
   plugins: [],

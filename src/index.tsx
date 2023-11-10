@@ -5,14 +5,17 @@ import './index.css'
 import App from './App'
 import ThemeContextProvider from './contexts/ThemeContext'
 import SidePanelProvider from './contexts/SidePanelContext'
+import DataContextProvider from './contexts/DataContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <ThemeContextProvider>
-      <SidePanelProvider>
-        <App />
-      </SidePanelProvider>
+      <DataContextProvider>
+        <SidePanelProvider>
+          <App />
+        </SidePanelProvider>
+      </DataContextProvider>
     </ThemeContextProvider>
   </React.StrictMode>
 )

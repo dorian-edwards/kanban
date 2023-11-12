@@ -24,6 +24,17 @@ export interface Column {
   tasks: Task[]
 }
 
+export interface LayoverProps {
+  children?: JSX.Element
+  turnLayoverOff: () => void
+  mobile: boolean
+}
+
+export interface MainNavProps {
+  sidePanelVisible: boolean
+  activeBoard: Board
+}
+
 export interface SubTask {
   id: number
   description: string

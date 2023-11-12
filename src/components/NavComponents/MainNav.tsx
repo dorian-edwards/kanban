@@ -1,12 +1,12 @@
+import { MainNavProps } from '../../interfaces'
 import AddTaskButton from '../Buttons/AddTaskButton'
 import { NavMenu } from '../Buttons/NavMenu'
 import NavDark from '../icons/NavDark'
 
 export default function MainNav({
   sidePanelVisible,
-}: {
-  sidePanelVisible: boolean
-}) {
+  activeBoard,
+}: MainNavProps) {
   return (
     <nav className='main-nav flex justify-between bg-white'>
       <div className='flex'>
@@ -18,7 +18,7 @@ export default function MainNav({
           <NavDark />
         </div>
         <h1 className='py-[2.5rem] pl-[2.5rem] font-sans font-bold text-xl'>
-          Kanban Board
+          {activeBoard.title}
         </h1>
       </div>
       <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-[2.4rem]'>

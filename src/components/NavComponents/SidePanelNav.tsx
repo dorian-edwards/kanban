@@ -1,36 +1,39 @@
-import BoardIcon from '../icons/BoardIcon'
+import { useDataContext } from '../../contexts/DataContext'
+import { BoardLink } from '../Buttons/BoardLink'
+import CreateBoardButton from '../Buttons/CreateBoardButton'
 
-export default function SidePanelNav() {
+export interface SidePanelNavProps {
+  turnLayoverOff?: () => void
+}
+
+export default function SidePanelNav({ turnLayoverOff }: SidePanelNavProps) {
+  const {
+    boardLinks,
+    activeBoard: { id: activeId },
+    updateActiveBoard,
+  } = useDataContext()
+
   return (
     <div className='side-panel-nav-wrapper'>
       <h2 className='text-xs tracking-wide text-med-gray font-bold mb-[1.2rem] pl-[2.4rem]'>
-        {'All Boards (3)'}
+        {`All Boards (${boardLinks.length})`}
       </h2>
       <nav className='side-panel-nav min-w-[24rem] desktop:min-w-[28rem]'>
         <ul>
-          <li className='text-med-gray'>
-            <div className='link-wrapper pl-[2.4rem] rounded-r-xl bg-main-purple text-white py-[1.2rem]'>
-              <BoardIcon additionalStyling='mr-[1.2rem]' />
-              Platform Launch
-            </div>
-          </li>
-          <li className='text-med-gray'>
-            <div className='link-wrapper pl-[2.4rem] rounded-r-xl py-[1.2rem]'>
-              <BoardIcon additionalStyling='mr-[1.2rem]' />
-              Marketing Plan
-            </div>
-          </li>
-          <li className='text-med-gray'>
-            <div className='link-wrapper pl-[2.4rem] rounded-r-xl  py-[1.2rem]'>
-              <BoardIcon additionalStyling='mr-[1.2rem]' />
-              Roadmap
-            </div>
-          </li>
+          {boardLinks.map((boardLink) => (
+            <li key={boardLink.id}>
+              <div className='' onClick={turnLayoverOff}>
+                <BoardLink
+                  id={boardLink.id}
+                  title={boardLink.title}
+                  active={boardLink.id === activeId}
+                  update={updateActiveBoard}
+                />
+              </div>
+            </li>
+          ))}
           <li className='text-main-purple'>
-            <button className='link-wrapper pl-[2.4rem] rounded-r-xl py-[1.2rem] flex items-center'>
-              <BoardIcon additionalStyling='mr-[1.2rem]' />
-              +&nbsp;&nbsp;Create New Board
-            </button>
+            <CreateBoardButton />
           </li>
         </ul>
       </nav>

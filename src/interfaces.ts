@@ -12,6 +12,17 @@ export interface Board {
   columns: Column[]
 }
 
+export interface BoardData {
+  boardLinks: BoardLinkData[]
+  activeBoard: Board | null
+  updateActiveBoard: (n: number) => void
+}
+
+export interface BoardLinkData {
+  id: number
+  title: string
+}
+
 export interface BoardLinkprops {
   id: number
   title: string
@@ -32,7 +43,7 @@ export interface LayoverProps {
 
 export interface MainNavProps {
   sidePanelVisible: boolean
-  activeBoard: Board
+  activeBoard: Board | null
 }
 
 export interface SubTask {

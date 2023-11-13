@@ -1,6 +1,5 @@
 import { useContext, createContext, useState } from 'react'
-import data from '../data.json'
-import { Board } from '../interfaces'
+import { Board, BoardData, BoardLinkData } from '../interfaces'
 
 const DataContext = createContext<BoardData | null>(null)
 
@@ -9,8 +8,15 @@ export default function DataContextProvider({
 }: {
   children: JSX.Element
 }) {
-  const [activeBoard, setActiveBoard] = useState<Board>(data[0])
-  const boardLinks = data.map((board) => ({ id: board.id, title: board.title }))
+  const [activeBoard, setActiveBoard] = useState<Board | null>(
+    data.length === 0 ? null : data[0]
+  )
+
+  let boardLinks: BoardLinkData[] = []
+
+  if (boardLinks.length !== 0) {
+    boardLinks = data.map((board) => ({ id: board.id, title: board.title }))
+  }
 
   function updateActiveBoard(id: number): void {
     const board = data.filter((b) => b.id === id)[0]
@@ -34,13 +40,4 @@ export function useDataContext() {
   return context
 }
 
-export interface BoardLinkData {
-  id: number
-  title: string
-}
-
-export interface BoardData {
-  boardLinks: BoardLinkData[]
-  activeBoard: Board
-  updateActiveBoard: (n: number) => void
-}
+const data: Board[] = []

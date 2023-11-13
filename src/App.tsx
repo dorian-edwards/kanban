@@ -23,7 +23,7 @@ export default function App() {
   return (
     <>
       {mobile ? (
-        <MobileNav />
+        <MobileNav activeBoard={activeBoard} />
       ) : (
         <MainNav
           sidePanelVisible={sidePanelVisible}

@@ -2,7 +2,11 @@ import { useDataContext } from '../../contexts/DataContext'
 import { BoardLink } from '../Buttons/BoardLink'
 import CreateBoardButton from '../Buttons/CreateBoardButton'
 
-export default function SidePanelNav() {
+export interface SidePanelNavProps {
+  turnLayoverOff?: () => void
+}
+
+export default function SidePanelNav({ turnLayoverOff }: SidePanelNavProps) {
   const {
     boardLinks,
     activeBoard: { id: activeId },
@@ -18,12 +22,14 @@ export default function SidePanelNav() {
         <ul>
           {boardLinks.map((boardLink) => (
             <li key={boardLink.id}>
-              <BoardLink
-                id={boardLink.id}
-                title={boardLink.title}
-                active={boardLink.id === activeId}
-                update={updateActiveBoard}
-              />
+              <div className='' onClick={turnLayoverOff}>
+                <BoardLink
+                  id={boardLink.id}
+                  title={boardLink.title}
+                  active={boardLink.id === activeId}
+                  update={updateActiveBoard}
+                />
+              </div>
             </li>
           ))}
           <li className='text-main-purple'>

@@ -5,21 +5,28 @@ import ChevronDown from '../icons/ChevronDown'
 import Layover from '../Layover'
 import MobileNavIcon from '../icons/MobileNavIcon'
 import VerticalEllipsis from '../icons/VerticalEllipsis'
+import MobileNavMenu from './MobileNavMenu'
+import { Board } from '../../interfaces'
 
-export default function MobileNav() {
+export interface MobileNavProps {
+  activeBoard: Board
+}
+
+export default function MobileNav({ activeBoard }: MobileNavProps) {
   const [layoverActive, setLayoverActive] = useState<boolean>(false)
+
   return (
     <>
       {layoverActive ? (
         <Layover mobile={true} turnLayoverOff={() => setLayoverActive(false)}>
-          <div className='test-button'>broh!</div>
+          <MobileNavMenu turnLayoverOff={() => setLayoverActive(false)} />
         </Layover>
       ) : null}
       <nav className='pl-[2.4rem] pr-[1.6rem] py-[1.6rem] flex items-center justify-between bg-white'>
         <div className='flex items-center'>
           <MobileNavIcon />
           <h1 className='font-bold font-sans text-xl mr-[1rem]'>
-            Platform Launch
+            {activeBoard.title}
           </h1>
           {layoverActive ? (
             <button onClick={() => setLayoverActive(false)}>

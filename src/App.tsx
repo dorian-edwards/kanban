@@ -6,21 +6,12 @@ import ShowSidePanel from './components/NavComponents/ShowSidePanel'
 import SidePanel from './components/NavComponents/SidePanel'
 import MobileNav from './components/NavComponents/MobileNav'
 import ButtonPrimary from './components/Buttons/ButtonPrimary'
+import useScreenMonitor from './components/Hooks/useScreenMonitor'
 
 export default function App() {
-  const [mobile, setMobile] = useState<boolean>(window.innerWidth < 768)
   const { sidePanelVisible, toggleSidePanel } = useSidePanel()
   const { activeBoard } = useDataContext()
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) return setMobile(true)
-
-      setMobile(false)
-    }
-    window.addEventListener('resize', handleResize)
-  }, [])
-
+  const mobile = useScreenMonitor()
   return (
     <>
       {mobile ? (

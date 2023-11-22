@@ -65,6 +65,7 @@ export interface MobileNavMenuProps {
   layoverActive: boolean
   setFullScreen: (b: boolean) => void
   setLayoverActive: (b: boolean) => void
+  fullScreenActive: boolean
 }
 
 export interface SubTask {

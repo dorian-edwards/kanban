@@ -1,5 +1,4 @@
 import { MainNavProps } from '../../interfaces'
-import AddTaskButton from '../Buttons/AddTaskButton'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import { NavMenu } from '../Buttons/NavMenu'
 import NavDark from '../icons/NavDark'

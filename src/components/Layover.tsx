@@ -24,7 +24,7 @@ export default function Layover({ children, turnLayoverOff }: LayoverProps) {
 
   return (
     <div
-      className={`w-full absolute z-[100] flex justify-center bg-[rgba(0,0,0,0.5)] h-full items-center`}
+      className={`w-full absolute z-[100] flex justify-center bg-[rgba(0,0,0,0.5)] h-full items-center top-0 left-0`}
     >
       <div
         className='layover-menu absolute z-[101] w-full max-w-[26.4rem] mt-4'

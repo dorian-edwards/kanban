@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { MobileNavMenuProps } from '../../interfaces'
 import ChevronDown from '../icons/ChevronDown'
 import ChevronUp from '../icons/ChevronUp'
@@ -8,27 +9,27 @@ export default function MobileNavMenu({
   layoverActive,
   setFullScreen,
   setLayoverActive,
+  fullScreenActive,
 }: MobileNavMenuProps) {
+  const [chevronPressed, setChevronPressed] = useState<boolean>(false)
+
+  const chevron = chevronPressed ? <ChevronUp /> : <ChevronDown />
+
   return (
     <div className='flex items-center'>
       <MobileNavIcon />
       <h1 className='font-bold font-sans text-xl mr-[1rem]'>
         {activeBoardTitle}
       </h1>
-      {layoverActive ? (
-        <button onClick={() => setLayoverActive(false)}>
-          <ChevronUp />
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            setFullScreen(false)
-            setLayoverActive(true)
-          }}
-        >
-          <ChevronDown />
-        </button>
-      )}
+      <button
+        onClick={() => {
+          setFullScreen(!fullScreenActive)
+          setLayoverActive(!layoverActive)
+          setChevronPressed(!chevronPressed)
+        }}
+      >
+        {chevron}
+      </button>
     </div>
   )
 }

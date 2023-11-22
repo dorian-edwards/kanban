@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Layover from '../Layover'
-import MobileControlPanel from './MobileControlPanel'
 import { MobileNavProps } from '../../interfaces'
 import MobileNavMenu from './MobileNavMenu'
+import MobileControlPanel from './MobileControlPanel'
 import MobileEdit from './MobileEdit'
 
 export default function MobileNav({ activeBoard }: MobileNavProps) {
@@ -33,6 +33,7 @@ export default function MobileNav({ activeBoard }: MobileNavProps) {
             layoverActive={layoverActive}
             setFullScreen={setFullScreen}
             setLayoverActive={setLayoverActive}
+            fullScreenActive={fullScreen}
           />
         ) : (
           // Empty div for flex spacing

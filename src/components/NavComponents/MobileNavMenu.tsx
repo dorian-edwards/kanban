@@ -1,18 +1,34 @@
-import SidePanelNav from './SidePanelNav'
-import ThemeToggle from './ThemeToggle'
+import { MobileNavMenuProps } from '../../interfaces'
+import ChevronDown from '../icons/ChevronDown'
+import ChevronUp from '../icons/ChevronUp'
+import MobileNavIcon from '../icons/MobileNavIcon'
 
-export interface MobileNavMenuProps {
-  turnLayoverOff: () => void
-}
-
-export default function MobileNavMenu({ turnLayoverOff }: MobileNavMenuProps) {
+export default function MobileNavMenu({
+  activeBoardTitle,
+  layoverActive,
+  setFullScreen,
+  setLayoverActive,
+}: MobileNavMenuProps) {
   return (
-    <div className='mobile-menu bg-white py-[1.6rem] rounded-md'>
-      {' '}
-      <SidePanelNav turnLayoverOff={turnLayoverOff} />
-      <div className='mt-[1.6rem] w-full max-w-[23.5rem] mx-auto'>
-        <ThemeToggle />
-      </div>
+    <div className='flex items-center'>
+      <MobileNavIcon />
+      <h1 className='font-bold font-sans text-xl mr-[1rem]'>
+        {activeBoardTitle}
+      </h1>
+      {layoverActive ? (
+        <button onClick={() => setLayoverActive(false)}>
+          <ChevronUp />
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            setFullScreen(false)
+            setLayoverActive(true)
+          }}
+        >
+          <ChevronDown />
+        </button>
+      )}
     </div>
   )
 }

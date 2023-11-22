@@ -1,51 +1,48 @@
 import { useState } from 'react'
-import AddTask from '../icons/AddTask'
-import ChevronUp from '../icons/ChevronUp'
-import ChevronDown from '../icons/ChevronDown'
 import Layover from '../Layover'
-import MobileNavIcon from '../icons/MobileNavIcon'
-import VerticalEllipsis from '../icons/VerticalEllipsis'
+import MobileControlPanel from './MobileControlPanel'
+import { MobileNavProps } from '../../interfaces'
 import MobileNavMenu from './MobileNavMenu'
-import { Board } from '../../interfaces'
-
-export interface MobileNavProps {
-  activeBoard: Board
-}
+import MobileEdit from './MobileEdit'
 
 export default function MobileNav({ activeBoard }: MobileNavProps) {
   const [layoverActive, setLayoverActive] = useState<boolean>(false)
+  const [fullScreen, setFullScreen] = useState<boolean>(true)
+
+  const modal = fullScreen ? (
+    <div>Broh</div>
+  ) : (
+    <MobileControlPanel turnLayoverOff={() => setLayoverActive(false)} />
+  )
 
   return (
     <>
       {layoverActive ? (
-        <Layover mobile={true} turnLayoverOff={() => setLayoverActive(false)}>
-          <MobileNavMenu turnLayoverOff={() => setLayoverActive(false)} />
+        <Layover turnLayoverOff={() => setLayoverActive(false)}>
+          {modal}
         </Layover>
       ) : null}
-      <nav className='pl-[2.4rem] pr-[1.6rem] py-[1.6rem] flex items-center justify-between bg-white'>
-        <div className='flex items-center'>
-          <MobileNavIcon />
-          <h1 className='font-bold font-sans text-xl mr-[1rem]'>
-            {activeBoard.title}
-          </h1>
-          {layoverActive ? (
-            <button onClick={() => setLayoverActive(false)}>
-              <ChevronUp />
-            </button>
-          ) : (
-            <button onClick={() => setLayoverActive(true)}>
-              <ChevronDown />
-            </button>
-          )}
-        </div>
-        <div className='flex items-center'>
-          <button className='flex justify-center items-center w-[4.8rem] h-[3.2rem] bg-main-purple-hover rounded-lg'>
-            <AddTask />
-          </button>
-          <button className='ml-[2rem]'>
-            <VerticalEllipsis />
-          </button>
-        </div>
+      <nav
+        className={`mobile-nav relative ${
+          fullScreen ? '' : 'z-[101]'
+        } pl-[2.4rem] pr-[1.6rem] py-[1.6rem] flex items-center justify-between bg-white`}
+      >
+        {activeBoard ? (
+          <MobileNavMenu
+            activeBoardTitle={activeBoard.title}
+            layoverActive={layoverActive}
+            setFullScreen={setFullScreen}
+            setLayoverActive={setLayoverActive}
+          />
+        ) : (
+          // Empty div for flex spacing
+          <div></div>
+        )}
+        <MobileEdit
+          activeBoard={activeBoard}
+          setFullScreen={setFullScreen}
+          setLayoverActive={setLayoverActive}
+        />
       </nav>
     </>
   )

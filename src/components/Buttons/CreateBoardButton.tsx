@@ -7,7 +7,7 @@ export default function CreateBoardButton() {
         additionalStyling='mr-[1.2rem]'
         pathStyling='fill-main-purple'
       />
-      +&nbsp;&nbsp;Create New Board
+      {'+  Create New Board'}
     </button>
   )
 }

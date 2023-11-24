@@ -1,16 +1,8 @@
 import { useState } from 'react'
 import ButtonPrimary from './Buttons/ButtonPrimary'
 import CrossIcon from './icons/CrossIcon'
-
-export interface BoardInfo {
-  title: string
-  columns: ColumnInfo[]
-}
-
-export interface ColumnInfo {
-  id: string
-  title: string
-}
+import { BoardInfo } from '../interfaces'
+import ButtonSecondary from './Buttons/ButtonSecondary'
 
 export default function CreateBoard() {
   const [board, setBoard] = useState<BoardInfo>({
@@ -37,12 +29,7 @@ export default function CreateBoard() {
       <form>
         <h2 className='mb-[2.4rem] font-bold text-[1.8rem]'>Add New Board</h2>
         <div className='mb-[2.4rem]'>
-          <label
-            className='mb-[0.8rem] block font-bold text-[1.2rem] text-med-gray'
-            htmlFor='board-name'
-          >
-            Board Name
-          </label>
+          <Label>Board Name</Label>
           <input
             type='text'
             id='board-name'
@@ -50,9 +37,7 @@ export default function CreateBoard() {
           />
         </div>
         <div className='mb-[1.2rem]'>
-          <label className='mb-[0.8rem] block font-bold text-[1.2rem] text-med-gray'>
-            Board Columns
-          </label>
+          <Label>Board Columns</Label>
           {board.columns.map(({ id, title }, index) => {
             return (
               <div key={index}>
@@ -69,18 +54,39 @@ export default function CreateBoard() {
             )
           })}
         </div>
-        <ButtonPrimary
-          text={'+ Add New Column'}
+        <ButtonSecondary
           onClick={handleAddColumn}
-          additionalStyling='w-full mb-[2.4rem] bg-main-purple-opaque !text-main-purple'
+          additionalStyling='mb-[2.4rem]'
           type='button'
-        />
-        <ButtonPrimary text='Create New Board' type='button' />
+        >
+          + Add New Column
+        </ButtonSecondary>
+        <ButtonPrimary type='button'>Create New Board</ButtonPrimary>
       </form>
     </div>
   )
 }
 
+export function Label({ children }: LabelProps) {
+  return (
+    <label
+      className='mb-[0.8rem] block font-bold text-[1.2rem] text-med-gray'
+      htmlFor='board-name'
+    >
+      {children}
+    </label>
+  )
+}
+
+export interface LabelProps {
+  children: string | JSX.Element
+}
+
+/**
+ * Returns a randomly generated sequence of 3 capital letters and four numbers for creating ids
+ *
+ * @returns string
+ */
 function keyGen(): string {
   let results = ''
 

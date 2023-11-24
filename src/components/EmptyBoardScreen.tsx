@@ -1,5 +1,6 @@
 import { useOverlayContext } from '../contexts/OverlayContext'
 import ButtonPrimary from './Buttons/ButtonPrimary'
+import CreateBoard from './CreateBoard'
 import Overlay from './Overlay'
 
 export default function EmptyBoardScreen() {
@@ -9,7 +10,7 @@ export default function EmptyBoardScreen() {
     <>
       {overlayActive ? (
         <Overlay turnOverlayOff={() => setOverlayActive(false)}>
-          <div>Broh</div>
+          <CreateBoard />
         </Overlay>
       ) : (
         <></>
@@ -18,10 +19,9 @@ export default function EmptyBoardScreen() {
         <h2 className='mb-[2.5rem] text-med-gray font-bold text-lg'>
           This board is empty. Create a new column to get started.
         </h2>
-        <ButtonPrimary
-          text='+ Add New Column'
-          onClick={() => setOverlayActive(true)}
-        />
+        <ButtonPrimary onClick={() => setOverlayActive(true)}>
+          {'+ Add New Column'}
+        </ButtonPrimary>
       </div>
     </>
   )

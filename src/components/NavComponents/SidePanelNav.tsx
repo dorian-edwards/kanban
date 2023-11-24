@@ -14,10 +14,10 @@ export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
       <h2 className='text-xs tracking-wide text-med-gray font-bold mb-[1.2rem] pl-[2.4rem]'>
         {`All Boards (${boardLinks.length})`}
       </h2>
-      {activeBoard ? (
-        <nav className='side-panel-nav min-w-[24rem] desktop:min-w-[28rem]'>
-          <ul>
-            {boardLinks.map((boardLink) => (
+      <nav className='side-panel-nav min-w-[24rem] desktop:min-w-[28rem]'>
+        <ul>
+          {activeBoard &&
+            boardLinks.map((boardLink) => (
               <li key={boardLink.id}>
                 <div className='' onClick={turnOverlayOff}>
                   <BoardLink
@@ -29,12 +29,11 @@ export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
                 </div>
               </li>
             ))}
-            <li className='text-main-purple'>
-              <CreateBoardButton />
-            </li>
-          </ul>
-        </nav>
-      ) : null}
+          <li className='text-primary-purple'>
+            <CreateBoardButton />
+          </li>
+        </ul>
+      </nav>
     </div>
   )
 }

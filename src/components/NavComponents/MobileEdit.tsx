@@ -12,8 +12,8 @@ export default function MobileEdit({
       <button
         className={`flex justify-center items-center w-[4.8rem] h-[3.2rem] rounded-lg ${
           activeBoard && activeBoard.columns.length !== 0
-            ? 'bg-main-purple hover:bg-main-purple-hover'
-            : 'bg-main-purple-disabled'
+            ? 'bg-primary-purple hover:bg-primary-purple-hover'
+            : 'bg-primary-purple-disabled'
         }`}
         disabled={!activeBoard || activeBoard.columns.length === 0}
         onClick={() => {

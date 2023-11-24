@@ -20,10 +20,9 @@ export default function EmptyWorkspaceScreen() {
         <h2 className='mb-[2.5rem] text-med-gray font-bold text-lg'>
           This workspace is empty. Create a new board to get started.
         </h2>
-        <ButtonPrimary
-          text='+ Add New Board'
-          onClick={() => setOverlayActive(true)}
-        />
+        <ButtonPrimary onClick={() => setOverlayActive(true)}>
+          {'+ Add New Board'}
+        </ButtonPrimary>
       </div>
     </>
   )

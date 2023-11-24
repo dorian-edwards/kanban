@@ -18,6 +18,11 @@ export interface BoardData {
   updateActiveBoard: (n: number) => void
 }
 
+export interface BoardInfo {
+  title: string
+  columns: ColumnInfo[]
+}
+
 export interface BoardLinkData {
   id: number
   title: string
@@ -30,9 +35,22 @@ export interface BoardLinkprops {
   update: (n: number) => void
 }
 
+export interface ButtonInterface {
+  children: string | JSX.Element
+  type?: 'button' | 'submit' | 'reset' | undefined
+  additionalStyling?: string
+  disabled?: boolean
+  onClick?: () => void | ((id: number) => void)
+}
+
 export interface Column {
   title: string
   tasks: Task[]
+}
+
+export interface ColumnInfo {
+  id: string
+  title: string
 }
 
 export interface OverlayProps {

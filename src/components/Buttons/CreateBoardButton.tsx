@@ -11,7 +11,7 @@ export default function CreateBoardButton() {
     >
       <BoardIcon
         additionalStyling='mr-[1.2rem]'
-        pathStyling='fill-main-purple'
+        pathStyling='fill-primary-purple'
       />
       {'+  Create New Board'}
     </button>

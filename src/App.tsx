@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useSidePanel } from './contexts/SidePanelContext'
 import { useDataContext } from './contexts/DataContext'
 import MainNav from './components/NavComponents/MainNav'

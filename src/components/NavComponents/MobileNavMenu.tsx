@@ -6,9 +6,9 @@ import MobileNavIcon from '../icons/MobileNavIcon'
 
 export default function MobileNavMenu({
   activeBoardTitle,
-  layoverActive,
+  overlayActive,
   setFullScreen,
-  setLayoverActive,
+  setOverlayActive,
   fullScreenActive,
 }: MobileNavMenuProps) {
   const [chevronPressed, setChevronPressed] = useState<boolean>(false)
@@ -24,7 +24,7 @@ export default function MobileNavMenu({
       <button
         onClick={() => {
           setFullScreen(!fullScreenActive)
-          setLayoverActive(!layoverActive)
+          setOverlayActive(!overlayActive)
           setChevronPressed(!chevronPressed)
         }}
       >

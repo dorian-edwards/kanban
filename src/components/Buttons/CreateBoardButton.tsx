@@ -1,13 +1,13 @@
-import { useLayoverContext } from '../../contexts/LayoverContext'
+import { useOverlayContext } from '../../contexts/OverlayContext'
 import BoardIcon from '../icons/BoardIcon'
 
 export default function CreateBoardButton() {
-  const { setLayoverActive } = useLayoverContext()
+  const { setOverlayActive } = useOverlayContext()
 
   return (
     <button
       className='link-wrapper pl-[2.4rem] rounded-r-xl py-[1.2rem] flex items-center'
-      onClick={() => setLayoverActive(true)}
+      onClick={() => setOverlayActive(true)}
     >
       <BoardIcon
         additionalStyling='mr-[1.2rem]'

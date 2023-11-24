@@ -5,7 +5,7 @@ import VerticalEllipsis from '../icons/VerticalEllipsis'
 export default function MobileEdit({
   activeBoard,
   setFullScreen,
-  setLayoverActive,
+  setOverlayActive,
 }: MobileEditProps) {
   return (
     <div className='mobile-edit flex items-center'>
@@ -18,7 +18,7 @@ export default function MobileEdit({
         disabled={!activeBoard || activeBoard.columns.length === 0}
         onClick={() => {
           setFullScreen(true)
-          setLayoverActive(true)
+          setOverlayActive(true)
         }}
       >
         <AddTask />

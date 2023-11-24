@@ -1,16 +1,16 @@
-import { useLayoverContext } from '../contexts/LayoverContext'
+import { useOverlayContext } from '../contexts/OverlayContext'
 import ButtonPrimary from './Buttons/ButtonPrimary'
-import Layover from './Layover'
+import Overlay from './Overlay'
 
 export default function EmptyBoardScreen() {
-  const { layoverActive, setLayoverActive } = useLayoverContext()
+  const { overlayActive, setOverlayActive } = useOverlayContext()
 
   return (
     <>
-      {layoverActive ? (
-        <Layover turnLayoverOff={() => setLayoverActive(false)}>
+      {overlayActive ? (
+        <Overlay turnOverlayOff={() => setOverlayActive(false)}>
           <div>Broh</div>
-        </Layover>
+        </Overlay>
       ) : (
         <></>
       )}
@@ -20,7 +20,7 @@ export default function EmptyBoardScreen() {
         </h2>
         <ButtonPrimary
           text='+ Add New Column'
-          onClick={() => setLayoverActive(true)}
+          onClick={() => setOverlayActive(true)}
         />
       </div>
     </>

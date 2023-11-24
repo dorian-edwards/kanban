@@ -1,17 +1,18 @@
-import { useLayoverContext } from '../contexts/LayoverContext'
+import { useOverlayContext } from '../contexts/OverlayContext'
 import ButtonPrimary from './Buttons/ButtonPrimary'
-import Layover from './Layover'
+import CreateBoard from './CreateBoard'
+import Overlay from './Overlay'
 
 // Display if there are no active boards
 export default function EmptyWorkspaceScreen() {
-  const { layoverActive, setLayoverActive } = useLayoverContext()
+  const { overlayActive, setOverlayActive } = useOverlayContext()
 
   return (
     <>
-      {layoverActive ? (
-        <Layover turnLayoverOff={() => setLayoverActive(false)}>
+      {overlayActive ? (
+        <Overlay turnOverlayOff={() => setOverlayActive(false)}>
           <CreateBoard />
-        </Layover>
+        </Overlay>
       ) : (
         <></>
       )}
@@ -21,21 +22,9 @@ export default function EmptyWorkspaceScreen() {
         </h2>
         <ButtonPrimary
           text='+ Add New Board'
-          onClick={() => setLayoverActive(true)}
+          onClick={() => setOverlayActive(true)}
         />
       </div>
-    </>
-  )
-}
-
-export function CreateBoard() {
-  return (
-    <>
-      <form action=''>
-        <label htmlFor='name'>Name</label>
-        <input type='text' name='' id='name' />
-        <button type='submit'>Submit</button>
-      </form>
     </>
   )
 }

@@ -35,20 +35,20 @@ export interface Column {
   tasks: Task[]
 }
 
-export interface LayoverProps {
+export interface OverlayProps {
   children?: JSX.Element
-  turnLayoverOff: () => void
+  turnOverlayOff: () => void
   isFullScreen?: boolean
 }
 
 export interface MobileControlPanelProps {
-  turnLayoverOff: () => void
+  turnOverlayOff: () => void
 }
 
 export interface MobileEditProps {
   activeBoard: Board | null
   setFullScreen: (b: boolean) => void
-  setLayoverActive: (b: boolean) => void
+  setOverlayActive: (b: boolean) => void
 }
 
 export interface MainNavProps {
@@ -62,9 +62,9 @@ export interface MobileNavProps {
 
 export interface MobileNavMenuProps {
   activeBoardTitle: string
-  layoverActive: boolean
+  overlayActive: boolean
   setFullScreen: (b: boolean) => void
-  setLayoverActive: (b: boolean) => void
+  setOverlayActive: (b: boolean) => void
   fullScreenActive: boolean
 }
 

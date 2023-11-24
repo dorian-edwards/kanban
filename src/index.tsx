@@ -6,18 +6,18 @@ import App from './App'
 import ThemeContextProvider from './contexts/ThemeContext'
 import SidePanelProvider from './contexts/SidePanelContext'
 import DataContextProvider from './contexts/DataContext'
-import LayoverContextProvider from './contexts/LayoverContext'
+import OverlayContextProvider from './contexts/OverlayContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <ThemeContextProvider>
       <DataContextProvider>
-        <LayoverContextProvider>
+        <OverlayContextProvider>
           <SidePanelProvider>
             <App />
           </SidePanelProvider>
-        </LayoverContextProvider>
+        </OverlayContextProvider>
       </DataContextProvider>
     </ThemeContextProvider>
   </React.StrictMode>

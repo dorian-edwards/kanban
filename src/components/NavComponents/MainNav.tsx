@@ -1,5 +1,4 @@
 import { MainNavProps } from '../../interfaces'
-import AddTaskButton from '../Buttons/AddTaskButton'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import { NavMenu } from '../Buttons/NavMenu'
 import NavDark from '../icons/NavDark'
@@ -26,9 +25,11 @@ export default function MainNav({
       </div>
       <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-[2.4rem]'>
         <ButtonPrimary
-          text='+ Add New Task'
           disabled={!(activeBoard && activeBoard.columns.length !== 0) || true}
-        />
+          additionalStyling='px-[2.5rem]'
+        >
+          {'+ Add New Task'}
+        </ButtonPrimary>
         <NavMenu />
       </div>
     </nav>

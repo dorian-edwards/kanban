@@ -1,26 +1,26 @@
 import { useState } from 'react'
-import Layover from '../Layover'
-import MobileControlPanel from './MobileControlPanel'
+import Overlay from '../Overlay'
 import { MobileNavProps } from '../../interfaces'
 import MobileNavMenu from './MobileNavMenu'
+import MobileControlPanel from './MobileControlPanel'
 import MobileEdit from './MobileEdit'
 
 export default function MobileNav({ activeBoard }: MobileNavProps) {
-  const [layoverActive, setLayoverActive] = useState<boolean>(false)
+  const [overlayActive, setOverlayActive] = useState<boolean>(false)
   const [fullScreen, setFullScreen] = useState<boolean>(true)
 
   const modal = fullScreen ? (
     <div>Broh</div>
   ) : (
-    <MobileControlPanel turnLayoverOff={() => setLayoverActive(false)} />
+    <MobileControlPanel turnOverlayOff={() => setOverlayActive(false)} />
   )
 
   return (
     <>
-      {layoverActive ? (
-        <Layover turnLayoverOff={() => setLayoverActive(false)}>
+      {overlayActive ? (
+        <Overlay turnOverlayOff={() => setOverlayActive(false)}>
           {modal}
-        </Layover>
+        </Overlay>
       ) : null}
       <nav
         className={`mobile-nav relative ${
@@ -30,9 +30,10 @@ export default function MobileNav({ activeBoard }: MobileNavProps) {
         {activeBoard ? (
           <MobileNavMenu
             activeBoardTitle={activeBoard.title}
-            layoverActive={layoverActive}
+            overlayActive={overlayActive}
             setFullScreen={setFullScreen}
-            setLayoverActive={setLayoverActive}
+            setOverlayActive={setOverlayActive}
+            fullScreenActive={fullScreen}
           />
         ) : (
           // Empty div for flex spacing
@@ -41,7 +42,7 @@ export default function MobileNav({ activeBoard }: MobileNavProps) {
         <MobileEdit
           activeBoard={activeBoard}
           setFullScreen={setFullScreen}
-          setLayoverActive={setLayoverActive}
+          setOverlayActive={setOverlayActive}
         />
       </nav>
     </>

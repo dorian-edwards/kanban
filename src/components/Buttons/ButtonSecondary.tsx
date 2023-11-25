@@ -1,6 +1,6 @@
 import { ButtonProps } from '../../interfaces'
 
-export default function AddTaskButton({
+export default function ButtonSecondary({
   children,
   type,
   additionalStyling,
@@ -9,7 +9,7 @@ export default function AddTaskButton({
 }: ButtonProps) {
   return (
     <button
-      className={`w-full py-[1.4rem] text-center rounded-lg text-white bg-primary-purple hover:bg-primary-purple-hover disabled:bg-lavender ${additionalStyling}`}
+      className={`w-full py-[1.4rem] text-center rounded-lg text-primary-purple bg-secondary-purple hover:bg-secondary-purple-hover disabled:bg-primary-purple-disabled ${additionalStyling}`}
       disabled={disabled}
       onClick={onClick}
       type={type}

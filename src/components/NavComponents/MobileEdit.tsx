@@ -5,20 +5,20 @@ import VerticalEllipsis from '../icons/VerticalEllipsis'
 export default function MobileEdit({
   activeBoard,
   setFullScreen,
-  setLayoverActive,
+  setOverlayActive,
 }: MobileEditProps) {
   return (
     <div className='mobile-edit flex items-center'>
       <button
         className={`flex justify-center items-center w-[4.8rem] h-[3.2rem] rounded-lg ${
           activeBoard && activeBoard.columns.length !== 0
-            ? 'bg-main-purple hover:bg-main-purple-hover'
-            : 'bg-main-purple-disabled'
+            ? 'bg-primary-purple hover:bg-primary-purple-hover'
+            : 'bg-primary-purple-disabled'
         }`}
         disabled={!activeBoard || activeBoard.columns.length === 0}
         onClick={() => {
           setFullScreen(true)
-          setLayoverActive(true)
+          setOverlayActive(true)
         }}
       >
         <AddTask />

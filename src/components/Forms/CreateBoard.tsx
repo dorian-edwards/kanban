@@ -1,8 +1,10 @@
-import { useState } from 'react'
-import ButtonPrimary from './Buttons/ButtonPrimary'
-import CrossIcon from './icons/CrossIcon'
-import { BoardInfo } from '../interfaces'
-import ButtonSecondary from './Buttons/ButtonSecondary'
+import { FormEvent, useState } from 'react'
+import ButtonPrimary from '../Buttons/ButtonPrimary'
+import { BoardInfo } from '../../interfaces'
+import ButtonSecondary from '../Buttons/ButtonSecondary'
+import Label from './FormElements/Label'
+import Input from './FormElements/Input'
+import DynamicInput from './FormElements/DynamicInput'
 
 export default function CreateBoard() {
   const [board, setBoard] = useState<BoardInfo>({
@@ -24,16 +26,36 @@ export default function CreateBoard() {
     })
   }
 
+  const handleColumnInput = (
+    e: React.FormEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const columnCopy = [...board.columns]
+    columnCopy[index].title = e.currentTarget.value
+
+    setBoard({ ...board, columns: [...columnCopy] })
+  }
+
+  const handleTitleInput = (e: React.FormEvent<HTMLInputElement>) => {
+    setBoard({ ...board, title: e.currentTarget.value })
+  }
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(board)
+  }
+
   return (
     <div className='bg-white p-[2.4rem] rounded-sm mx-[16px]'>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <h2 className='mb-[2.4rem] font-bold text-[1.8rem]'>Add New Board</h2>
         <div className='mb-[2.4rem]'>
-          <Label>Board Name</Label>
-          <input
+          <Label htmlFor='board-name'>Board Name</Label>
+          <Input
             type='text'
             id='board-name'
-            className='border border-cool-gray rounded-sm outline-none w-full pl-[1.6rem] py-[0.8rem]'
+            value={board.title}
+            onChange={handleTitleInput}
           />
         </div>
         <div className='mb-[1.2rem]'>
@@ -41,15 +63,13 @@ export default function CreateBoard() {
           {board.columns.map(({ id, title }, index) => {
             return (
               <div key={index}>
-                <div className='flex gap-[1.6rem] mb-[1.2rem]'>
-                  <input
-                    type='text'
-                    className='border border-cool-gray rounded-sm outline-none w-full pl-[1.6rem] py-[0.8rem]'
-                  />
-                  <button onClick={() => handleDeleteColumn(id)} type='button'>
-                    <CrossIcon />
-                  </button>
-                </div>
+                <DynamicInput
+                  onClick={() => handleDeleteColumn(id)}
+                  inputType='text'
+                  buttonType='button'
+                  value={board.columns[index].title}
+                  onChange={(e) => handleColumnInput(e, index)}
+                />
               </div>
             )
           })}
@@ -61,25 +81,10 @@ export default function CreateBoard() {
         >
           + Add New Column
         </ButtonSecondary>
-        <ButtonPrimary type='button'>Create New Board</ButtonPrimary>
+        <ButtonPrimary type='submit'>Create New Board</ButtonPrimary>
       </form>
     </div>
   )
-}
-
-export function Label({ children }: LabelProps) {
-  return (
-    <label
-      className='mb-[0.8rem] block font-bold text-[1.2rem] text-med-gray'
-      htmlFor='board-name'
-    >
-      {children}
-    </label>
-  )
-}
-
-export interface LabelProps {
-  children: string | JSX.Element
 }
 
 /**

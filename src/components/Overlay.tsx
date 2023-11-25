@@ -4,33 +4,8 @@ import { OverlayProps } from '../interfaces'
 export default function Overlay({ children, turnOverlayOff }: OverlayProps) {
   const ref = useRef<HTMLDivElement>(null)
 
-  // useEffect(() => {
-  //   function handleClickOutside(event: MouseEvent) {
-  //     if (!ref.current) return
-
-  //     // if (!ref.current.contains(event.target)) turnOverlayOff()
-  //     if (
-  //       event.target instanceof HTMLElement &&
-  //       !ref.current.contains(event.target)
-  //     ) {
-  //       console.log('hey')
-  //       turnOverlayOff()
-  //     }
-  //   }
-
-  //   const test = setTimeout(() => {
-  //     document.addEventListener('click', handleClickOutside)
-  //   }, 500)
-
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside)
-  //     clearTimeout(test)
-  //   }
-  // }, [turnOverlayOff])
-
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      console.log((e.target as HTMLElement).getAttribute('id'))
       if ((e.target as HTMLElement).getAttribute('id') === 'overlay')
         turnOverlayOff()
     }

@@ -1,4 +1,4 @@
-import { ButtonInterface } from '../../interfaces'
+import { ButtonProps } from '../../interfaces'
 
 export default function ButtonSecondary({
   children,
@@ -6,7 +6,7 @@ export default function ButtonSecondary({
   additionalStyling,
   disabled,
   onClick,
-}: ButtonInterface) {
+}: ButtonProps) {
   return (
     <button
       className={`w-full py-[1.4rem] text-center rounded-lg text-primary-purple bg-secondary-purple hover:bg-secondary-purple-hover disabled:bg-primary-purple-disabled ${additionalStyling}`}

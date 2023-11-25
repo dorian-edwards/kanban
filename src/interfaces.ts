@@ -35,7 +35,7 @@ export interface BoardLinkprops {
   update: (n: number) => void
 }
 
-export interface ButtonInterface {
+export interface ButtonProps {
   children: string | JSX.Element
   type?: 'button' | 'submit' | 'reset' | undefined
   additionalStyling?: string
@@ -53,10 +53,26 @@ export interface ColumnInfo {
   title: string
 }
 
-export interface OverlayProps {
-  children?: JSX.Element
-  turnOverlayOff: () => void
-  isFullScreen?: boolean
+export interface DynamicInputProps {
+  inputType: React.HTMLInputTypeAttribute
+  buttonType: 'button' | 'reset' | 'submit' | undefined
+  id?: string
+  value: string
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void
+  onClick: () => void
+}
+
+export interface InputProps {
+  type: React.HTMLInputTypeAttribute
+  id?: string
+  value: string
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void
+  additionalStyling?: string
+}
+
+export interface LabelProps {
+  children: string | JSX.Element
+  htmlFor?: string
 }
 
 export interface MobileControlPanelProps {
@@ -84,6 +100,12 @@ export interface MobileNavMenuProps {
   setFullScreen: (b: boolean) => void
   setOverlayActive: (b: boolean) => void
   fullScreenActive: boolean
+}
+
+export interface OverlayProps {
+  children?: JSX.Element
+  turnOverlayOff: () => void
+  isFullScreen?: boolean
 }
 
 export interface SubTask {

@@ -1,10 +1,7 @@
 import { useDataContext } from '../../contexts/DataContext'
+import { SidePanelNavProps } from '../../interfaces'
 import { BoardLink } from '../Buttons/BoardLink'
 import CreateBoardButton from '../Buttons/CreateBoardButton'
-
-export interface SidePanelNavProps {
-  turnOverlayOff?: () => void
-}
 
 export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
   const { boardLinks, activeBoard, updateActiveBoard } = useDataContext()

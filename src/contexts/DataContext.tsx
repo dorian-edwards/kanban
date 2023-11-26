@@ -39,6 +39,7 @@ export function useDataContext() {
   if (!context) throw new Error('Must use data context within a data provider')
   return context
 }
+
 const data: Board[] = populateBoard(false)
 
 function populateBoard(populate: boolean): Board[] {

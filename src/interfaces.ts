@@ -62,6 +62,12 @@ export interface DynamicInputProps {
   onClick: () => void
 }
 
+export interface IconProps {
+  additionalStyling?: string
+  active?: boolean
+  pathStyling?: string
+}
+
 export interface InputProps {
   type: React.HTMLInputTypeAttribute
   id?: string
@@ -106,6 +112,10 @@ export interface OverlayProps {
   children?: JSX.Element
   turnOverlayOff: () => void
   isFullScreen?: boolean
+}
+
+export interface SidePanelNavProps {
+  turnOverlayOff?: () => void
 }
 
 export interface SubTask {

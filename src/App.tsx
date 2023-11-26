@@ -34,8 +34,3 @@ export default function App() {
     </>
   )
 }
-
-// Props for both create board and create column??
-export interface EmptyScreenProps {
-  onClick: () => void | ((id: number) => void)
-}

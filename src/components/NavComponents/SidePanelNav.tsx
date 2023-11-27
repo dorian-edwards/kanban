@@ -1,10 +1,14 @@
-import { useDataContext } from '../../contexts/DataContext'
+import { useBoardDataContext } from '../../contexts/StateManagement'
 import { SidePanelNavProps } from '../../interfaces'
 import { BoardLink } from '../Buttons/BoardLink'
 import CreateBoardButton from '../Buttons/CreateBoardButton'
 
 export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
-  const { boardLinks, activeBoard, updateActiveBoard } = useDataContext()
+  const { activeBoard, boards } = useBoardDataContext()
+
+  const boardLinks = boards.map((board) => {
+    return { id: board.id, title: board.title }
+  })
 
   return (
     <div className='side-panel-nav-wrapper'>
@@ -21,7 +25,6 @@ export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
                     id={boardLink.id}
                     title={boardLink.title}
                     active={boardLink.id === activeBoard.id}
-                    update={updateActiveBoard}
                   />
                 </div>
               </li>

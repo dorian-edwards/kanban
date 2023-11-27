@@ -5,13 +5,14 @@ import Overlay from './Overlay'
 
 // Display if there are no active boards
 export default function EmptyWorkspaceScreen() {
-  const { overlayActive, setOverlayActive } = useOverlayContext()
+  const { overlayActive, setOverlayActive, modal, setModal } =
+    useOverlayContext()
 
   return (
     <>
       {overlayActive ? (
         <Overlay turnOverlayOff={() => setOverlayActive(false)}>
-          <CreateBoard />
+          {modal}
         </Overlay>
       ) : (
         <></>
@@ -21,7 +22,10 @@ export default function EmptyWorkspaceScreen() {
           This workspace is empty. Create a new board to get started.
         </h2>
         <ButtonPrimary
-          onClick={() => setOverlayActive(true)}
+          onClick={() => {
+            setModal(<CreateBoard />)
+            setOverlayActive(true)
+          }}
           additionalStyling='max-w-[17.4rem]'
         >
           {'+ Add New Board'}

@@ -1,5 +1,4 @@
 import { useSidePanel } from './contexts/SidePanelContext'
-import { useDataContext } from './contexts/DataContext'
 import MainNav from './components/NavComponents/MainNav'
 import ShowSidePanel from './components/NavComponents/ShowSidePanel'
 import SidePanel from './components/NavComponents/SidePanel'
@@ -7,16 +6,17 @@ import MobileNav from './components/NavComponents/MobileNav'
 import useScreenMonitor from './components/Hooks/useScreenMonitor'
 import EmptyBoardScreen from './components/EmptyBoardScreen'
 import EmptyWorkspaceScreen from './components/EmptyWorkspaceScreen'
+import { useBoardDataContext } from './contexts/StateManagement'
 
 export default function App() {
   const { sidePanelVisible, toggleSidePanel } = useSidePanel()
-  const { activeBoard } = useDataContext()
+  const { activeBoard } = useBoardDataContext()
   const mobile = useScreenMonitor()
 
   return (
     <>
       {mobile ? (
-        <MobileNav activeBoard={activeBoard} />
+        <MobileNav />
       ) : (
         <MainNav
           sidePanelVisible={sidePanelVisible}

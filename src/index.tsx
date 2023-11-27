@@ -7,6 +7,7 @@ import ThemeContextProvider from './contexts/ThemeContext'
 import SidePanelProvider from './contexts/SidePanelContext'
 import DataContextProvider from './contexts/DataContext'
 import OverlayContextProvider from './contexts/OverlayContext'
+import StateManagement from './contexts/StateManagement'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -15,7 +16,9 @@ root.render(
       <DataContextProvider>
         <OverlayContextProvider>
           <SidePanelProvider>
-            <App />
+            <StateManagement>
+              <App />
+            </StateManagement>
           </SidePanelProvider>
         </OverlayContextProvider>
       </DataContextProvider>

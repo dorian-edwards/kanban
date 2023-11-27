@@ -2,7 +2,11 @@ import { useContext, createContext, useState } from 'react'
 
 const OverlayContext = createContext<{
   overlayActive: boolean
-  setOverlayActive: (b: boolean) => void
+  setOverlayActive: React.Dispatch<React.SetStateAction<boolean>>
+  modal: JSX.Element
+  setModal: React.Dispatch<React.SetStateAction<JSX.Element>>
+  fullScreen: boolean
+  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>
 } | null>(null)
 
 export default function OverlayContextProvider({
@@ -11,9 +15,20 @@ export default function OverlayContextProvider({
   children: JSX.Element
 }) {
   const [overlayActive, setOverlayActive] = useState<boolean>(false)
+  const [modal, setModal] = useState<JSX.Element>(<></>)
+  const [fullScreen, setFullScreen] = useState<boolean>(true)
 
   return (
-    <OverlayContext.Provider value={{ overlayActive, setOverlayActive }}>
+    <OverlayContext.Provider
+      value={{
+        overlayActive,
+        setOverlayActive,
+        modal,
+        setModal,
+        fullScreen,
+        setFullScreen,
+      }}
+    >
       {children}
     </OverlayContext.Provider>
   )

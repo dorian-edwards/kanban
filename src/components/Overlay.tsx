@@ -1,19 +1,23 @@
 import { useEffect, useRef } from 'react'
 import { OverlayProps } from '../interfaces'
+import { useOverlayContext } from '../contexts/OverlayContext'
 
 export default function Overlay({ children, turnOverlayOff }: OverlayProps) {
   const ref = useRef<HTMLDivElement>(null)
+  const { setFullScreen } = useOverlayContext()
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).getAttribute('id') === 'overlay')
+      if ((e.target as HTMLElement).getAttribute('id') === 'overlay') {
         turnOverlayOff()
+        setFullScreen(true)
+      }
     }
 
     document.addEventListener('click', handleClickOutside)
 
     return () => document.removeEventListener('click', handleClickOutside)
-  }, [turnOverlayOff])
+  }, [turnOverlayOff, setFullScreen])
 
   return (
     <div

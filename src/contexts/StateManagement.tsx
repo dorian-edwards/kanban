@@ -1,46 +1,81 @@
-import { useContext, createContext, useState } from 'react'
-import { Board, BoardData, BoardLinkData } from '../interfaces'
+import { createContext, useContext, useReducer } from 'react'
+import { Board } from '../interfaces'
 
-const DataContext = createContext<BoardData | null>(null)
+const BoardDataContext = createContext<BoardData | null>(null)
+const BoardDispatchContext = createContext<React.Dispatch<BoardAction> | null>(
+  null
+)
 
-export default function DataContextProvider({
+export const useBoardDataContext = () => {
+  const context = useContext(BoardDataContext)
+  if (!context)
+    throw new Error(
+      'BoardDataContext needs to be used within a BoardContextProvider'
+    )
+
+  return context
+}
+
+export const useBoardDispatchContext = () => {
+  const context = useContext(BoardDispatchContext)
+  if (!context)
+    throw new Error(
+      'BoardDispatchContext must be used within a BoardDispatchContext Provider'
+    )
+
+  return context
+}
+
+function reducer(
+  state: BoardData,
+  action: { type: string; payload: BoardPayload }
+): BoardData {
+  switch (action.type) {
+    case 'ADD':
+      console.log('broh')
+      return state
+    default:
+      return state
+  }
+}
+
+export default function StateManagement({
   children,
 }: {
   children: JSX.Element
 }) {
-  const [activeBoard, setActiveBoard] = useState<Board | null>(
-    data.length === 0 ? null : data[0]
-  )
+  const [state, dispatch] = useReducer(boardReducer, {
+    activeBoard: data[0] || null,
+    boards: data,
+  })
 
-  let boardLinks: BoardLinkData[] = []
-
-  if (data.length !== 0) {
-    boardLinks = data.map((board) => ({ id: board.id, title: board.title }))
-  }
-
-  function updateActiveBoard(id: string): void {
-    const board = data.filter((b) => b.id === id)[0]
-
-    if (!board) return
-    setActiveBoard(board)
-  }
+  console.log(state)
 
   return (
-    <DataContext.Provider
-      value={{ boardLinks, activeBoard, updateActiveBoard }}
-    >
-      {children}
-    </DataContext.Provider>
+    <BoardDataContext.Provider value={state}>
+      <BoardDispatchContext.Provider value={dispatch}>
+        {children}
+      </BoardDispatchContext.Provider>
+    </BoardDataContext.Provider>
   )
 }
 
-export function useDataContext() {
-  const context = useContext(DataContext)
-  if (!context) throw new Error('Must use data context within a data provider')
-  return context
+export interface BoardPayload {
+  id?: string
+  title?: string
 }
 
-const data: Board[] = populateBoard(false)
+export interface BoardAction {
+  type: string
+  payload: BoardPayload
+}
+
+export interface BoardData {
+  activeBoard: Board | null
+  boards: Board[]
+}
+
+const data: Board[] = populateBoard(true)
 
 function populateBoard(populate: boolean): Board[] {
   return !populate
@@ -127,4 +162,21 @@ function populateBoard(populate: boolean): Board[] {
           ],
         },
       ]
+}
+
+function boardReducer(
+  state: BoardData,
+  action: { type: string; payload: { id?: string; title?: string } }
+): BoardData {
+  switch (action.type) {
+    case 'SET_ACTIVE':
+      return {
+        ...state,
+        activeBoard: state.boards.filter(
+          (board) => board.id === action.payload.id
+        )[0],
+      }
+    default:
+      return state
+  }
 }

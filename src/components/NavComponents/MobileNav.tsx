@@ -1,49 +1,27 @@
-import { useState } from 'react'
-import Overlay from '../Overlay'
-import { MobileNavProps } from '../../interfaces'
 import MobileNavMenu from './MobileNavMenu'
-import MobileControlPanel from './MobileControlPanel'
 import MobileEdit from './MobileEdit'
+import { useOverlayContext } from '../../contexts/OverlayContext'
+import MobileNavIcon from '../icons/MobileNavIcon'
+import { useBoardDataContext } from '../../contexts/StateManagement'
 
-export default function MobileNav({ activeBoard }: MobileNavProps) {
-  const [overlayActive, setOverlayActive] = useState<boolean>(false)
-  const [fullScreen, setFullScreen] = useState<boolean>(true)
-
-  const modal = fullScreen ? (
-    <div>Broh</div>
-  ) : (
-    <MobileControlPanel turnOverlayOff={() => setOverlayActive(false)} />
-  )
+export default function MobileNav() {
+  const { fullScreen } = useOverlayContext()
+  const { activeBoard } = useBoardDataContext()
 
   return (
     <>
-      {overlayActive ? (
-        <Overlay turnOverlayOff={() => setOverlayActive(false)}>
-          {modal}
-        </Overlay>
-      ) : null}
       <nav
         className={`mobile-nav relative ${
           fullScreen ? '' : 'z-[101]'
         } pl-[2.4rem] pr-[1.6rem] py-[1.6rem] flex items-center justify-between bg-white`}
       >
         {activeBoard ? (
-          <MobileNavMenu
-            activeBoardTitle={activeBoard.title}
-            overlayActive={overlayActive}
-            setFullScreen={setFullScreen}
-            setOverlayActive={setOverlayActive}
-            fullScreenActive={fullScreen}
-          />
+          <MobileNavMenu />
         ) : (
           // Empty div for flex spacing
-          <div></div>
+          <MobileNavIcon />
         )}
-        <MobileEdit
-          activeBoard={activeBoard}
-          setFullScreen={setFullScreen}
-          setOverlayActive={setOverlayActive}
-        />
+        <MobileEdit activeBoard={activeBoard} />
       </nav>
     </>
   )

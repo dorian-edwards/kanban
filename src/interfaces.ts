@@ -7,7 +7,7 @@ export interface AnimatedButtonProps {
 }
 
 export interface Board {
-  id: number
+  id: string
   title: string
   columns: Column[]
 }
@@ -15,7 +15,7 @@ export interface Board {
 export interface BoardData {
   boardLinks: BoardLinkData[]
   activeBoard: Board | null
-  updateActiveBoard: (n: number) => void
+  updateActiveBoard: (n: string) => void
 }
 
 export interface BoardInfo {
@@ -24,15 +24,14 @@ export interface BoardInfo {
 }
 
 export interface BoardLinkData {
-  id: number
+  id: string
   title: string
 }
 
 export interface BoardLinkprops {
-  id: number
+  id: string
   title: string
   active: boolean
-  update: (n: number) => void
 }
 
 export interface ButtonProps {
@@ -87,8 +86,8 @@ export interface MobileControlPanelProps {
 
 export interface MobileEditProps {
   activeBoard: Board | null
-  setFullScreen: (b: boolean) => void
-  setOverlayActive: (b: boolean) => void
+  // setFullScreen: (b: boolean) => void
+  // setOverlayActive: (b: boolean) => void
 }
 
 export interface MainNavProps {
@@ -102,10 +101,10 @@ export interface MobileNavProps {
 
 export interface MobileNavMenuProps {
   activeBoardTitle: string
-  overlayActive: boolean
-  setFullScreen: (b: boolean) => void
-  setOverlayActive: (b: boolean) => void
-  fullScreenActive: boolean
+  // overlayActive: boolean
+  // setFullScreen: (b: boolean) => void
+  // setOverlayActive: (b: boolean) => void
+  // fullScreenActive: boolean
 }
 
 export interface OverlayProps {

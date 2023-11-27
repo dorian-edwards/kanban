@@ -1,16 +1,16 @@
 import { useOverlayContext } from '../contexts/OverlayContext'
 import ButtonPrimary from './Buttons/ButtonPrimary'
-import CreateBoard from './Forms/CreateBoard'
 import Overlay from './Overlay'
 
 export default function EmptyBoardScreen() {
-  const { overlayActive, setOverlayActive } = useOverlayContext()
+  const { overlayActive, setOverlayActive, modal, setModal } =
+    useOverlayContext()
 
   return (
     <>
       {overlayActive ? (
         <Overlay turnOverlayOff={() => setOverlayActive(false)}>
-          <CreateBoard />
+          {modal}
         </Overlay>
       ) : (
         <></>
@@ -20,7 +20,10 @@ export default function EmptyBoardScreen() {
           This board is empty. Create a new column to get started.
         </h2>
         <ButtonPrimary
-          onClick={() => setOverlayActive(true)}
+          onClick={() => {
+            setModal(<>Add Column</>)
+            setOverlayActive(true)
+          }}
           additionalStyling='max-w-[17.4rem]'
         >
           {'+ Add New Column'}

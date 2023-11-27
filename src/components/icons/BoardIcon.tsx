@@ -1,8 +1,4 @@
-export interface IconProps {
-  additionalStyling?: string
-  active?: boolean
-  pathStyling?: string
-}
+import { IconProps } from '../../interfaces'
 
 export default function BoardIcon({
   additionalStyling,

@@ -5,21 +5,7 @@ import ButtonSecondary from '../Buttons/ButtonSecondary'
 import Label from './FormElements/Label'
 import Input from './FormElements/Input'
 import DynamicInput from './FormElements/DynamicInput'
-
-/**
- * Returns a randomly generated sequence of 3 capital letters and four numbers for creating ids
- *
- * @returns string
- */
-function keyGen(): string {
-  let results = ''
-
-  for (let i = 0; i < 3; i++) {
-    results += String.fromCharCode(Math.floor(Math.random() * 26) + 65)
-  }
-
-  return results + Math.floor(Math.random() * 9000 + 1000)
-}
+import keyGen from '../../utilities/KeyGen'
 
 export default function CreateBoard() {
   const [board, setBoard] = useState<BoardInfo>({
@@ -29,6 +15,7 @@ export default function CreateBoard() {
   })
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorTimeout, setErrorTimeOut] = useState<NodeJS.Timeout | undefined>()
 
   const handleAddColumn = () => {

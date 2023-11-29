@@ -7,7 +7,7 @@ export default function BoardIcon({
 }: IconProps) {
   return (
     <svg
-      className={`inline ${additionalStyling}`}
+      className={`inline min-w-[1.6rem] ${additionalStyling}`}
       width='16'
       height='16'
       xmlns='http://www.w3.org/2000/svg'

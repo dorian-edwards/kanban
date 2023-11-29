@@ -6,6 +6,8 @@ import Label from './FormElements/Label'
 import Input from './FormElements/Input'
 import DynamicInput from './FormElements/DynamicInput'
 import keyGen from '../../utilities/KeyGen'
+import { useBoardDispatchContext } from '../../contexts/StateManagement'
+import { useOverlayContext } from '../../contexts/OverlayContext'
 
 export default function CreateBoard() {
   const [board, setBoard] = useState<BoardInfo>({
@@ -13,6 +15,8 @@ export default function CreateBoard() {
     title: '',
     columns: [],
   })
+  const dispatch = useBoardDispatchContext()
+  const { setOverlayActive } = useOverlayContext()
 
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,6 +26,13 @@ export default function CreateBoard() {
     setBoard({
       ...board,
       columns: [...board.columns, { id: keyGen(), title: '' }],
+    })
+  }
+
+  const handleRemoveColumn = (id: string) => {
+    setBoard({
+      ...board,
+      columns: board.columns.filter((column) => column.id !== id),
     })
   }
 
@@ -37,12 +48,33 @@ export default function CreateBoard() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitted(true)
-    setErrorTimeOut(
-      setTimeout(() => {
-        setIsSubmitted(false)
-      }, 5000)
-    )
+    if (!isFormValid()) {
+      setIsSubmitted(true)
+      setErrorTimeOut(
+        setTimeout(() => {
+          setIsSubmitted(false)
+        }, 5000)
+      )
+      return
+    }
+
+    dispatch({
+      type: 'CREATE_BOARD',
+      payload: { ...board, id: keyGen() },
+    })
+
+    setOverlayActive(false)
+  }
+
+  const isFormValid = (): boolean => {
+    let result = true
+    if (board.title.trim() === '') result = false
+
+    for (let column of board.columns) {
+      if (column.title.trim() === '') result = false
+    }
+
+    return result
   }
 
   return (
@@ -68,14 +100,7 @@ export default function CreateBoard() {
             return (
               <div key={index}>
                 <DynamicInput
-                  onClick={() => {
-                    setBoard({
-                      ...board,
-                      columns: board.columns.filter(
-                        (column) => column.id !== id
-                      ),
-                    })
-                  }}
+                  onClick={() => handleRemoveColumn(id)}
                   inputType='text'
                   buttonType='button'
                   value={board.columns[index].title}

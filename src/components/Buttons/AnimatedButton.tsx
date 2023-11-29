@@ -17,7 +17,7 @@ export default function AnimatedButton({
     >
       {children}
       <span
-        className={`ml-[1rem] ${
+        className={`ml-[1rem] overflow-x-scroll ${
           active
             ? 'text-white'
             : 'text-med-gray group-hover:text-primary-purple'

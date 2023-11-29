@@ -9,10 +9,17 @@ export default function DynamicInput({
   value,
   onChange,
   onClick,
+  isSubmitted,
 }: DynamicInputProps) {
   return (
     <div className='flex gap-[1.6rem] mb-[1.2rem]'>
-      <Input type={inputType} id={id} value={value} onChange={onChange} />
+      <Input
+        type={inputType}
+        id={id}
+        value={value}
+        onChange={onChange}
+        isSubmitted={isSubmitted}
+      />
       <button onClick={onClick} type={buttonType}>
         <CrossIcon />
       </button>

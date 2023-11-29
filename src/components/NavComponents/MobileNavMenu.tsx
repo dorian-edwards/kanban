@@ -1,4 +1,3 @@
-import { MobileNavMenuProps } from '../../interfaces'
 import ChevronDown from '../icons/ChevronDown'
 import ChevronUp from '../icons/ChevronUp'
 import MobileNavIcon from '../icons/MobileNavIcon'

@@ -26,19 +26,6 @@ export const useBoardDispatchContext = () => {
   return context
 }
 
-function reducer(
-  state: BoardData,
-  action: { type: string; payload: BoardPayload }
-): BoardData {
-  switch (action.type) {
-    case 'ADD':
-      console.log('broh')
-      return state
-    default:
-      return state
-  }
-}
-
 export default function StateManagement({
   children,
 }: {
@@ -48,8 +35,6 @@ export default function StateManagement({
     activeBoard: data[0] || null,
     boards: data,
   })
-
-  console.log(state)
 
   return (
     <BoardDataContext.Provider value={state}>

@@ -19,6 +19,7 @@ export interface BoardData {
 }
 
 export interface BoardInfo {
+  id: string
   title: string
   columns: ColumnInfo[]
 }
@@ -59,6 +60,7 @@ export interface DynamicInputProps {
   value: string
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
   onClick: () => void
+  isSubmitted?: boolean
 }
 
 export interface IconProps {
@@ -73,6 +75,7 @@ export interface InputProps {
   value: string
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
   additionalStyling?: string
+  isSubmitted?: boolean
 }
 
 export interface LabelProps {

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import { BoardInfo } from '../../interfaces'
 import ButtonSecondary from '../Buttons/ButtonSecondary'
@@ -23,13 +23,44 @@ function keyGen(): string {
 
 export default function CreateBoard() {
   const [board, setBoard] = useState<BoardInfo>({
+    id: '',
     title: '',
     columns: [],
   })
 
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  const [errorTimeout, setErrorTimeOut] = useState<NodeJS.Timeout | undefined>()
+
+  const handleAddColumn = () => {
+    setBoard({
+      ...board,
+      columns: [...board.columns, { id: keyGen(), title: '' }],
+    })
+  }
+
+  const handleColumnInputChange = (
+    e: React.FormEvent<HTMLInputElement>,
+    n: number
+  ) => {
+    setIsSubmitted(false)
+    const copy = { ...board, columns: [...board.columns] }
+    copy.columns[n].title = e.currentTarget.value
+    setBoard(copy)
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitted(true)
+    setErrorTimeOut(
+      setTimeout(() => {
+        setIsSubmitted(false)
+      }, 5000)
+    )
+  }
+
   return (
     <div className='bg-white p-[2.4rem] rounded-sm mx-[16px]'>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmit}>
         <h2 className='mb-[2.4rem] font-bold text-[1.8rem]'>Add New Board</h2>
         <div className='mb-[2.4rem]'>
           <Label htmlFor='board-name'>Board Name</Label>
@@ -37,7 +68,11 @@ export default function CreateBoard() {
             type='text'
             id='board-name'
             value={board.title}
-            onChange={() => {}}
+            onChange={(e) => {
+              setIsSubmitted(false)
+              setBoard({ ...board, title: e.currentTarget.value })
+            }}
+            isSubmitted={isSubmitted}
           />
         </div>
         <div className='mb-[1.2rem]'>
@@ -46,18 +81,26 @@ export default function CreateBoard() {
             return (
               <div key={index}>
                 <DynamicInput
-                  onClick={() => {}}
+                  onClick={() => {
+                    setBoard({
+                      ...board,
+                      columns: board.columns.filter(
+                        (column) => column.id !== id
+                      ),
+                    })
+                  }}
                   inputType='text'
                   buttonType='button'
                   value={board.columns[index].title}
-                  onChange={() => {}}
+                  onChange={(e) => handleColumnInputChange(e, index)}
+                  isSubmitted={isSubmitted}
                 />
               </div>
             )
           })}
         </div>
         <ButtonSecondary
-          onClick={() => {}}
+          onClick={handleAddColumn}
           additionalStyling='mb-[2.4rem]'
           type='button'
         >

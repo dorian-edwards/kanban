@@ -9,6 +9,9 @@ module.exports = {
         'extra-loose': '2.3rem',
         normal: '1.5rem',
         tight: '1.2rem',
+      }, // box-shadow: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
+      boxShadow: {
+        sm: '0px 4px 6px 0px rgba(54, 78, 126, 0.10)',
       },
     },
     screens: {

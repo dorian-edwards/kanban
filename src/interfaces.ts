@@ -12,10 +12,19 @@ export interface Board {
   columns: Column[]
 }
 
+export interface BoardPayload {
+  id?: string
+  title?: string
+}
+
+export interface BoardAction {
+  type: string
+  payload: BoardPayload
+}
+
 export interface BoardData {
-  boardLinks: BoardLinkData[]
   activeBoard: Board | null
-  updateActiveBoard: (n: string) => void
+  boards: Board[]
 }
 
 export interface BoardInfo {
@@ -40,7 +49,7 @@ export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined
   additionalStyling?: string
   disabled?: boolean
-  onClick?: () => void | ((id: number) => void)
+  onClick?: () => void | ((id: string) => void)
 }
 
 export interface Column {
@@ -121,13 +130,13 @@ export interface SidePanelNavProps {
 }
 
 export interface SubTask {
-  id: number
+  id: string
   description: string
   complete: boolean
 }
 
 export interface Task {
-  id: number
+  id: string
   title: string
   description: string
   subtasks: SubTask[]

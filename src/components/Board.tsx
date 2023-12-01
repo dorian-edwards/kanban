@@ -5,8 +5,8 @@ export default function Board() {
   const { activeBoard } = useBoardDataContext()
   return (
     <>
-      {/* {activeBoard && activeBoard.columns.length !== 0 ? (
-        <div className='w-full h-full pt-[2.4rem] px-[1.6rem] flex gap-x-[2.4rem]'>
+      {activeBoard && activeBoard.columns.length !== 0 ? (
+        <div className='w-full h-full pt-[2.4rem] px-[1.6rem] flex gap-x-[2.4rem] overflow-x-scroll'>
           <Column />
           <Column />
           <Column />
@@ -16,8 +16,7 @@ export default function Board() {
         </div>
       ) : (
         <BoardEmpty />
-      )} */}
-      hey
+      )}
     </>
   )
 }

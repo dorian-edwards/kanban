@@ -5,32 +5,38 @@ export default function populateBoard(populate: boolean): Board[] {
     ? []
     : [
         {
-          id: '1',
+          id: 'B1',
           title: 'Platform Launch',
           columns: [
             {
-              title: 'Column 1',
+              id: 'PLC1',
+              title: 'Todo',
               tasks: [
                 {
-                  id: '1',
-                  title: 'Task 1',
+                  id: 'PLC1T1',
+                  title: 'Build UI for onboarding flow',
                   description: 'Task 1 Description',
                   subtasks: [
                     {
-                      id: '1',
+                      id: 'PLC1T1S1',
                       description: 'SubTask 1',
                       complete: true,
                     },
                     {
-                      id: '2',
+                      id: 'PLC1T1S2',
                       description: 'SubTask 2',
+                      complete: true,
+                    },
+                    {
+                      id: 'PLC1T1S3',
+                      description: 'SubTask 3',
                       complete: false,
                     },
                   ],
                 },
                 {
-                  id: '2',
-                  title: 'Task 2',
+                  id: 'PLC1T2',
+                  title: 'Build UI for search',
                   description: 'Task 2 Description',
                   subtasks: [
                     {
@@ -40,10 +46,35 @@ export default function populateBoard(populate: boolean): Board[] {
                     },
                   ],
                 },
+                {
+                  id: 'PLC1T3',
+                  title: 'Create template structures',
+                  description: 'Task 2 Description',
+                  subtasks: [
+                    {
+                      id: '3',
+                      description: 'SubTask 3',
+                      complete: false,
+                    },
+                  ],
+                },
+                {
+                  id: 'PLC1T4',
+                  title: 'QA and test all major user journeys',
+                  description: 'Task 2 Description',
+                  subtasks: [
+                    {
+                      id: '3',
+                      description: 'SubTask 3',
+                      complete: true,
+                    },
+                  ],
+                },
               ],
             },
             {
-              title: 'Column 2',
+              id: 'PLC2',
+              title: 'Done',
               tasks: [
                 {
                   id: '3',
@@ -66,6 +97,7 @@ export default function populateBoard(populate: boolean): Board[] {
           title: 'Marketing',
           columns: [
             {
+              id: 'c1',
               title: 'Column 1',
               tasks: [
                 {

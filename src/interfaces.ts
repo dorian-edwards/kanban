@@ -9,7 +9,7 @@ export interface AnimatedButtonProps {
 export interface Board {
   id: string
   title: string
-  columns: Column[]
+  columns: ColumnInterface[]
 }
 
 export interface BoardPayload {
@@ -52,7 +52,8 @@ export interface ButtonProps {
   onClick?: () => void | ((id: string) => void)
 }
 
-export interface Column {
+export interface ColumnInterface {
+  id: string
   title: string
   tasks: Task[]
 }

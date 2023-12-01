@@ -7,14 +7,24 @@ import useScreenMonitor from './components/Hooks/useScreenMonitor'
 import EmptyBoardScreen from './components/EmptyBoardScreen'
 import EmptyWorkspaceScreen from './components/EmptyWorkspaceScreen'
 import { useBoardDataContext } from './contexts/StateManagement'
+import { useOverlayContext } from './contexts/OverlayContext'
+import Overlay from './components/Overlay'
 
 export default function App() {
   const { sidePanelVisible, toggleSidePanel } = useSidePanel()
   const { activeBoard } = useBoardDataContext()
   const mobile = useScreenMonitor()
+  const { overlayActive, modal, setOverlayActive } = useOverlayContext()
 
   return (
     <>
+      {overlayActive ? (
+        <Overlay turnOverlayOff={() => setOverlayActive(false)}>
+          {modal}
+        </Overlay>
+      ) : (
+        <></>
+      )}
       {mobile ? (
         <MobileNav />
       ) : (

@@ -1,22 +1,13 @@
 import { useOverlayContext } from '../contexts/OverlayContext'
 import ButtonPrimary from './Buttons/ButtonPrimary'
 import CreateBoard from './Forms/CreateBoard'
-import Overlay from './Overlay'
 
 // Display if there are no active boards
 export default function EmptyWorkspaceScreen() {
-  const { overlayActive, setOverlayActive, modal, setModal } =
-    useOverlayContext()
+  const { setOverlayActive, setModal } = useOverlayContext()
 
   return (
     <>
-      {overlayActive ? (
-        <Overlay turnOverlayOff={() => setOverlayActive(false)}>
-          {modal}
-        </Overlay>
-      ) : (
-        <></>
-      )}
       <div className='text-center w-[90%] max-w-[49.3rem] mx-auto'>
         <h2 className='mb-[2.5rem] text-med-gray font-bold text-lg'>
           This workspace is empty. Create a new board to get started.

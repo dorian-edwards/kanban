@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useEffect, useReducer } from 'react'
 import { Board, BoardAction, BoardData, BoardPayload } from '../interfaces'
 import populateBoard from '../utilities/PopulateBoard'
 
@@ -65,6 +65,7 @@ function boardReducer(
       console.log(action.payload)
       return {
         ...state,
+        activeBoard: { ...(action.payload as Board) },
         boards: [...state.boards, { ...(action.payload as Board) }],
       }
     default:

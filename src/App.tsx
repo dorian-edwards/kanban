@@ -9,6 +9,7 @@ import EmptyWorkspaceScreen from './components/EmptyWorkspaceScreen'
 import { useBoardDataContext } from './contexts/StateManagement'
 import { useOverlayContext } from './contexts/OverlayContext'
 import Overlay from './components/Overlay'
+import Board from './components/Board'
 
 export default function App() {
   const { sidePanelVisible, toggleSidePanel } = useSidePanel()
@@ -36,9 +37,9 @@ export default function App() {
 
       <section className='primary-display flex tablet:h-[calc(100vh-8rem)] h-[calc(100vh-6.4rem)]'>
         {!mobile && <SidePanel sidePanelVisible={sidePanelVisible} />}
-        <main className='board-display flex flex-grow justify-center items-center border-t-[1px] border-lavender bg-lgt-gray dark:bg-very-dark-gray'>
+        <main className='board-display flex flex-grow justify-center items-center border-t-[1px] border-lavender bg-lgt-gray dark:bg-very-dark-gray overflow-x-hidden'>
           {!mobile && <ShowSidePanel showSidePanel={toggleSidePanel} />}
-          {activeBoard ? <EmptyBoardScreen /> : <EmptyWorkspaceScreen />}
+          {activeBoard ? <Board /> : <EmptyWorkspaceScreen />}
         </main>
       </section>
     </>

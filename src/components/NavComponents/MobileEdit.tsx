@@ -6,7 +6,7 @@ export default function MobileEdit({ activeBoard }: MobileEditProps) {
   return (
     <div className='mobile-edit flex items-center'>
       <button
-        className={`flex justify-center items-center w-[4.8rem] h-[3.2rem] rounded-lg ${
+        className={`flex justify-center items-center w-[4.8rem] h-32px rounded-lg ${
           activeBoard && activeBoard.columns.length !== 0
             ? 'bg-primary-purple hover:bg-primary-purple-hover'
             : 'bg-primary-purple-disabled'

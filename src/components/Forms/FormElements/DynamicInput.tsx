@@ -12,7 +12,7 @@ export default function DynamicInput({
   isSubmitted,
 }: DynamicInputProps) {
   return (
-    <div className='flex gap-[1.6rem] mb-[1.2rem]'>
+    <div className='flex gap-16px mb-12px'>
       <Input
         type={inputType}
         id={id}

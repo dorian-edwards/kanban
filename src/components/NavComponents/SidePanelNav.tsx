@@ -12,7 +12,7 @@ export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
 
   return (
     <div className='side-panel-nav-wrapper'>
-      <h2 className='text-xs tracking-wide text-med-gray font-bold mb-[1.2rem] pl-[2.4rem]'>
+      <h2 className='text-xs tracking-wide text-med-gray font-bold mb-12px pl-24px'>
         {`All Boards (${boardLinks.length})`}
       </h2>
       <nav className='side-panel-nav min-w-[24rem] desktop:min-w-[28rem]'>
@@ -20,13 +20,11 @@ export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
           {activeBoard &&
             boardLinks.map((boardLink) => (
               <li key={boardLink.id}>
-                <div className='' onClick={turnOverlayOff}>
-                  <BoardLink
-                    id={boardLink.id}
-                    title={boardLink.title}
-                    active={boardLink.id === activeBoard.id}
-                  />
-                </div>
+                <BoardLink
+                  id={boardLink.id}
+                  title={boardLink.title}
+                  active={boardLink.id === activeBoard.id}
+                />
               </li>
             ))}
           <li className='text-primary-purple'>

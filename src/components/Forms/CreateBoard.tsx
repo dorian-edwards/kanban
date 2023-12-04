@@ -78,10 +78,10 @@ export default function CreateBoard() {
   }
 
   return (
-    <div className='bg-white p-[2.4rem] rounded-sm mx-[16px]'>
+    <div className='bg-white p-24px rounded-sm mx-[16px]'>
       <form onSubmit={handleSubmit}>
-        <h2 className='mb-[2.4rem] font-bold text-[1.8rem]'>Add New Board</h2>
-        <div className='mb-[2.4rem]'>
+        <h2 className='mb-24px font-bold text-18px'>Add New Board</h2>
+        <div className='mb-24px'>
           <Label htmlFor='board-name'>Board Name</Label>
           <Input
             type='text'
@@ -94,7 +94,7 @@ export default function CreateBoard() {
             isSubmitted={isSubmitted}
           />
         </div>
-        <div className='mb-[1.2rem]'>
+        <div className='mb-12px'>
           <Label>Board Columns</Label>
           {board.columns.map(({ id, title }, index) => {
             return (
@@ -113,7 +113,7 @@ export default function CreateBoard() {
         </div>
         <ButtonSecondary
           onClick={handleAddColumn}
-          additionalStyling='mb-[2.4rem]'
+          additionalStyling='mb-24px'
           type='button'
         >
           + Add New Column

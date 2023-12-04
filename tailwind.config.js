@@ -9,9 +9,17 @@ module.exports = {
         'extra-loose': '2.3rem',
         normal: '1.5rem',
         tight: '1.2rem',
-      }, // box-shadow: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
+      },
       boxShadow: {
         sm: '0px 4px 6px 0px rgba(54, 78, 126, 0.10)',
+        md: '0px 10px 20px 0px rgba(54, 78, 126, 0.25)',
+      },
+      spacing: {
+        '12px': '1.2rem',
+        '16px': '1.6rem',
+        '18px': '1.8rem',
+        '24px': '2.4rem',
+        '32px': '3.2rem',
       },
     },
     screens: {
@@ -55,6 +63,7 @@ module.exports = {
       'battleship-gray': '#979797',
     },
     borderRadius: {
+      xs: '0.2rem',
       sm: '0.4rem',
       md: '0.8rem',
       lg: '2.4rem',

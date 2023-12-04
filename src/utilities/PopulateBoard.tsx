@@ -15,7 +15,8 @@ export default function populateBoard(populate: boolean): Board[] {
                 {
                   id: 'PLC1T1',
                   title: 'Build UI for onboarding flow',
-                  description: 'Task 1 Description',
+                  description:
+                    "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                   subtasks: [
                     {
                       id: 'PLC1T1S1',

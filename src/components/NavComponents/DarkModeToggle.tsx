@@ -10,10 +10,10 @@ export default function DarkModeToggle() {
   return (
     <div className='darkmode-toggle'>
       <button
-        className='toggle w-[3.2rem] bg-primary-purple h-[1.6rem] rounded-xl flex items-center'
+        className='toggle w-32px bg-primary-purple h-16px rounded-xl flex items-center'
         onClick={handleClick}
       >
-        <div className='toggle-button w-[1.2rem] h-[1.2rem] bg-white rounded-xl transition-[left] duration-1000 relative left-[2px]  dark:left-[18px]' />
+        <div className='toggle-button w-12px h-12px bg-white rounded-xl transition-[left] duration-1000 relative left-[2px]  dark:left-[18px]' />
       </button>
     </div>
   )

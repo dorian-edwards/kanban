@@ -13,7 +13,7 @@ export default function MobileNav() {
       <nav
         className={`mobile-nav relative ${
           fullScreen ? '' : 'z-[101]'
-        } pl-[2.4rem] pr-[1.6rem] py-[1.6rem] flex items-center justify-between bg-white`}
+        } pl-24px pr-16px py-16px flex items-center justify-between bg-white`}
       >
         {activeBoard ? (
           <MobileNavMenu />

@@ -27,7 +27,7 @@ export function BoardLink({ id, title, active }: BoardLinkprops) {
       }}
       link={true}
     >
-      <BoardIcon additionalStyling='mr-[1.2rem]' active={active} />
+      <BoardIcon additionalStyling='mr-12px' active={active} />
     </AnimatedButton>
   )
 }

@@ -12,7 +12,7 @@ export default function MainNav({
       <div className='flex'>
         <div
           className={`logo-wrapper py-[2.5rem] pl-[2.6rem] border-r-[1px] border-lavender transition-[padding] duration-1000 ${
-            sidePanelVisible ? 'pr-[8rem] desktop:pr-[12.05rem]' : 'pr-[2.4rem]'
+            sidePanelVisible ? 'pr-[8rem] desktop:pr-[12.05rem]' : 'pr-24px'
           }`}
         >
           <NavDark />
@@ -23,7 +23,7 @@ export default function MainNav({
           </h1>
         ) : null}
       </div>
-      <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-[2.4rem]'>
+      <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-24px'>
         <ButtonPrimary
           disabled={!(activeBoard && activeBoard.columns.length !== 0) || true}
           additionalStyling='px-[2.5rem]'

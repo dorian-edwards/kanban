@@ -27,7 +27,7 @@ export default function Input({
       <input
         type={type}
         id={id}
-        className={`relative border border-cool-gray rounded-sm outline-none w-full pl-[1.6rem] py-[0.8rem] ${
+        className={`relative border border-cool-gray rounded-sm outline-none w-full pl-16px py-[0.8rem] ${
           isInvalid ? 'border-red' : ''
         } ${additionalStyling}`}
         value={value}

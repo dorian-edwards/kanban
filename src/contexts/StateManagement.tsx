@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react'
+import { createContext, useContext, useReducer } from 'react'
 import { Board, BoardAction, BoardData, BoardPayload } from '../interfaces'
 import populateBoard from '../utilities/PopulateBoard'
 

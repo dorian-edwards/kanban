@@ -1,5 +1,5 @@
 import AnimatedButton from '../Buttons/AnimatedButton'
-import { BoardLinkprops } from '../../interfaces'
+import { BoardLinkprops } from '../../interfaces/PropInterfaces'
 import BoardIcon from '../icons/BoardIcon'
 import { useBoardDispatchContext } from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
@@ -11,7 +11,7 @@ export function BoardLink({ id, title, active }: BoardLinkprops) {
   function handleActiveBoardUpdate(id: string): void {
     setOverlayActive(false)
     dispatch({
-      type: 'SET_ACTIVE',
+      type: 'SET_ACTIVE_BOARD',
       payload: {
         id: id,
       },

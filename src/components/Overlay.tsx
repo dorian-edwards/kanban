@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { OverlayProps } from '../interfaces'
 import { useOverlayContext } from '../contexts/OverlayContext'
+import { OverlayProps } from '../interfaces/PropInterfaces'
 
 export default function Overlay({ children, turnOverlayOff }: OverlayProps) {
   const ref = useRef<HTMLDivElement>(null)

@@ -6,38 +6,6 @@ export interface AnimatedButtonProps {
   active?: boolean
 }
 
-export interface Board {
-  id: string
-  title: string
-  columns: ColumnInterface[]
-}
-
-export interface BoardPayload {
-  id?: string
-  title?: string
-}
-
-export interface BoardAction {
-  type: string
-  payload: BoardPayload
-}
-
-export interface BoardData {
-  activeBoard: Board | null
-  boards: Board[]
-}
-
-export interface BoardInfo {
-  id: string
-  title: string
-  columns: ColumnInfo[]
-}
-
-export interface BoardLinkData {
-  id: string
-  title: string
-}
-
 export interface BoardLinkprops {
   id: string
   title: string
@@ -50,17 +18,6 @@ export interface ButtonProps {
   additionalStyling?: string
   disabled?: boolean
   onClick?: () => void | ((id: string) => void)
-}
-
-export interface ColumnInterface {
-  id: string
-  title: string
-  tasks: Task[]
-}
-
-export interface ColumnInfo {
-  id: string
-  title: string
 }
 
 export interface DynamicInputProps {
@@ -97,27 +54,17 @@ export interface MobileControlPanelProps {
   turnOverlayOff: () => void
 }
 
-export interface MobileEditProps {
-  activeBoard: Board | null
-  // setFullScreen: (b: boolean) => void
-  // setOverlayActive: (b: boolean) => void
-}
-
 export interface MainNavProps {
   sidePanelVisible: boolean
-  activeBoard: Board | null
+  // activeBoard: Board | null
 }
 
 export interface MobileNavProps {
-  activeBoard: Board | null
+  // activeBoard: Board | null
 }
 
 export interface MobileNavMenuProps {
   activeBoardTitle: string
-  // overlayActive: boolean
-  // setFullScreen: (b: boolean) => void
-  // setOverlayActive: (b: boolean) => void
-  // fullScreenActive: boolean
 }
 
 export interface OverlayProps {
@@ -128,17 +75,4 @@ export interface OverlayProps {
 
 export interface SidePanelNavProps {
   turnOverlayOff?: () => void
-}
-
-export interface SubTask {
-  id: string
-  description: string
-  complete: boolean
-}
-
-export interface Task {
-  id: string
-  title: string
-  description: string
-  subtasks: SubTask[]
 }

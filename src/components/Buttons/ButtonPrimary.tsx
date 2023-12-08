@@ -1,4 +1,4 @@
-import { ButtonProps } from '../../interfaces'
+import { ButtonProps } from '../../interfaces/PropInterfaces'
 
 export default function AddTaskButton({
   children,

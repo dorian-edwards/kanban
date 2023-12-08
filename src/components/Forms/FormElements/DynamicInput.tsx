@@ -1,4 +1,4 @@
-import { DynamicInputProps } from '../../../interfaces'
+import { DynamicInputProps } from '../../../interfaces/PropInterfaces'
 import CrossIcon from '../../icons/CrossIcon'
 import Input from './Input'
 

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import CheckMark from './icons/Check'
-import { SubTask } from '../interfaces'
+import { SubtaskInterface } from '../interfaces/DataInterfaces'
 
 interface SubTaskCardProps {
-  subtask: SubTask
+  subtask: SubtaskInterface
 }
 
 // Todo Add props

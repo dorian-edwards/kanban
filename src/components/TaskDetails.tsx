@@ -1,17 +1,20 @@
 import { useState, createRef, useEffect } from 'react'
-import { Task } from '../interfaces'
 import ChevronDown from './icons/ChevronDown'
 import ChevronUp from './icons/ChevronUp'
 import VerticalEllipsis from './icons/VerticalEllipsis'
 import ColumnSelector from './ColumnSelector'
 import EditMenu from './EditMenu'
 import SubTaskCard from './SubTaskCard'
-import reduceSubTasks from '../utilities/ReduceTaks'
+import { SubtaskInterface, TaskInterface } from '../interfaces/DataInterfaces'
 
 export default function TaskDetails({
-  task: { id, title, description, subtasks },
+  task: { id, title, description },
+  subtasks,
+  complete,
 }: {
-  task: Task
+  task: TaskInterface
+  subtasks: SubtaskInterface[]
+  complete: number
 }) {
   const [menuActive, setMenuActive] = useState<boolean>(false)
   const [selectColumnActive, setSelectColumnActive] = useState<boolean>(false)
@@ -58,7 +61,6 @@ export default function TaskDetails({
       document.removeEventListener('click', handleColumnSelectOutsideClick)
   }, [selectColumnActive, columnSelectRef])
 
-  const complete = subtasks.reduce(reduceSubTasks, 0)
   return (
     <div className='task-details p-32px bg-white rounded-sm'>
       <div className='heading mb-24px flex justify-between items-center relative'>

@@ -1,6 +1,12 @@
 import { createContext, useContext, useReducer } from 'react'
-import { Board, BoardAction, BoardData, BoardPayload } from '../interfaces'
-import populateBoard from '../utilities/PopulateBoard'
+import {
+  BoardData,
+  BoardAction,
+  Payload,
+  BoardInterface,
+  ColumnInterface,
+} from '../interfaces/DataInterfaces'
+import { populateBoardObject } from '../utilities/populateBoard'
 
 const BoardDataContext = createContext<BoardData | null>(null)
 const BoardDispatchContext = createContext<React.Dispatch<BoardAction> | null>(
@@ -32,9 +38,12 @@ export default function StateManagement({
 }: {
   children: JSX.Element
 }) {
-  const [state, dispatch] = useReducer(boardReducer, {
-    activeBoard: data[0] || null,
-    boards: data,
+  const [state, dispatch] = useReducer(reducer, {
+    activeBoard: Object.keys(data.boards)[0],
+    boards: { ...data.boards },
+    columns: { ...data.columns },
+    tasks: { ...data.tasks },
+    subtasks: { ...data.subtasks },
   })
 
   return (
@@ -46,31 +55,38 @@ export default function StateManagement({
   )
 }
 
-const data: Board[] = populateBoard(true)
+// const data: Board[] = populateBoardArray(true)
 
-function boardReducer(
+const data: BoardData = populateBoardObject(true)
+
+// New Reducer
+
+function reducer(
   state: BoardData,
   action: { type: string; payload: Payload }
 ): BoardData {
   switch (action.type) {
-    case 'SET_ACTIVE':
+    case 'SET_ACTIVE_BOARD':
       return {
         ...state,
-        activeBoard: state.boards.filter(
-          (board) => board.id === action.payload.id
-        )[0],
+        activeBoard: action.payload.id,
       }
 
-    case 'CREATE_BOARD':
-      console.log(action.payload)
+    case 'CREATE_BOARD': {
+      const { id, title } = action.payload as BoardInterface
       return {
         ...state,
-        activeBoard: { ...(action.payload as Board) },
-        boards: [...state.boards, { ...(action.payload as Board) }],
+        boards: { ...state.boards, [action.payload.id]: { id, title } },
       }
+    }
+    case 'CREATE_COLUMN': {
+      const { id, title, boardId } = action.payload as ColumnInterface
+      return {
+        ...state,
+        columns: { ...state.columns, [id]: { id, title, boardId } },
+      }
+    }
     default:
       return state
   }
 }
-
-type Payload = Board | BoardPayload

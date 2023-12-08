@@ -1,4 +1,4 @@
-import { AnimatedButtonProps } from '../../interfaces'
+import { AnimatedButtonProps } from '../../interfaces/PropInterfaces'
 
 export default function AnimatedButton({
   children,

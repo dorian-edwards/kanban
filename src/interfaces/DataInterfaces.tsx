@@ -51,8 +51,30 @@ export interface BoardData {
 }
 
 export interface BoardAction {
-  type: string
+  type: DataAction
   payload: Payload
+}
+
+export enum DataAction {
+  // set active board
+  setActiveBoard,
+  // BOARD ACTIONS
+  createBoard,
+  updateBoard,
+  deleteBoard,
+  // COLUMN ACTIONS
+  createColumn,
+  editColumn,
+  deleteColumn,
+  // TASK ACTIONS
+  createTask,
+  updateTask,
+  deleteTask,
+  // SUBTASK ACTIONS
+  createSubtask,
+  updateSubtask,
+  deleteSubtask,
+  toggleSubtaskComplete,
 }
 
 export type Payload =

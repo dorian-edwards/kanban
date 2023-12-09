@@ -4,7 +4,7 @@ import ChevronUp from './icons/ChevronUp'
 import VerticalEllipsis from './icons/VerticalEllipsis'
 import ColumnSelector from './ColumnSelector'
 import EditMenu from './EditMenu'
-import SubTaskCard from './SubTaskCard'
+import SubtaskCard from './SubtaskCard'
 import { SubtaskInterface, TaskInterface } from '../interfaces/DataInterfaces'
 
 export default function TaskDetails({
@@ -80,7 +80,7 @@ export default function TaskDetails({
         <ul className='flex flex-col gap-[0.8rem] mb-24px'>
           {subtasks.map((subtask) => (
             <li key={subtask.id}>
-              <SubTaskCard subtask={subtask} />
+              <SubtaskCard id={subtask.id} />
             </li>
           ))}
         </ul>

@@ -1,32 +1,40 @@
-import { useState } from 'react'
 import CheckMark from './icons/Check'
-import { SubtaskInterface } from '../interfaces/DataInterfaces'
+import {
+  useBoardDataContext,
+  useBoardDispatchContext,
+} from '../contexts/StateManagement'
+import { DataAction } from '../interfaces/DataInterfaces'
 
-interface SubTaskCardProps {
-  subtask: SubtaskInterface
-}
+export default function SubtaskCard({ id }: { id: string }) {
+  const { subtasks } = useBoardDataContext()
+  const subtask = subtasks[id]
 
-// Todo Add props
-export default function SubTaskCard({ subtask }: SubTaskCardProps) {
-  // Replace with prop
-  // Will need dispatch to toggle state
-  const [complete, setComplete] = useState<boolean>(false)
+  const dispatch = useBoardDispatchContext()
+  const handleToggle = () => {
+    dispatch({
+      type: DataAction.toggleSubtaskComplete,
+      payload: {
+        id,
+        complete: !subtask.complete,
+      },
+    })
+  }
 
   return (
     <button
       className='subtask-card bg-lgt-gray py-12px pl-12px pr-16px flex gap-16px items-center rounded-sm w-full'
-      onClick={() => setComplete((prev) => !prev)}
+      onClick={handleToggle}
     >
       <div
         className={`h-16px w-16px shrink-0 border border-cool-gray flex justify-center items-center rounded-xs ${
-          complete ? 'bg-primary-purple' : 'bg-white'
+          subtask.complete ? 'bg-primary-purple' : 'bg-white'
         }`}
       >
-        {complete ? <CheckMark /> : null}
+        {subtask.complete ? <CheckMark /> : null}
       </div>
       <p
         className={`text-xs font-bold ${
-          complete ? 'opacity-[0.5] line-through' : ''
+          subtask.complete ? 'opacity-[0.5] line-through' : ''
         }`}
       >
         {subtask.description}

@@ -5,8 +5,10 @@ import {
   Payload,
   BoardInterface,
   ColumnInterface,
+  SubtaskInterface,
+  DataAction,
 } from '../interfaces/DataInterfaces'
-import { populateBoardObject } from '../utilities/populateBoard'
+import { populateBoardObject } from '../utilities/PopulateBoard'
 
 const BoardDataContext = createContext<BoardData | null>(null)
 const BoardDispatchContext = createContext<React.Dispatch<BoardAction> | null>(
@@ -63,27 +65,39 @@ const data: BoardData = populateBoardObject(true)
 
 function reducer(
   state: BoardData,
-  action: { type: string; payload: Payload }
+  action: { type: DataAction; payload: Payload }
 ): BoardData {
   switch (action.type) {
-    case 'SET_ACTIVE_BOARD':
+    case DataAction.setActiveBoard:
       return {
         ...state,
         activeBoard: action.payload.id,
       }
 
-    case 'CREATE_BOARD': {
+    case DataAction.createBoard: {
       const { id, title } = action.payload as BoardInterface
       return {
         ...state,
         boards: { ...state.boards, [action.payload.id]: { id, title } },
       }
     }
-    case 'CREATE_COLUMN': {
+    case DataAction.createColumn: {
       const { id, title, boardId } = action.payload as ColumnInterface
       return {
         ...state,
         columns: { ...state.columns, [id]: { id, title, boardId } },
+      }
+    }
+
+    case DataAction.toggleSubtaskComplete: {
+      const { id, complete } = action.payload as SubtaskInterface
+      const { subtasks } = state
+      return {
+        ...state,
+        subtasks: {
+          ...subtasks,
+          [id]: { ...subtasks[id], complete: complete },
+        },
       }
     }
     default:

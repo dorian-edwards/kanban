@@ -7,6 +7,7 @@ import {
   ColumnInterface,
   SubtaskInterface,
   DataAction,
+  TaskInterface,
 } from '../interfaces/DataInterfaces'
 import { populateBoardObject } from '../utilities/populateBoard'
 
@@ -81,11 +82,21 @@ function reducer(
         boards: { ...state.boards, [action.payload.id]: { id, title } },
       }
     }
+
     case DataAction.createColumn: {
       const { id, title, boardId } = action.payload as ColumnInterface
       return {
         ...state,
         columns: { ...state.columns, [id]: { id, title, boardId } },
+      }
+    }
+
+    case DataAction.updateTask: {
+      const { id } = action.payload as TaskInterface
+      const { tasks } = state
+      return {
+        ...state,
+        tasks: { ...tasks, [id]: { ...tasks[id], ...action.payload } },
       }
     }
 
@@ -100,6 +111,7 @@ function reducer(
         },
       }
     }
+
     default:
       return state
   }

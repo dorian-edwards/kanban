@@ -6,7 +6,7 @@ import SubtaskCard from './SubtaskCard'
 import { SubtaskInterface, TaskInterface } from '../interfaces/DataInterfaces'
 
 export default function TaskDetails({
-  task: { id, title, description },
+  task,
   subtasks,
   complete,
 }: {
@@ -39,7 +39,9 @@ export default function TaskDetails({
   return (
     <div className='task-details p-32px bg-white rounded-sm'>
       <div className='heading mb-24px flex justify-between items-center relative'>
-        <h2 className='task-title text-black text-18px font-bold'>{title}</h2>
+        <h2 className='task-title text-black text-18px font-bold'>
+          {task.title}
+        </h2>
         <button onClick={() => setMenuActive((prev) => !prev)}>
           <VerticalEllipsis />
         </button>
@@ -47,7 +49,7 @@ export default function TaskDetails({
       </div>
 
       <p className='task-description text-sm text-med-gray font-medium leading-extra-loose mb-24px'>
-        {description}
+        {task.description}
       </p>
 
       <div className='subtasks-wrapper'>
@@ -60,8 +62,7 @@ export default function TaskDetails({
           ))}
         </ul>
       </div>
-
-      <ColumnSelector />
+      <ColumnSelector task={task} />
     </div>
   )
 }

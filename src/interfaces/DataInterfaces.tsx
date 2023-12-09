@@ -64,7 +64,7 @@ export enum DataAction {
   deleteBoard,
   // COLUMN ACTIONS
   createColumn,
-  editColumn,
+  updateColumn,
   deleteColumn,
   // TASK ACTIONS
   createTask,

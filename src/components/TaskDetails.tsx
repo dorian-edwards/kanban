@@ -3,19 +3,17 @@ import VerticalEllipsis from './icons/VerticalEllipsis'
 import ColumnSelector from './ColumnSelector'
 import EditMenu from './EditMenu'
 import SubtaskCard from './SubtaskCard'
-import { SubtaskInterface, TaskInterface } from '../interfaces/DataInterfaces'
+import { TaskInterface } from '../interfaces/DataInterfaces'
+import { useBoardDataContext } from '../contexts/StateManagement'
+import { extractSubtasks, reduceSubtasks } from '../utilities/dataExtraction'
 
-export default function TaskDetails({
-  task,
-  subtasks,
-  complete,
-}: {
-  task: TaskInterface
-  subtasks: SubtaskInterface[]
-  complete: number
-}) {
+export default function TaskDetails({ task }: { task: TaskInterface }) {
   const [menuActive, setMenuActive] = useState<boolean>(false)
   const editMenuRef = createRef<HTMLDivElement>() // <- this
+  const { subtasks } = useBoardDataContext()
+  const activeSubtasks = extractSubtasks(task.id, subtasks)
+
+  const complete = activeSubtasks.reduce(reduceSubtasks, 0)
 
   useEffect(() => {
     if (!menuActive) return
@@ -53,9 +51,9 @@ export default function TaskDetails({
       </p>
 
       <div className='subtasks-wrapper'>
-        <h3 className='subtasks-counter text-med-gray text-xs font-bold mb-16px'>{`Subtasks (${complete} of ${subtasks.length})`}</h3>
+        <h3 className='subtasks-counter text-med-gray text-xs font-bold mb-16px'>{`Subtasks (${complete} of ${activeSubtasks.length})`}</h3>
         <ul className='flex flex-col gap-[0.8rem] mb-24px'>
-          {subtasks.map((subtask) => (
+          {activeSubtasks.map((subtask) => (
             <li key={subtask.id}>
               <SubtaskCard id={subtask.id} />
             </li>

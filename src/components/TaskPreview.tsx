@@ -15,13 +15,7 @@ export default function TaskPreview({ task }: { task: TaskInterface }) {
     <button
       className='task-card block bg-white px-16px py-[2.3rem] rounded-sm w-full max-w-[28rem] min-w-[28rem] shadow-sm mb-[2rem]'
       onClick={() => {
-        setModal(
-          <TaskDetails
-            task={task}
-            subtasks={activeSubtasks}
-            complete={complete}
-          />
-        )
+        setModal(<TaskDetails task={task} />)
         setOverlayActive(true)
       }}
     >

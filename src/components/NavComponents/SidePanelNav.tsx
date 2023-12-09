@@ -1,12 +1,12 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
-import { SidePanelNavProps } from '../../interfaces'
+import { SidePanelNavProps } from '../../interfaces/PropInterfaces'
 import { BoardLink } from '../Buttons/BoardLink'
 import CreateBoardButton from '../Buttons/CreateBoardButton'
 
 export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
   const { activeBoard, boards } = useBoardDataContext()
 
-  const boardLinks = boards.map((board) => {
+  const boardLinks = Object.values(boards).map((board) => {
     return { id: board.id, title: board.title }
   })
 
@@ -23,7 +23,7 @@ export default function SidePanelNav({ turnOverlayOff }: SidePanelNavProps) {
                 <BoardLink
                   id={boardLink.id}
                   title={boardLink.title}
-                  active={boardLink.id === activeBoard.id}
+                  active={boardLink.id === activeBoard}
                 />
               </li>
             ))}

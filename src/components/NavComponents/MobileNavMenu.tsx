@@ -13,7 +13,7 @@ export default function MobileNavMenu() {
     setFullScreen,
     fullScreen,
   } = useOverlayContext()
-  const { activeBoard } = useBoardDataContext()
+  const { activeBoard, boards } = useBoardDataContext()
 
   const chevron = overlayActive && !fullScreen ? <ChevronUp /> : <ChevronDown />
 
@@ -21,7 +21,7 @@ export default function MobileNavMenu() {
     <div className='flex items-center'>
       <MobileNavIcon />
       <h1 className='font-bold font-sans text-xl mr-[1rem]'>
-        {activeBoard && activeBoard.title}
+        {activeBoard && boards[activeBoard].title}
       </h1>
       <button
         onClick={() => {

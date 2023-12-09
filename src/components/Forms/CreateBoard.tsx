@@ -1,16 +1,20 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
-import { BoardInfo } from '../../interfaces'
 import ButtonSecondary from '../Buttons/ButtonSecondary'
 import Label from './FormElements/Label'
 import Input from './FormElements/Input'
 import DynamicInput from './FormElements/DynamicInput'
-import keyGen from '../../utilities/KeyGen'
+import keyGen from '../../utilities/keyGen'
 import { useBoardDispatchContext } from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
+import { DataAction } from '../../interfaces/DataInterfaces'
 
 export default function CreateBoard() {
-  const [board, setBoard] = useState<BoardInfo>({
+  const [board, setBoard] = useState<{
+    id: string
+    title: string
+    columns: { id: string; title: string }[]
+  }>({
     id: '',
     title: '',
     columns: [],
@@ -25,7 +29,7 @@ export default function CreateBoard() {
   const handleAddColumn = () => {
     setBoard({
       ...board,
-      columns: [...board.columns, { id: keyGen(), title: '' }],
+      columns: [...board.columns, { id: keyGen('C'), title: '' }],
     })
   }
 
@@ -58,9 +62,24 @@ export default function CreateBoard() {
       return
     }
 
+    const boardId = keyGen('B')
+
     dispatch({
-      type: 'CREATE_BOARD',
-      payload: { ...board, id: keyGen() },
+      type: DataAction.createBoard,
+      payload: { id: boardId, title: board.title },
+    })
+
+    for (let column of board.columns) {
+      const { id, title } = column
+      dispatch({
+        type: DataAction.createColumn,
+        payload: { id, title, boardId },
+      })
+    }
+
+    dispatch({
+      type: DataAction.setActiveBoard,
+      payload: { id: boardId },
     })
 
     setOverlayActive(false)
@@ -87,7 +106,7 @@ export default function CreateBoard() {
             type='text'
             id='board-name'
             value={board.title}
-            onChange={(e) => {
+            onChange={(e: FormEvent<HTMLInputElement>) => {
               setIsSubmitted(false)
               setBoard({ ...board, title: e.currentTarget.value })
             }}
@@ -104,7 +123,9 @@ export default function CreateBoard() {
                   inputType='text'
                   buttonType='button'
                   value={board.columns[index].title}
-                  onChange={(e) => handleColumnInputChange(e, index)}
+                  onChange={(e: FormEvent<HTMLInputElement>) =>
+                    handleColumnInputChange(e, index)
+                  }
                   isSubmitted={isSubmitted}
                 />
               </div>

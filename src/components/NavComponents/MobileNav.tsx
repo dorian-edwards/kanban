@@ -21,7 +21,7 @@ export default function MobileNav() {
           // Empty div for flex spacing
           <MobileNavIcon />
         )}
-        <MobileEdit activeBoard={activeBoard} />
+        <MobileEdit />
       </nav>
     </>
   )

@@ -13,9 +13,9 @@ import Board from './components/Board'
 
 export default function App() {
   const { sidePanelVisible, toggleSidePanel } = useSidePanel()
-  const { activeBoard } = useBoardDataContext()
   const mobile = useScreenMonitor()
   const { overlayActive, modal, setOverlayActive } = useOverlayContext()
+  const { activeBoard } = useBoardDataContext()
 
   return (
     <>
@@ -26,14 +26,7 @@ export default function App() {
       ) : (
         <></>
       )}
-      {mobile ? (
-        <MobileNav />
-      ) : (
-        <MainNav
-          sidePanelVisible={sidePanelVisible}
-          activeBoard={activeBoard}
-        />
-      )}
+      {mobile ? <MobileNav /> : <MainNav sidePanelVisible={sidePanelVisible} />}
 
       <section className='primary-display flex tablet:h-[calc(100vh-8rem)] h-[calc(100vh-6.4rem)]'>
         {!mobile && <SidePanel sidePanelVisible={sidePanelVisible} />}

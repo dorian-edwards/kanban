@@ -1,4 +1,4 @@
-import { IconProps } from '../../interfaces'
+import { IconProps } from '../../interfaces/PropInterfaces'
 
 export default function BoardIcon({
   additionalStyling,

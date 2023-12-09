@@ -1,6 +1,14 @@
-import { createContext, useContext, useEffect, useReducer } from 'react'
-import { Board, BoardAction, BoardData, BoardPayload } from '../interfaces'
-import populateBoard from '../utilities/PopulateBoard'
+import { createContext, useContext, useReducer } from 'react'
+import {
+  BoardData,
+  BoardAction,
+  Payload,
+  BoardInterface,
+  ColumnInterface,
+  SubtaskInterface,
+  DataAction,
+} from '../interfaces/DataInterfaces'
+import { populateBoardObject } from '../utilities/PopulateBoard'
 
 const BoardDataContext = createContext<BoardData | null>(null)
 const BoardDispatchContext = createContext<React.Dispatch<BoardAction> | null>(
@@ -32,9 +40,12 @@ export default function StateManagement({
 }: {
   children: JSX.Element
 }) {
-  const [state, dispatch] = useReducer(boardReducer, {
-    activeBoard: data[0] || null,
-    boards: data,
+  const [state, dispatch] = useReducer(reducer, {
+    activeBoard: Object.keys(data.boards)[0],
+    boards: { ...data.boards },
+    columns: { ...data.columns },
+    tasks: { ...data.tasks },
+    subtasks: { ...data.subtasks },
   })
 
   return (
@@ -46,31 +57,50 @@ export default function StateManagement({
   )
 }
 
-const data: Board[] = populateBoard(true)
+// const data: Board[] = populateBoardArray(true)
 
-function boardReducer(
+const data: BoardData = populateBoardObject(true)
+
+// New Reducer
+
+function reducer(
   state: BoardData,
-  action: { type: string; payload: Payload }
+  action: { type: DataAction; payload: Payload }
 ): BoardData {
   switch (action.type) {
-    case 'SET_ACTIVE':
+    case DataAction.setActiveBoard:
       return {
         ...state,
-        activeBoard: state.boards.filter(
-          (board) => board.id === action.payload.id
-        )[0],
+        activeBoard: action.payload.id,
       }
 
-    case 'CREATE_BOARD':
-      console.log(action.payload)
+    case DataAction.createBoard: {
+      const { id, title } = action.payload as BoardInterface
       return {
         ...state,
-        activeBoard: { ...(action.payload as Board) },
-        boards: [...state.boards, { ...(action.payload as Board) }],
+        boards: { ...state.boards, [action.payload.id]: { id, title } },
       }
+    }
+    case DataAction.createColumn: {
+      const { id, title, boardId } = action.payload as ColumnInterface
+      return {
+        ...state,
+        columns: { ...state.columns, [id]: { id, title, boardId } },
+      }
+    }
+
+    case DataAction.toggleSubtaskComplete: {
+      const { id, complete } = action.payload as SubtaskInterface
+      const { subtasks } = state
+      return {
+        ...state,
+        subtasks: {
+          ...subtasks,
+          [id]: { ...subtasks[id], complete: complete },
+        },
+      }
+    }
     default:
       return state
   }
 }
-
-type Payload = Board | BoardPayload

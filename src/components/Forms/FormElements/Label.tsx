@@ -1,4 +1,4 @@
-import { LabelProps } from '../../../interfaces'
+import { LabelProps } from '../../../interfaces/PropInterfaces'
 
 export default function Label({ children, htmlFor }: LabelProps) {
   return (

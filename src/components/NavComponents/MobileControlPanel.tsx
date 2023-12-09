@@ -1,4 +1,4 @@
-import { MobileControlPanelProps } from '../../interfaces'
+import { MobileControlPanelProps } from '../../interfaces/PropInterfaces'
 import SidePanelNav from './SidePanelNav'
 import ThemeToggle from './ThemeToggle'
 

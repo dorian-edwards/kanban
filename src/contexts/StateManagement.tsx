@@ -8,7 +8,7 @@ import {
   SubtaskInterface,
   DataAction,
 } from '../interfaces/DataInterfaces'
-import { populateBoardObject } from '../utilities/PopulateBoard'
+import { populateBoardObject } from '../utilities/populateBoard'
 
 const BoardDataContext = createContext<BoardData | null>(null)
 const BoardDispatchContext = createContext<React.Dispatch<BoardAction> | null>(

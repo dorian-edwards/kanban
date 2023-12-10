@@ -15,7 +15,7 @@ export default function MainNav({ sidePanelVisible }: MainNavProps) {
       <div className='flex'>
         <div
           className={`logo-wrapper py-[2.5rem] pl-[2.6rem] border-r-[1px] border-lavender transition-[padding] duration-1000 ${
-            sidePanelVisible ? 'pr-[8rem] desktop:pr-[12.05rem]' : 'pr-24px'
+            sidePanelVisible ? 'pr-[8rem] desktop:pr-[12rem]' : 'pr-24px'
           }`}
         >
           <NavDark />

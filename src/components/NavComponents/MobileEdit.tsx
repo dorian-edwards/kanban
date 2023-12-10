@@ -3,7 +3,6 @@ import { EditType } from '../../interfaces/DataInterfaces'
 import { extractColumns } from '../../utilities/dataExtraction'
 import Edit from '../Edit'
 import AddTask from '../icons/AddTask'
-import VerticalEllipsis from '../icons/VerticalEllipsis'
 
 export default function MobileEdit() {
   const { activeBoard, columns } = useBoardDataContext()

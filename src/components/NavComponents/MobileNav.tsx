@@ -11,7 +11,7 @@ export default function MobileNav() {
   return (
     <>
       <nav
-        className={`mobile-nav relative ${
+        className={`mobile-nav ${
           fullScreen ? '' : 'z-[101]'
         } pl-24px pr-16px py-16px flex items-center justify-between bg-white`}
       >

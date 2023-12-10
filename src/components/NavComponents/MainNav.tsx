@@ -1,7 +1,9 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
+import { EditType } from '../../interfaces/DataInterfaces'
 import { MainNavProps } from '../../interfaces/PropInterfaces'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import { NavMenu } from '../Buttons/NavMenu'
+import Edit from '../Edit'
 import NavDark from '../icons/NavDark'
 
 export default function MainNav({ sidePanelVisible }: MainNavProps) {
@@ -26,14 +28,15 @@ export default function MainNav({ sidePanelVisible }: MainNavProps) {
           </h1>
         ) : null}
       </div>
-      <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-24px'>
+      <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-24px relative'>
         <ButtonPrimary
           disabled={!(activeBoard && activeBoardColumns.length !== 0) || true}
           additionalStyling='px-[2.5rem]'
         >
           {'+ Add New Task'}
         </ButtonPrimary>
-        <NavMenu />
+
+        <Edit type={EditType.board} />
       </div>
     </nav>
   )

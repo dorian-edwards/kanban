@@ -83,3 +83,8 @@ export type Payload =
   | ColumnInterface
   | TaskInterface
   | SubtaskInterface
+
+export enum EditType {
+  board = 'Board',
+  task = 'Task',
+}

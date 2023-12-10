@@ -1,9 +1,9 @@
-import CheckMark from './icons/Check'
+import CheckMark from '../icons/Check'
 import {
   useBoardDataContext,
   useBoardDispatchContext,
-} from '../contexts/StateManagement'
-import { DataAction } from '../interfaces/DataInterfaces'
+} from '../../contexts/StateManagement'
+import { DataAction } from '../../interfaces/DataInterfaces'
 
 export default function SubtaskCard({ id }: { id: string }) {
   const { subtasks } = useBoardDataContext()

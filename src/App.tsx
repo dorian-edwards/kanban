@@ -4,12 +4,11 @@ import ShowSidePanel from './components/NavComponents/ShowSidePanel'
 import SidePanel from './components/NavComponents/SidePanel'
 import MobileNav from './components/NavComponents/MobileNav'
 import useScreenMonitor from './components/Hooks/useScreenMonitor'
-import EmptyBoardScreen from './components/EmptyBoardScreen'
 import EmptyWorkspaceScreen from './components/EmptyWorkspaceScreen'
 import { useBoardDataContext } from './contexts/StateManagement'
 import { useOverlayContext } from './contexts/OverlayContext'
 import Overlay from './components/Overlay'
-import Board from './components/Board'
+import Board from './components/BoardComponents/Board'
 
 export default function App() {
   const { sidePanelVisible, toggleSidePanel } = useSidePanel()

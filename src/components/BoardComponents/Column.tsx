@@ -1,7 +1,7 @@
-import { useBoardDataContext } from '../contexts/StateManagement'
-import { ColumnInterface } from '../interfaces/DataInterfaces'
-import { extractTasks } from '../utilities/dataExtraction'
-import TaskPreview from './TaskPreview'
+import { useBoardDataContext } from '../../contexts/StateManagement'
+import { ColumnInterface } from '../../interfaces/DataInterfaces'
+import { extractTasks } from '../../utilities/dataExtraction'
+import TaskPreview from '../TaskComponents/TaskPreview'
 
 export default function Column({ id, title, boardId }: ColumnInterface) {
   const { tasks } = useBoardDataContext()

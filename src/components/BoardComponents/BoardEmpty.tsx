@@ -1,5 +1,5 @@
-import { useOverlayContext } from '../contexts/OverlayContext'
-import ButtonPrimary from './Buttons/ButtonPrimary'
+import { useOverlayContext } from '../../contexts/OverlayContext'
+import ButtonPrimary from '../Buttons/ButtonPrimary'
 
 export default function BoardEmpty() {
   const { setOverlayActive, setModal } = useOverlayContext()

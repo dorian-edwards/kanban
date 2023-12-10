@@ -1,11 +1,11 @@
 import { useState, createRef, useEffect } from 'react'
-import VerticalEllipsis from './icons/VerticalEllipsis'
+import VerticalEllipsis from '../icons/VerticalEllipsis'
 import ColumnSelector from './ColumnSelector'
-import EditMenu from './EditMenu'
+import EditMenu from '../EditMenu'
 import SubtaskCard from './SubtaskCard'
-import { TaskInterface } from '../interfaces/DataInterfaces'
-import { useBoardDataContext } from '../contexts/StateManagement'
-import { extractSubtasks, reduceSubtasks } from '../utilities/dataExtraction'
+import { TaskInterface } from '../../interfaces/DataInterfaces'
+import { useBoardDataContext } from '../../contexts/StateManagement'
+import { extractSubtasks, reduceSubtasks } from '../../utilities/dataExtraction'
 
 export default function TaskDetails({ task }: { task: TaskInterface }) {
   const [menuActive, setMenuActive] = useState<boolean>(false)

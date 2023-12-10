@@ -1,9 +1,9 @@
 import { useState, createRef, useEffect } from 'react'
 import ColumnDropdown from './ColumnDropdown'
-import ChevronDown from './icons/ChevronDown'
-import ChevronUp from './icons/ChevronUp'
-import { TaskInterface } from '../interfaces/DataInterfaces'
-import { useBoardDataContext } from '../contexts/StateManagement'
+import ChevronDown from '../icons/ChevronDown'
+import ChevronUp from '../icons/ChevronUp'
+import { TaskInterface } from '../../interfaces/DataInterfaces'
+import { useBoardDataContext } from '../../contexts/StateManagement'
 
 export default function ColumnSelector({ task }: { task: TaskInterface }) {
   const columnTitle = useBoardDataContext().columns[task.columnId].title

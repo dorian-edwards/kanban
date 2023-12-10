@@ -58,11 +58,7 @@ export default function StateManagement({
   )
 }
 
-// const data: Board[] = populateBoardArray(true)
-
 const data: BoardData = populateBoardObject(true)
-
-// New Reducer
 
 function reducer(
   state: BoardData,

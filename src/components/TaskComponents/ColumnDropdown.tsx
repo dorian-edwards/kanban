@@ -2,9 +2,9 @@ import { forwardRef } from 'react'
 import {
   useBoardDataContext,
   useBoardDispatchContext,
-} from '../contexts/StateManagement'
-import { DataAction, TaskInterface } from '../interfaces/DataInterfaces'
-import { useOverlayContext } from '../contexts/OverlayContext'
+} from '../../contexts/StateManagement'
+import { DataAction, TaskInterface } from '../../interfaces/DataInterfaces'
+import { useOverlayContext } from '../../contexts/OverlayContext'
 
 interface Props {
   task: TaskInterface

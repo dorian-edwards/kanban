@@ -3,7 +3,7 @@ import {
   useBoardDataContext,
   useBoardDispatchContext,
 } from '../contexts/StateManagement'
-import { DataAction, EditType } from '../interfaces/DataInterfaces'
+import { DATA_ACTION, EditType } from '../interfaces/DataInterfaces'
 import ButtonDelete from './Buttons/ButtonDelete'
 import ButtonSecondary from './Buttons/ButtonSecondary'
 
@@ -27,14 +27,14 @@ export default function DeleteConfirmation({
   function handleDelete() {
     if (taskId) {
       dispatch({
-        type: DataAction.deleteTask,
+        type: DATA_ACTION.DELETE_TASK,
         payload: { id: taskId },
       })
       return
     }
 
     dispatch({
-      type: DataAction.deleteBoard,
+      type: DATA_ACTION.DELETE_BOARD,
       payload: { id: activeBoard },
     })
     setOverlayActive(false)

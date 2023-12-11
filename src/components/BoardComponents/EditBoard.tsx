@@ -7,7 +7,7 @@ import {
   useBoardDispatchContext,
 } from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
-import { DataAction } from '../../interfaces/DataInterfaces'
+import { DATA_ACTION } from '../../interfaces/DataInterfaces'
 import DynamicInput from '../FormElements/DynamicInput'
 import Input from '../FormElements/Input'
 import Label from '../FormElements/Label'
@@ -79,7 +79,7 @@ export default function EditBoard() {
     for (let column of startingColumns) {
       if (!(column.id in newColumns)) {
         dispatch({
-          type: DataAction.deleteColumn,
+          type: DATA_ACTION.DELETE_COLUMN,
           payload: { id: column.id },
         })
       }
@@ -87,18 +87,18 @@ export default function EditBoard() {
 
     for (let column of board.columns) {
       dispatch({
-        type: DataAction.createColumn,
+        type: DATA_ACTION.CREATE_COLUMN,
         payload: { ...column, boardId: board.id },
       })
     }
 
     dispatch({
-      type: DataAction.updateBoard,
+      type: DATA_ACTION.UPDATE_BOARD,
       payload: { id: board.id, title: board.title },
     })
 
     dispatch({
-      type: DataAction.setActiveBoard,
+      type: DATA_ACTION.SET_ACTIVE_BOARD,
       payload: { id: board.id },
     })
 

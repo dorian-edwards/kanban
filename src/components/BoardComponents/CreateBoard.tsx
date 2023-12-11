@@ -7,7 +7,7 @@ import DynamicInput from '../FormElements/DynamicInput'
 import keyGen from '../../utilities/keyGen'
 import { useBoardDispatchContext } from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
-import { DataAction } from '../../interfaces/DataInterfaces'
+import { DATA_ACTION } from '../../interfaces/DataInterfaces'
 
 export default function CreateBoard() {
   const [board, setBoard] = useState<{
@@ -65,20 +65,20 @@ export default function CreateBoard() {
     const boardId = keyGen('B')
 
     dispatch({
-      type: DataAction.createBoard,
+      type: DATA_ACTION.CREATE_BOARD,
       payload: { id: boardId, title: board.title },
     })
 
     for (let column of board.columns) {
       const { id, title } = column
       dispatch({
-        type: DataAction.createColumn,
+        type: DATA_ACTION.CREATE_COLUMN,
         payload: { id, title, boardId },
       })
     }
 
     dispatch({
-      type: DataAction.setActiveBoard,
+      type: DATA_ACTION.SET_ACTIVE_BOARD,
       payload: { id: boardId },
     })
 

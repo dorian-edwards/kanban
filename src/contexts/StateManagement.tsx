@@ -6,7 +6,7 @@ import {
   BoardInterface,
   ColumnInterface,
   SubtaskInterface,
-  DataAction,
+  DATA_ACTION,
   TaskInterface,
 } from '../interfaces/DataInterfaces'
 import { populateBoardObject } from '../utilities/populateBoard'
@@ -62,16 +62,16 @@ const data: BoardData = populateBoardObject(true)
 
 function reducer(
   state: BoardData,
-  action: { type: DataAction; payload: Payload }
+  action: { type: DATA_ACTION; payload: Payload }
 ): BoardData {
   switch (action.type) {
-    case DataAction.setActiveBoard:
+    case DATA_ACTION.SET_ACTIVE_BOARD:
       return {
         ...state,
         activeBoard: action.payload.id,
       }
 
-    case DataAction.createBoard: {
+    case DATA_ACTION.CREATE_BOARD: {
       const { id, title } = action.payload as BoardInterface
       return {
         ...state,
@@ -79,13 +79,13 @@ function reducer(
       }
     }
 
-    case DataAction.updateBoard: {
+    case DATA_ACTION.UPDATE_BOARD: {
       const { id, title } = action.payload as BoardInterface
       const { boards } = state
       return { ...state, boards: { ...boards, [id]: { id, title } } }
     }
 
-    case DataAction.deleteBoard: {
+    case DATA_ACTION.DELETE_BOARD: {
       const { id } = action.payload as BoardInterface
       let stateCopy = structuredClone(state)
       stateCopy = { ...deleteAssociatedColumns(id, stateCopy) }
@@ -94,7 +94,7 @@ function reducer(
       return { ...stateCopy, activeBoard: Object.keys(stateCopy.boards)[0] }
     }
 
-    case DataAction.createColumn: {
+    case DATA_ACTION.CREATE_COLUMN: {
       const { id, title, boardId } = action.payload as ColumnInterface
       return {
         ...state,
@@ -102,7 +102,7 @@ function reducer(
       }
     }
 
-    case DataAction.deleteColumn: {
+    case DATA_ACTION.DELETE_COLUMN: {
       const { id } = action.payload as ColumnInterface
       let stateCopy = structuredClone(state)
       stateCopy = deleteAssociatedTasks(id, state)
@@ -111,7 +111,7 @@ function reducer(
       return { ...stateCopy }
     }
 
-    case DataAction.updateTask: {
+    case DATA_ACTION.UPDATE_TASK: {
       const { id } = action.payload as TaskInterface
       const { tasks } = state
       return {
@@ -120,7 +120,7 @@ function reducer(
       }
     }
 
-    case DataAction.toggleSubtaskComplete: {
+    case DATA_ACTION.TOGGLE_SUBTASK_COMPLETE: {
       const { id, complete } = action.payload as SubtaskInterface
       const { subtasks } = state
       return {

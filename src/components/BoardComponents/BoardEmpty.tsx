@@ -1,5 +1,6 @@
 import { useOverlayContext } from '../../contexts/OverlayContext'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
+import EditBoard from './EditBoard'
 
 export default function BoardEmpty() {
   const { setOverlayActive, setModal } = useOverlayContext()
@@ -12,7 +13,7 @@ export default function BoardEmpty() {
         </h2>
         <ButtonPrimary
           onClick={() => {
-            setModal(<>Add Column</>)
+            setModal(<EditBoard />)
             setOverlayActive(true)
           }}
           additionalStyling='max-w-[17.4rem]'

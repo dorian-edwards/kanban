@@ -12,7 +12,11 @@ export function populateBoardObject(populate: boolean): BoardData {
         columns: {
           CATU4720: { id: 'CATU4720', title: 'Todo', boardId: 'BOSN4590' },
           CEHE6807: { id: 'CEHE6807', title: 'Done', boardId: 'BOSN4590' },
-          CDDU7226: { id: 'CDDU7226', title: 'Column 1', boardId: 'BWTM1785' },
+          CDDU7226: {
+            id: 'CDDU7226',
+            title: 'Nice to haves',
+            boardId: 'BWTM1785',
+          },
         },
         tasks: {
           TQCL1142: {

@@ -1,5 +1,5 @@
 import { useOverlayContext } from '../../contexts/OverlayContext'
-import CreateBoard from '../Forms/CreateBoard'
+import CreateBoard from '../BoardComponents/CreateBoard'
 import BoardIcon from '../icons/BoardIcon'
 
 export default function CreateBoardButton() {

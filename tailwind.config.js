@@ -15,6 +15,7 @@ module.exports = {
         md: '0px 10px 20px 0px rgba(54, 78, 126, 0.25)',
       },
       spacing: {
+        '8px': '0.8rem',
         '12px': '1.2rem',
         '16px': '1.6rem',
         '18px': '1.8rem',

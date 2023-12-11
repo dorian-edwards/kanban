@@ -4,6 +4,16 @@ import {
   TaskInterface,
 } from '../interfaces/DataInterfaces'
 
+export function arrayToObject<T extends { id: string; title: string }>(
+  data: T[]
+): { [key: string]: T } {
+  let obj: { [key: string]: T } = {}
+  for (let entry of data) {
+    obj[entry.id] = entry
+  }
+  return obj
+}
+
 export function extractColumns(
   targetBoardId: string,
   columns: {

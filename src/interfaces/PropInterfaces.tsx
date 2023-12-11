@@ -30,6 +30,12 @@ export interface DynamicInputProps {
   isSubmitted?: boolean
 }
 
+export interface EditMenuProps {
+  type: string
+  taskId?: string
+  setMenuActive: (b: boolean) => void
+}
+
 export interface IconProps {
   additionalStyling?: string
   active?: boolean
@@ -72,6 +78,8 @@ export interface OverlayProps {
   turnOverlayOff: () => void
   isFullScreen?: boolean
 }
+
+export type Ref = HTMLDivElement
 
 export interface SidePanelNavProps {
   turnOverlayOff?: () => void

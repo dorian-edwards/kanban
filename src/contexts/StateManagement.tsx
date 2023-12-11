@@ -79,12 +79,36 @@ function reducer(
       }
     }
 
+    case DataAction.updateBoard: {
+      const { id, title } = action.payload as BoardInterface
+      const { boards } = state
+      return { ...state, boards: { ...boards, [id]: { id, title } } }
+    }
+
+    case DataAction.deleteBoard: {
+      const { id } = action.payload as BoardInterface
+      let stateCopy = structuredClone(state)
+      stateCopy = { ...deleteAssociatedColumns(id, stateCopy) }
+      delete stateCopy.boards[id]
+
+      return { ...stateCopy, activeBoard: Object.keys(stateCopy.boards)[0] }
+    }
+
     case DataAction.createColumn: {
       const { id, title, boardId } = action.payload as ColumnInterface
       return {
         ...state,
         columns: { ...state.columns, [id]: { id, title, boardId } },
       }
+    }
+
+    case DataAction.deleteColumn: {
+      const { id } = action.payload as ColumnInterface
+      let stateCopy = structuredClone(state)
+      stateCopy = deleteAssociatedTasks(id, state)
+      delete stateCopy.columns[id]
+
+      return { ...stateCopy }
     }
 
     case DataAction.updateTask: {
@@ -111,4 +135,50 @@ function reducer(
     default:
       return state
   }
+}
+
+export function deleteAssociatedSubtasks(
+  taskId: string,
+  data: BoardData
+): BoardData {
+  const clonedData = structuredClone(data)
+  const { subtasks } = clonedData
+
+  for (let [key, subtask] of Object.entries<SubtaskInterface>(subtasks)) {
+    if (subtask.taskId === taskId) delete subtasks[key]
+  }
+
+  return { ...clonedData }
+}
+
+export function deleteAssociatedTasks(
+  columnId: string,
+  data: BoardData
+): BoardData {
+  let clonedData = structuredClone(data)
+  const { tasks } = clonedData
+  for (let [key, task] of Object.entries<TaskInterface>(tasks)) {
+    if (task.columnId === columnId) {
+      clonedData = { ...deleteAssociatedSubtasks(key, clonedData) }
+      delete clonedData.tasks[key]
+    }
+  }
+
+  return { ...clonedData }
+}
+
+export function deleteAssociatedColumns(
+  boardId: string,
+  data: BoardData
+): BoardData {
+  let clonedData = structuredClone(data)
+  const { columns } = clonedData
+  for (let [key, column] of Object.entries<ColumnInterface>(columns)) {
+    if (column.boardId === boardId) {
+      clonedData = { ...deleteAssociatedTasks(key, clonedData) }
+      delete clonedData.columns[key]
+    }
+  }
+
+  return { ...clonedData }
 }

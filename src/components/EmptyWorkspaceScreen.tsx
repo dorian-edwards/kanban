@@ -1,6 +1,6 @@
 import { useOverlayContext } from '../contexts/OverlayContext'
 import ButtonPrimary from './Buttons/ButtonPrimary'
-import CreateBoard from './Forms/CreateBoard'
+import CreateBoard from './BoardComponents/CreateBoard'
 
 // Display if there are no active boards
 export default function EmptyWorkspaceScreen() {

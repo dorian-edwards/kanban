@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { InputProps } from '../../../interfaces/PropInterfaces'
+import { InputProps } from '../../interfaces/PropInterfaces'
 
 export default function Input({
   type,

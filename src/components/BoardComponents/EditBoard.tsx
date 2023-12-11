@@ -2,27 +2,37 @@ import { FormEvent, useState } from 'react'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import ButtonSecondary from '../Buttons/ButtonSecondary'
 import keyGen from '../../utilities/keyGen'
-import { useBoardDispatchContext } from '../../contexts/StateManagement'
+import {
+  useBoardDataContext,
+  useBoardDispatchContext,
+} from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
 import { DataAction } from '../../interfaces/DataInterfaces'
-import DynamicInput from '../Forms/FormElements/DynamicInput'
-import Input from '../Forms/FormElements/Input'
-import Label from '../Forms/FormElements/Label'
+import DynamicInput from '../FormElements/DynamicInput'
+import Input from '../FormElements/Input'
+import Label from '../FormElements/Label'
+import { arrayToObject, extractColumns } from '../../utilities/dataManipulation'
+
+export interface BoardForm {
+  id: string
+  title: string
+  columns: { id: string; title: string }[]
+}
 
 export default function EditBoard() {
-  const [board, setBoard] = useState<{
-    id: string
-    title: string
-    columns: { id: string; title: string }[]
-  }>({
-    id: '',
-    title: '',
-    columns: [],
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  const state = useBoardDataContext()
+  const { setOverlayActive } = useOverlayContext()
+  const activeBoard = state.boards[state.activeBoard]
+  const startingColumns = extractColumns(activeBoard.id, state.columns)
+
+  const [board, setBoard] = useState<BoardForm>({
+    id: activeBoard.id,
+    title: activeBoard.title,
+    columns: [...startingColumns.map(({ id, title }) => ({ id, title }))],
   })
   const dispatch = useBoardDispatchContext()
-  const { setOverlayActive } = useOverlayContext()
 
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorTimeout, setErrorTimeOut] = useState<NodeJS.Timeout | undefined>()
 
@@ -42,11 +52,11 @@ export default function EditBoard() {
 
   const handleColumnInputChange = (
     e: React.FormEvent<HTMLInputElement>,
-    n: number
+    index: number
   ) => {
     setIsSubmitted(false)
     const copy = { ...board, columns: [...board.columns] }
-    copy.columns[n].title = e.currentTarget.value
+    copy.columns[index].title = e.currentTarget.value
     setBoard(copy)
   }
 
@@ -62,24 +72,34 @@ export default function EditBoard() {
       return
     }
 
-    const boardId = keyGen('B')
+    const newColumns = arrayToObject<{ id: string; title: string }>(
+      board.columns
+    )
 
-    dispatch({
-      type: DataAction.createBoard,
-      payload: { id: boardId, title: board.title },
-    })
+    for (let column of startingColumns) {
+      if (!(column.id in newColumns)) {
+        dispatch({
+          type: DataAction.deleteColumn,
+          payload: { id: column.id },
+        })
+      }
+    }
 
     for (let column of board.columns) {
-      const { id, title } = column
       dispatch({
         type: DataAction.createColumn,
-        payload: { id, title, boardId },
+        payload: { ...column, boardId: board.id },
       })
     }
 
     dispatch({
+      type: DataAction.updateBoard,
+      payload: { id: board.id, title: board.title },
+    })
+
+    dispatch({
       type: DataAction.setActiveBoard,
-      payload: { id: boardId },
+      payload: { id: board.id },
     })
 
     setOverlayActive(false)

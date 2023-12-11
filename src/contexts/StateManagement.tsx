@@ -79,6 +79,12 @@ function reducer(
       }
     }
 
+    case DataAction.updateBoard: {
+      const { id, title } = action.payload as BoardInterface
+      const { boards } = state
+      return { ...state, boards: { ...boards, [id]: { id, title } } }
+    }
+
     case DataAction.deleteBoard: {
       const { id } = action.payload as BoardInterface
       let stateCopy = structuredClone(state)
@@ -94,6 +100,15 @@ function reducer(
         ...state,
         columns: { ...state.columns, [id]: { id, title, boardId } },
       }
+    }
+
+    case DataAction.deleteColumn: {
+      const { id } = action.payload as ColumnInterface
+      let stateCopy = structuredClone(state)
+      stateCopy = deleteAssociatedTasks(id, state)
+      delete stateCopy.columns[id]
+
+      return { ...stateCopy }
     }
 
     case DataAction.updateTask: {

@@ -1,6 +1,6 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import { ColumnInterface } from '../../interfaces/DataInterfaces'
-import { extractTasks } from '../../utilities/dataExtraction'
+import { extractTasks } from '../../utilities/dataManipulation'
 import TaskPreview from '../TaskComponents/TaskPreview'
 
 export default function Column({ id, title, boardId }: ColumnInterface) {

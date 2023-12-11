@@ -1,7 +1,7 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import { EditType } from '../../interfaces/DataInterfaces'
 import { MainNavProps } from '../../interfaces/PropInterfaces'
-import { extractColumns } from '../../utilities/dataExtraction'
+import { extractColumns } from '../../utilities/dataManipulation'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import Edit from '../Edit'
 import NavDark from '../icons/NavDark'

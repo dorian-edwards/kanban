@@ -5,9 +5,10 @@ import VerticalEllipsis from './icons/VerticalEllipsis'
 export interface EditProps {
   type: string
   taskId?: string
+  disabled: boolean
 }
 
-export default function Edit({ type, taskId }: EditProps) {
+export default function Edit({ type, taskId, disabled }: EditProps) {
   const [menuActive, setMenuActive] = useState<boolean>(false)
   const editMenuRef = createRef<HTMLDivElement>() // <- this
 
@@ -32,11 +33,19 @@ export default function Edit({ type, taskId }: EditProps) {
 
   return (
     <div className='edit-menu'>
-      <button onClick={() => setMenuActive((prev) => !prev)}>
+      <button
+        onClick={() => setMenuActive((prev) => !prev)}
+        disabled={disabled}
+      >
         <VerticalEllipsis />
       </button>
       {menuActive ? (
-        <EditMenu ref={editMenuRef} type={type} taskId={taskId} />
+        <EditMenu
+          ref={editMenuRef}
+          type={type}
+          taskId={taskId}
+          setMenuActive={setMenuActive}
+        />
       ) : null}
     </div>
   )

@@ -7,6 +7,7 @@ import AddTask from '../icons/AddTask'
 export default function MobileEdit() {
   const { activeBoard, columns } = useBoardDataContext()
   const activeColumns = extractColumns(activeBoard, columns)
+
   return (
     <div className='mobile-nav-options flex items-center relative'>
       <button
@@ -24,7 +25,7 @@ export default function MobileEdit() {
         <AddTask />
       </button>
       <div className='menu ml-[2rem]'>
-        <Edit type={EditType.board} />
+        <Edit type={EditType.board} disabled={!activeBoard} />
       </div>
     </div>
   )

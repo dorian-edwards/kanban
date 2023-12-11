@@ -85,7 +85,7 @@ function reducer(
       stateCopy = { ...deleteAssociatedColumns(id, stateCopy) }
       delete stateCopy.boards[id]
 
-      return { ...stateCopy }
+      return { ...stateCopy, activeBoard: Object.keys(stateCopy.boards)[0] }
     }
 
     case DataAction.createColumn: {

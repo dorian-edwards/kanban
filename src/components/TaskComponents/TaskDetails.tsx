@@ -17,7 +17,7 @@ export default function TaskDetails({ task }: { task: TaskInterface }) {
         <h2 className='task-title text-black text-18px font-bold'>
           {task.title}
         </h2>
-        <Edit type={EditType.task} taskId={task.id} />
+        <Edit type={EditType.task} taskId={task.id} disabled={false} />
       </div>
 
       <p className='task-description text-sm text-med-gray font-medium leading-extra-loose mb-24px'>

@@ -1,6 +1,6 @@
 import { ButtonProps } from '../../interfaces/PropInterfaces'
 
-export default function ButtonSecondary({
+export default function ButtonDelete({
   children,
   type,
   additionalStyling,
@@ -9,7 +9,7 @@ export default function ButtonSecondary({
 }: ButtonProps) {
   return (
     <button
-      className={`w-full py-8px text-sm text-center rounded-lg text-primary-purple bg-secondary-purple hover:bg-secondary-purple-hover disabled:bg-primary-purple-disabled ${additionalStyling}`}
+      className={`w-full py-8px text-sm text-center rounded-lg text-white bg-red hover:bg-red-hover disabled:bg-med-gray ${additionalStyling}`}
       disabled={disabled}
       onClick={onClick}
       type={type}

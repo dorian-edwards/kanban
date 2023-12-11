@@ -5,10 +5,7 @@ import SidePanel from './components/NavComponents/SidePanel'
 import MobileNav from './components/NavComponents/MobileNav'
 import useScreenMonitor from './components/Hooks/useScreenMonitor'
 import EmptyWorkspaceScreen from './components/EmptyWorkspaceScreen'
-import {
-  deleteAssociatedColumns,
-  useBoardDataContext,
-} from './contexts/StateManagement'
+import { useBoardDataContext } from './contexts/StateManagement'
 import { useOverlayContext } from './contexts/OverlayContext'
 import Overlay from './components/Overlay'
 import Board from './components/BoardComponents/Board'
@@ -18,11 +15,6 @@ export default function App() {
   const mobile = useScreenMonitor()
   const { overlayActive, modal, setOverlayActive } = useOverlayContext()
   const { activeBoard } = useBoardDataContext()
-
-  const state = useBoardDataContext()
-  console.log(state)
-  const test = deleteAssociatedColumns('BOSN4590', state)
-  console.log(test)
 
   return (
     <>

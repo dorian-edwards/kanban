@@ -17,7 +17,7 @@ export default function EmptyWorkspaceScreen() {
             setModal(<CreateBoard />)
             setOverlayActive(true)
           }}
-          additionalStyling='max-w-[17.4rem]'
+          additionalStyling='max-w-[17.4rem] text-med'
         >
           {'+ Add New Board'}
         </ButtonPrimary>

@@ -1,15 +1,14 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import { EditType } from '../../interfaces/DataInterfaces'
 import { MainNavProps } from '../../interfaces/PropInterfaces'
+import { extractColumns } from '../../utilities/dataExtraction'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import Edit from '../Edit'
 import NavDark from '../icons/NavDark'
 
 export default function MainNav({ sidePanelVisible }: MainNavProps) {
   const { activeBoard, boards, columns } = useBoardDataContext()
-  const activeBoardColumns = Object.values(columns).filter(
-    (col) => col.boardId === activeBoard
-  )
+  const activeColumns = extractColumns(activeBoard, columns)
 
   return (
     <nav className='main-nav flex justify-between bg-white'>
@@ -29,13 +28,13 @@ export default function MainNav({ sidePanelVisible }: MainNavProps) {
       </div>
       <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-24px relative'>
         <ButtonPrimary
-          disabled={!(activeBoard && activeBoardColumns.length !== 0) || true}
-          additionalStyling='px-[2.5rem]'
+          disabled={!(activeBoard && activeColumns.length !== 0) || true}
+          additionalStyling='px-[2.5rem] text-med !py-[1.4rem]'
         >
           {'+ Add New Task'}
         </ButtonPrimary>
 
-        <Edit type={EditType.board} />
+        <Edit type={EditType.board} disabled={!activeBoard} />
       </div>
     </nav>
   )

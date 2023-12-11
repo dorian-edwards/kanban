@@ -9,7 +9,7 @@ export default function AddTaskButton({
 }: ButtonProps) {
   return (
     <button
-      className={`w-full py-[1.4rem] text-center rounded-lg text-white bg-primary-purple hover:bg-primary-purple-hover disabled:bg-lavender ${additionalStyling}`}
+      className={`w-full py-8px text-sm text-center rounded-lg text-white bg-primary-purple hover:bg-primary-purple-hover disabled:bg-lavender ${additionalStyling}`}
       disabled={disabled}
       onClick={onClick}
       type={type}

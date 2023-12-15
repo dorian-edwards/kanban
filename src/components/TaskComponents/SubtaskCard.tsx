@@ -3,7 +3,7 @@ import {
   useBoardDataContext,
   useBoardDispatchContext,
 } from '../../contexts/StateManagement'
-import { DataAction } from '../../interfaces/DataInterfaces'
+import { DATA_ACTION } from '../../interfaces/DataInterfaces'
 
 export default function SubtaskCard({ id }: { id: string }) {
   const { subtasks } = useBoardDataContext()
@@ -12,7 +12,7 @@ export default function SubtaskCard({ id }: { id: string }) {
   const dispatch = useBoardDispatchContext()
   const handleToggle = () => {
     dispatch({
-      type: DataAction.toggleSubtaskComplete,
+      type: DATA_ACTION.TOGGLE_SUBTASK_COMPLETE,
       payload: {
         id,
         complete: !subtask.complete,

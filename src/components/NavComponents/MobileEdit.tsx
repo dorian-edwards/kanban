@@ -1,6 +1,6 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import { EditType } from '../../interfaces/DataInterfaces'
-import { extractColumns } from '../../utilities/dataManipulation'
+import { extractColumns } from '../../utilities/dataUtilities'
 import Edit from '../Edit'
 import AddTask from '../icons/AddTask'
 

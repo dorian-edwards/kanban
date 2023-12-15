@@ -3,7 +3,7 @@ import {
   useBoardDataContext,
   useBoardDispatchContext,
 } from '../../contexts/StateManagement'
-import { DataAction, TaskInterface } from '../../interfaces/DataInterfaces'
+import { DATA_ACTION, TaskInterface } from '../../interfaces/DataInterfaces'
 import { useOverlayContext } from '../../contexts/OverlayContext'
 
 interface Props {
@@ -27,7 +27,7 @@ const ColumnSelector = forwardRef<Ref, Props>(function ColumnSelector(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     dispatch({
-      type: DataAction.updateTask,
+      type: DATA_ACTION.UPDATE_TASK,
       payload: { ...task, columnId: e.currentTarget.value },
     })
   }

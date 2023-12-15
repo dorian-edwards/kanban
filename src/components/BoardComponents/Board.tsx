@@ -1,7 +1,7 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import BoardEmpty from './BoardEmpty'
 import Column from './Column'
-import { extractColumns } from '../../utilities/dataManipulation'
+import { extractColumns } from '../../utilities/dataUtilities'
 
 export default function Board() {
   const { activeBoard, columns } = useBoardDataContext()

@@ -1,10 +1,7 @@
 import { useOverlayContext } from '../../contexts/OverlayContext'
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import { TaskInterface } from '../../interfaces/DataInterfaces'
-import {
-  extractSubtasks,
-  reduceSubtasks,
-} from '../../utilities/dataManipulation'
+import { extractSubtasks, reduceSubtasks } from '../../utilities/dataUtilities'
 import TaskDetails from './TaskDetails'
 
 export default function TaskPreview({ task }: { task: TaskInterface }) {

@@ -74,7 +74,6 @@ export function deleteColumn(columnId: string, data: BoardData): BoardData {
   }
 }
 
-// deletes subtasks and then task
 export function deleteTask(taskId: string, data: BoardData): BoardData {
   return {
     ...data,

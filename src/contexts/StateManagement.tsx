@@ -64,65 +64,65 @@ function reducer(
   state: BoardData,
   action: { type: DATA_ACTION; payload: Payload }
 ): BoardData {
+  const stateCopy = structuredClone(state)
+
   switch (action.type) {
     case DATA_ACTION.SET_ACTIVE_BOARD:
       return {
-        ...state,
+        ...stateCopy,
         activeBoard: action.payload.id,
       }
 
     case DATA_ACTION.CREATE_BOARD: {
       const { id, title } = action.payload as BoardInterface
       return {
-        ...state,
-        boards: { ...state.boards, [id]: { id, title } },
+        ...stateCopy,
+        boards: { ...stateCopy.boards, [id]: { id, title } },
       }
     }
 
     case DATA_ACTION.UPDATE_BOARD: {
       const { id, title } = action.payload as BoardInterface
-      const { boards } = state
-      return { ...state, boards: { ...boards, [id]: { id, title } } }
+      return {
+        ...stateCopy,
+        boards: { ...stateCopy.boards, [id]: { id, title } },
+      }
     }
 
     case DATA_ACTION.DELETE_BOARD: {
-      const { id } = action.payload as BoardInterface
-      let stateCopy = structuredClone(state)
-      stateCopy = deleteBoard(id, stateCopy)
-
-      return { ...stateCopy, activeBoard: Object.keys(stateCopy.boards)[0] }
+      return {
+        ...deleteBoard(action.payload.id, stateCopy),
+        activeBoard: Object.keys(stateCopy.boards)[0],
+      }
     }
 
     case DATA_ACTION.CREATE_COLUMN: {
       const { id, title, boardId } = action.payload as ColumnInterface
       return {
-        ...state,
-        columns: { ...state.columns, [id]: { id, title, boardId } },
+        ...stateCopy,
+        columns: { ...stateCopy.columns, [id]: { id, title, boardId } },
       }
     }
 
     case DATA_ACTION.DELETE_COLUMN: {
       const { id } = action.payload as ColumnInterface
-      let stateCopy = structuredClone(state)
-      stateCopy = deleteColumn(id, stateCopy)
-
-      return stateCopy
+      return deleteColumn(id, stateCopy)
     }
 
     case DATA_ACTION.UPDATE_TASK: {
       const { id } = action.payload as TaskInterface
-      const { tasks } = state
+      const { tasks } = stateCopy
       return {
-        ...state,
+        ...stateCopy,
         tasks: { ...tasks, [id]: { ...tasks[id], ...action.payload } },
       }
     }
 
     case DATA_ACTION.TOGGLE_SUBTASK_COMPLETE: {
       const { id, complete } = action.payload as SubtaskInterface
-      const { subtasks } = state
+      const { subtasks } = stateCopy
       return {
-        ...state,
+        ...stateCopy,
         subtasks: {
           ...subtasks,
           [id]: { ...subtasks[id], complete: complete },

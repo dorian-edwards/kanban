@@ -2,10 +2,7 @@ import ColumnSelector from './ColumnSelector'
 import SubtaskCard from './SubtaskCard'
 import { EditType, TaskInterface } from '../../interfaces/DataInterfaces'
 import { useBoardDataContext } from '../../contexts/StateManagement'
-import {
-  extractSubtasks,
-  reduceSubtasks,
-} from '../../utilities/dataManipulation'
+import { extractSubtasks, reduceSubtasks } from '../../utilities/dataUtilities'
 import Edit from '../Edit'
 
 export default function TaskDetails({ task }: { task: TaskInterface }) {

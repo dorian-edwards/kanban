@@ -11,7 +11,7 @@ import { DATA_ACTION } from '../../interfaces/DataInterfaces'
 import DynamicInput from '../FormElements/DynamicInput'
 import Input from '../FormElements/Input'
 import Label from '../FormElements/Label'
-import { arrayToObject, extractColumns } from '../../utilities/dataManipulation'
+import { arrayToObject, extractColumns } from '../../utilities/dataUtilities'
 
 export interface BoardForm {
   id: string

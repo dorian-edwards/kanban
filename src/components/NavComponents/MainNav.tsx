@@ -1,14 +1,17 @@
+import { useOverlayContext } from '../../contexts/OverlayContext'
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import { EditType } from '../../interfaces/DataInterfaces'
 import { MainNavProps } from '../../interfaces/PropInterfaces'
 import { extractColumns } from '../../utilities/dataUtilities'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import Edit from '../Edit'
+import CreateTask from '../TaskComponents/CreateTask'
 import NavDark from '../icons/NavDark'
 
 export default function MainNav({ sidePanelVisible }: MainNavProps) {
   const { activeBoard, boards, columns } = useBoardDataContext()
   const activeColumns = extractColumns(activeBoard, columns)
+  const { setModal, setOverlayActive } = useOverlayContext()
 
   return (
     <nav className='main-nav flex justify-between bg-white'>
@@ -28,8 +31,12 @@ export default function MainNav({ sidePanelVisible }: MainNavProps) {
       </div>
       <div className='main-nav-options flex items-center pr-[2.5rem] gap-x-24px relative'>
         <ButtonPrimary
-          disabled={!(activeBoard && activeColumns.length !== 0) || true}
+          disabled={!(activeBoard && activeColumns.length !== 0)}
           additionalStyling='px-[2.5rem] text-med !py-[1.4rem]'
+          onClick={() => {
+            setModal(<CreateTask />)
+            setOverlayActive(true)
+          }}
         >
           {'+ Add New Task'}
         </ButtonPrimary>

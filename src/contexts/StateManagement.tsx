@@ -90,9 +90,10 @@ function reducer(
     }
 
     case DATA_ACTION.DELETE_BOARD: {
+      const updatedData = deleteBoard(action.payload.id, stateCopy)
       return {
-        ...deleteBoard(action.payload.id, stateCopy),
-        activeBoard: Object.keys(stateCopy.boards)[0],
+        ...updatedData,
+        activeBoard: Object.keys(updatedData.boards)[0],
       }
     }
 

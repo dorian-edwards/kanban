@@ -60,9 +60,7 @@ export const InitialColumn = forwardRef<
   HTMLDivElement,
   { onSelect: () => void; setStatus: (id: string) => void }
 >(function ColumnSelect({ onSelect, setStatus }, ref) {
-  const { setOverlayActive } = useOverlayContext()
   const { activeBoard, columns } = useBoardDataContext()
-  const dispatch = useBoardDispatchContext()
 
   const activeColumns = Object.values(columns).filter(
     (column) => column.boardId === activeBoard

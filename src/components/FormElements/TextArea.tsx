@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react'
-import { InputProps } from '../../interfaces/PropInterfaces'
+import { TextareaProps } from '../../interfaces/PropInterfaces'
 
-export default function Input({
-  type,
+export default function TextArea({
   id,
   value,
   placeholder,
   onChange,
   additionalStyling,
   isSubmitted,
-}: InputProps) {
+}: TextareaProps) {
   const [hasBeenFocused, setHasBeenFocused] = useState<boolean>(false)
   const [isInvalid, setIsinvalid] = useState<boolean>(false)
 
@@ -25,10 +24,9 @@ export default function Input({
 
   return (
     <div className='relative w-full'>
-      <input
-        type={type}
+      <textarea
         id={id}
-        className={`relative border text-sm border-cool-gray rounded-sm outline-none w-full pl-16px py-[0.8rem] ${
+        className={`relative border text-sm border-cool-gray rounded-sm outline-none w-full pl-16px py-[0.8rem] resize-none min-h-[11.2rem] ${
           isInvalid ? 'border-red' : ''
         } ${additionalStyling}`}
         value={value}

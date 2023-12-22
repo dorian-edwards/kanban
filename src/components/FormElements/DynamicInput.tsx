@@ -7,6 +7,7 @@ export default function DynamicInput({
   buttonType,
   id,
   value,
+  placeholder,
   onChange,
   onClick,
   isSubmitted,
@@ -17,6 +18,7 @@ export default function DynamicInput({
         type={inputType}
         id={id}
         value={value}
+        placeholder={placeholder}
         onChange={onChange}
         isSubmitted={isSubmitted}
       />

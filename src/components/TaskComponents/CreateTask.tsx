@@ -1,56 +1,73 @@
 import { FormEvent, useState } from 'react'
+import {
+  useBoardDataContext,
+  useBoardDispatchContext,
+} from '../../contexts/StateManagement'
+import keyGen from '../../utilities/keyGen'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
-import ButtonSecondary from '../Buttons/ButtonSecondary'
 import Label from '../FormElements/Label'
 import Input from '../FormElements/Input'
+import TextArea from '../FormElements/TextArea'
 import DynamicInput from '../FormElements/DynamicInput'
-import keyGen from '../../utilities/keyGen'
-import { useBoardDispatchContext } from '../../contexts/StateManagement'
-import { useOverlayContext } from '../../contexts/OverlayContext'
+import ButtonSecondary from '../Buttons/ButtonSecondary'
+import ColumnSelector from './ColumnSelector'
 import { DATA_ACTION } from '../../interfaces/DataInterfaces'
+import { useOverlayContext } from '../../contexts/OverlayContext'
+
+export interface TaskFormData {
+  id: string
+  title: string
+  description: string
+  subtasks: { id: string; description: string; placeholder?: string }[]
+  status: { title: string; id: string }
+}
 
 export default function CreateTask() {
-  const [board, setBoard] = useState<{
-    id: string
-    title: string
-    columns: { id: string; title: string }[]
-  }>({
-    id: '',
-    title: '',
-    columns: [],
-  })
+  const { activeBoard, columns } = useBoardDataContext()
   const dispatch = useBoardDispatchContext()
   const { setOverlayActive } = useOverlayContext()
 
+  const [task, setTask] = useState<TaskFormData>({
+    id: '',
+    title: '',
+    description: '',
+    subtasks: [
+      { id: '', description: '', placeholder: 'e.g. Make coffee' },
+      { id: '', description: '', placeholder: 'e.g. Drink coffee and smile' },
+    ],
+    status: {
+      title: Object.values(columns).filter(
+        (col) => col.boardId === activeBoard
+      )[0].title,
+      id: Object.values(columns).filter((col) => col.boardId === activeBoard)[0]
+        .id,
+    },
+  })
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorTimeout, setErrorTimeOut] = useState<NodeJS.Timeout | undefined>()
 
-  const handleAddColumn = () => {
-    setBoard({
-      ...board,
-      columns: [...board.columns, { id: keyGen('C'), title: '' }],
+  const handleSubtaskChange = (
+    e: FormEvent<HTMLInputElement>,
+    index: number
+  ): void => {
+    const copy = structuredClone(task)
+    copy.subtasks[index].description = e.currentTarget.value
+    setTask(copy)
+  }
+
+  const handleSubtaskRemove = (index: number) => {
+    setTask({
+      ...task,
+      subtasks: task.subtasks.filter((task, i) => i !== index),
     })
   }
 
-  const handleRemoveColumn = (id: string) => {
-    setBoard({
-      ...board,
-      columns: board.columns.filter((column) => column.id !== id),
-    })
+  const handleStatusChange = (id: string) => {
+    setTask({ ...task, status: { title: columns[id].title, id } })
   }
 
-  const handleColumnInputChange = (
-    e: React.FormEvent<HTMLInputElement>,
-    n: number
-  ) => {
-    setIsSubmitted(false)
-    const copy = { ...board, columns: [...board.columns] }
-    copy.columns[n].title = e.currentTarget.value
-    setBoard(copy)
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!isFormValid()) {
       setIsSubmitted(true)
@@ -62,24 +79,28 @@ export default function CreateTask() {
       return
     }
 
-    const boardId = keyGen('B')
+    const taskId = keyGen('T')
 
     dispatch({
-      type: DATA_ACTION.CREATE_BOARD,
-      payload: { id: boardId, title: board.title },
+      type: DATA_ACTION.CREATE_TASK,
+      payload: {
+        id: taskId,
+        title: task.title,
+        description: task.description,
+        columnId: task.status.id,
+      },
     })
 
-    for (let column of board.columns) {
-      const { id, title } = column
+    task.subtasks.forEach(({ description }) => {
       dispatch({
-        type: DATA_ACTION.CREATE_COLUMN,
-        payload: { id, title, boardId },
+        type: DATA_ACTION.CREATE_SUBTASK,
+        payload: {
+          id: keyGen('ST'),
+          description,
+          complete: false,
+          taskId,
+        },
       })
-    }
-
-    dispatch({
-      type: DATA_ACTION.SET_ACTIVE_BOARD,
-      payload: { id: boardId },
     })
 
     setOverlayActive(false)
@@ -87,59 +108,88 @@ export default function CreateTask() {
 
   const isFormValid = (): boolean => {
     let result = true
-    if (board.title.trim() === '') result = false
+    if (task.title.trim() === '') return false
+    if (task.description.trim() === '') return false
+    if (task.status.title.trim() === '') return false
 
-    for (let column of board.columns) {
-      if (column.title.trim() === '') result = false
-    }
-
+    task.subtasks.forEach(({ description }) => {
+      result = description.trim() !== ''
+    })
     return result
   }
 
   return (
     <div className='bg-white p-24px rounded-sm mx-[16px]'>
       <form onSubmit={handleSubmit}>
-        <h2 className='mb-24px font-bold text-18px'>Add New Board</h2>
+        <h2 className='task-form-title mb-24px font-bold text-18px'>
+          Add New Task
+        </h2>
         <div className='mb-24px'>
-          <Label htmlFor='board-name'>Board Name</Label>
+          <Label htmlFor='task-title'>Title</Label>
           <Input
             type='text'
-            id='board-name'
-            value={board.title}
+            id='task-title'
+            value={task.title}
+            placeholder='e.g. Take coffee break'
             onChange={(e: FormEvent<HTMLInputElement>) => {
               setIsSubmitted(false)
-              setBoard({ ...board, title: e.currentTarget.value })
+              setTask({ ...task, title: e.currentTarget.value })
+            }}
+            isSubmitted={isSubmitted}
+          />
+        </div>
+        <div className='mb-24px'>
+          <Label htmlFor='task-description'>Description</Label>
+          <TextArea
+            id='task-description'
+            value={task.description}
+            placeholder={
+              "e.g. It's always good to take a break. This 15 break will recharge the batteries a little."
+            }
+            onChange={function (e: FormEvent<HTMLTextAreaElement>): void {
+              setIsSubmitted(false)
+              setTask({ ...task, description: e.currentTarget.value })
             }}
             isSubmitted={isSubmitted}
           />
         </div>
         <div className='mb-12px'>
-          <Label>Board Columns</Label>
-          {board.columns.map(({ id, title }, index) => {
-            return (
-              <div key={index}>
-                <DynamicInput
-                  onClick={() => handleRemoveColumn(id)}
-                  inputType='text'
-                  buttonType='button'
-                  value={board.columns[index].title}
-                  onChange={(e: FormEvent<HTMLInputElement>) =>
-                    handleColumnInputChange(e, index)
-                  }
-                  isSubmitted={isSubmitted}
-                />
-              </div>
-            )
-          })}
+          <Label>Subtasks</Label>
+          {task.subtasks.map(({ id, description, placeholder }, index) => (
+            <div key={index}>
+              <DynamicInput
+                onClick={() => handleSubtaskRemove(index)}
+                inputType='text'
+                buttonType='button'
+                value={description}
+                placeholder={placeholder}
+                onChange={(e) => handleSubtaskChange(e, index)}
+                isSubmitted={isSubmitted}
+              />
+            </div>
+          ))}
         </div>
         <ButtonSecondary
-          onClick={handleAddColumn}
           additionalStyling='mb-24px'
           type='button'
+          onClick={() => {
+            setTask({
+              ...task,
+              subtasks: [
+                ...task.subtasks,
+                { id: '', description: '', placeholder: '' },
+              ],
+            })
+          }}
         >
-          + Add New Column
+          {'+ Add New Subtask'}
         </ButtonSecondary>
-        <ButtonPrimary type='submit'>Create New Board</ButtonPrimary>
+        <ColumnSelector
+          status={task.status.title}
+          changeStatus={handleStatusChange}
+          additionalStyling={'mb-24px'}
+        />
+        <ButtonPrimary type='submit'>Create Task</ButtonPrimary>
       </form>
     </div>
   )

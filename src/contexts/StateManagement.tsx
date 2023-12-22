@@ -110,12 +110,33 @@ function reducer(
       return deleteColumn(id, stateCopy)
     }
 
+    case DATA_ACTION.CREATE_TASK: {
+      const { id } = action.payload
+      const { tasks } = stateCopy
+      return {
+        ...stateCopy,
+        tasks: { ...tasks, [id]: { ...(action.payload as TaskInterface) } },
+      }
+    }
+
     case DATA_ACTION.UPDATE_TASK: {
       const { id } = action.payload as TaskInterface
       const { tasks } = stateCopy
       return {
         ...stateCopy,
         tasks: { ...tasks, [id]: { ...tasks[id], ...action.payload } },
+      }
+    }
+
+    case DATA_ACTION.CREATE_SUBTASK: {
+      const { id } = action.payload
+      const { subtasks } = stateCopy
+      return {
+        ...stateCopy,
+        subtasks: {
+          ...subtasks,
+          [id]: { ...(action.payload as SubtaskInterface) },
+        },
       }
     }
 

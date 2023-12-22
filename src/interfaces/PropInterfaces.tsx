@@ -25,6 +25,7 @@ export interface DynamicInputProps {
   buttonType: 'button' | 'reset' | 'submit' | undefined
   id?: string
   value: string
+  placeholder?: string
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
   onClick: () => void
   isSubmitted?: boolean
@@ -49,6 +50,7 @@ export interface InputProps {
   onChange: (e: React.FormEvent<HTMLInputElement>) => void
   additionalStyling?: string
   isSubmitted?: boolean
+  placeholder?: string
 }
 
 export interface LabelProps {
@@ -83,4 +85,13 @@ export type Ref = HTMLDivElement
 
 export interface SidePanelNavProps {
   turnOverlayOff?: () => void
+}
+
+export interface TextareaProps {
+  id?: string
+  value: string
+  onChange: (e: React.FormEvent<HTMLTextAreaElement>) => void
+  additionalStyling?: string
+  isSubmitted?: boolean
+  placeholder?: string
 }

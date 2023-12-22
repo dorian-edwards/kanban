@@ -122,7 +122,7 @@ export default function CreateBoard() {
                   onClick={() => handleRemoveColumn(id)}
                   inputType='text'
                   buttonType='button'
-                  value={board.columns[index].title}
+                  value={title}
                   onChange={(e: FormEvent<HTMLInputElement>) =>
                     handleColumnInputChange(e, index)
                   }

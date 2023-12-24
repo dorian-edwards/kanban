@@ -1,10 +1,14 @@
 import {
+  BoardAction,
   BoardData,
+  BoardForm,
   BoardInterface,
   ColumnInterface,
+  DATA_ACTION,
   SubtaskInterface,
   TaskInterface,
 } from '../interfaces/DataInterfaces'
+import keyGen from './keyGen'
 
 export function arrayToObject<T extends { id: string; title: string }>(
   data: T[]
@@ -90,4 +94,59 @@ export function filter<T>(
   fxn: (entry: [string, T]) => boolean
 ): { [key: string]: T } {
   return Object.fromEntries(Object.entries(collection).filter(fxn))
+}
+
+export function updateBoard(
+  dispatch: React.Dispatch<BoardAction>,
+  board: BoardForm,
+  preEditColumns: ColumnInterface[]
+) {
+  const postEditColumns = arrayToObject<{ id: string; title: string }>(
+    board.columns
+  )
+
+  for (let column of preEditColumns) {
+    if (!(column.id in postEditColumns)) {
+      dispatch({
+        type: DATA_ACTION.DELETE_COLUMN,
+        payload: { id: column.id },
+      })
+    }
+  }
+
+  for (let column of board.columns) {
+    dispatch({
+      type: DATA_ACTION.CREATE_COLUMN,
+      payload: { ...column, boardId: board.id },
+    })
+  }
+
+  dispatch({
+    type: DATA_ACTION.UPDATE_BOARD,
+    payload: { id: board.id, title: board.title },
+  })
+}
+
+export function createBoard(
+  dispatch: React.Dispatch<BoardAction>,
+  board: BoardForm
+) {
+  const boardId = keyGen('B')
+
+  dispatch({
+    type: DATA_ACTION.CREATE_BOARD,
+    payload: { id: boardId, title: board.title },
+  })
+
+  for (let column of board.columns) {
+    dispatch({
+      type: DATA_ACTION.CREATE_COLUMN,
+      payload: { ...column, id: keyGen('C'), boardId },
+    })
+  }
+
+  dispatch({
+    type: DATA_ACTION.SET_ACTIVE_BOARD,
+    payload: { id: boardId },
+  })
 }

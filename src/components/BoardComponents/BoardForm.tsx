@@ -1,30 +1,39 @@
 import { FormEvent, useState } from 'react'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import ButtonSecondary from '../Buttons/ButtonSecondary'
-import Label from '../FormElements/Label'
-import Input from '../FormElements/Input'
-import DynamicInput from '../FormElements/DynamicInput'
 import keyGen from '../../utilities/keyGen'
-import { useBoardDispatchContext } from '../../contexts/StateManagement'
+import {
+  useBoardDataContext,
+  useBoardDispatchContext,
+} from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
-import { DATA_ACTION } from '../../interfaces/DataInterfaces'
+import { BoardForm } from '../../interfaces/DataInterfaces'
+import DynamicInput from '../FormElements/DynamicInput'
+import Input from '../FormElements/Input'
+import Label from '../FormElements/Label'
+import {
+  createBoard,
+  extractColumns,
+  updateBoard,
+} from '../../utilities/dataUtilities'
 
-export default function CreateBoard() {
-  const [board, setBoard] = useState<{
-    id: string
-    title: string
-    columns: { id: string; title: string }[]
-  }>({
-    id: '',
-    title: '',
-    columns: [],
-  })
-  const dispatch = useBoardDispatchContext()
-  const { setOverlayActive } = useOverlayContext()
-
+export default function BoardTest({ editMode }: { editMode: boolean }) {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  const { setOverlayActive } = useOverlayContext()
+  const state = useBoardDataContext()
+  const dispatch = useBoardDispatchContext()
+  const activeBoard = state.boards[state.activeBoard]
+  const preEditColumns = extractColumns(activeBoard.id, state.columns)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorTimeout, setErrorTimeOut] = useState<NodeJS.Timeout | undefined>()
+
+  const [board, setBoard] = useState<BoardForm>({
+    id: editMode ? activeBoard.id : '',
+    title: editMode ? activeBoard.title : '',
+    columns: editMode
+      ? [...preEditColumns.map(({ id, title }) => ({ id, title }))]
+      : [],
+  })
 
   const handleAddColumn = () => {
     setBoard({
@@ -42,12 +51,23 @@ export default function CreateBoard() {
 
   const handleColumnInputChange = (
     e: React.FormEvent<HTMLInputElement>,
-    n: number
+    index: number
   ) => {
     setIsSubmitted(false)
     const copy = { ...board, columns: [...board.columns] }
-    copy.columns[n].title = e.currentTarget.value
+    copy.columns[index].title = e.currentTarget.value
     setBoard(copy)
+  }
+
+  const isFormValid = (): boolean => {
+    let result = true
+    if (board.title.trim() === '') result = false
+
+    for (let column of board.columns) {
+      if (column.title.trim() === '') result = false
+    }
+
+    return result
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,46 +82,23 @@ export default function CreateBoard() {
       return
     }
 
-    const boardId = keyGen('B')
-
-    dispatch({
-      type: DATA_ACTION.CREATE_BOARD,
-      payload: { id: boardId, title: board.title },
-    })
-
-    for (let column of board.columns) {
-      const { id, title } = column
-      dispatch({
-        type: DATA_ACTION.CREATE_COLUMN,
-        payload: { id, title, boardId },
-      })
+    if (editMode) {
+      updateBoard(dispatch, board, preEditColumns)
+    } else {
+      createBoard(dispatch, board)
     }
-
-    dispatch({
-      type: DATA_ACTION.SET_ACTIVE_BOARD,
-      payload: { id: boardId },
-    })
 
     setOverlayActive(false)
-  }
-
-  const isFormValid = (): boolean => {
-    let result = true
-    if (board.title.trim() === '') result = false
-
-    for (let column of board.columns) {
-      if (column.title.trim() === '') result = false
-    }
-
-    return result
   }
 
   return (
     <div className='bg-white p-24px rounded-sm mx-[16px]'>
       <form onSubmit={handleSubmit}>
-        <h2 className='mb-24px font-bold text-18px'>Add New Board</h2>
-        <div className='mb-24px'>
-          <Label htmlFor='board-name'>Board Name</Label>
+        <h2 className='mb-24px font-bold text-18px'>
+          {editMode ? 'Edit Board' : 'Add New Board'}
+        </h2>
+        <div className='board-title-input-wrapper mb-24px'>
+          <Label htmlFor='board-name'>{editMode ? 'Name' : 'Board Name'}</Label>
           <Input
             type='text'
             id='board-name'
@@ -113,8 +110,8 @@ export default function CreateBoard() {
             isSubmitted={isSubmitted}
           />
         </div>
-        <div className='mb-12px'>
-          <Label>Board Columns</Label>
+        <div className='board-columns-input-wrapper mb-12px'>
+          <Label>{editMode ? 'Columns' : 'Board Columns'}</Label>
           {board.columns.map(({ id, title }, index) => {
             return (
               <div key={index}>
@@ -122,7 +119,7 @@ export default function CreateBoard() {
                   onClick={() => handleRemoveColumn(id)}
                   inputType='text'
                   buttonType='button'
-                  value={title}
+                  value={board.columns[index].title}
                   onChange={(e: FormEvent<HTMLInputElement>) =>
                     handleColumnInputChange(e, index)
                   }
@@ -139,7 +136,9 @@ export default function CreateBoard() {
         >
           + Add New Column
         </ButtonSecondary>
-        <ButtonPrimary type='submit'>Create New Board</ButtonPrimary>
+        <ButtonPrimary type='submit'>
+          {editMode ? 'Save Changes' : 'Create New Board'}
+        </ButtonPrimary>
       </form>
     </div>
   )

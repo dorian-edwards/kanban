@@ -3,8 +3,8 @@ import { EditType } from '../interfaces/DataInterfaces'
 import { EditMenuProps, Ref } from '../interfaces/PropInterfaces'
 import { useOverlayContext } from '../contexts/OverlayContext'
 import DeleteConfirmation from './DeleteConfirmation'
-import EditBoard from './BoardComponents/EditBoard'
 import EditTask from './TaskComponents/EditTask'
+import BoardForm from './BoardComponents/BoardForm'
 
 const EditMenu = forwardRef<Ref, EditMenuProps>(function EditMenu(
   { type, taskId, setMenuActive },
@@ -25,7 +25,13 @@ const EditMenu = forwardRef<Ref, EditMenuProps>(function EditMenu(
       <button
         className='block text-sm font-med leading-extra-loose text-med-gray font-medium mb-16px'
         onClick={() => {
-          setModal(type === EditType.board ? <EditBoard /> : <EditTask />)
+          setModal(
+            type === EditType.board ? (
+              <BoardForm editMode={true} />
+            ) : (
+              <EditTask />
+            )
+          )
           setOverlayActive(true)
           setMenuActive(false)
         }}

@@ -4,6 +4,12 @@ export interface BoardInterface {
   title: string
 }
 
+export interface BoardForm {
+  id: string
+  title: string
+  columns: { id: string; title: string }[]
+}
+
 export interface ColumnInterface {
   id: string
   title: string

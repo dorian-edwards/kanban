@@ -10,7 +10,11 @@ import {
   TaskInterface,
 } from '../interfaces/DataInterfaces'
 import { populateBoardObject } from '../utilities/populateBoard'
-import { deleteBoard, deleteColumn } from '../utilities/dataUtilities'
+import {
+  deleteBoard,
+  deleteColumn,
+  deleteTask,
+} from '../utilities/dataUtilities'
 const BoardDataContext = createContext<BoardData | null>(null)
 const BoardDispatchContext = createContext<React.Dispatch<BoardAction> | null>(
   null
@@ -126,6 +130,11 @@ function reducer(
         ...stateCopy,
         tasks: { ...tasks, [id]: { ...tasks[id], ...action.payload } },
       }
+    }
+
+    case DATA_ACTION.DELETE_TASK: {
+      const { id } = action.payload as TaskInterface
+      return deleteTask(id, stateCopy)
     }
 
     case DATA_ACTION.CREATE_SUBTASK: {

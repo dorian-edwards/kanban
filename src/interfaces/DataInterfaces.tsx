@@ -94,3 +94,11 @@ export enum EditType {
   board = 'Board',
   task = 'Task',
 }
+
+export interface TaskFormData {
+  id: string
+  title: string
+  description: string
+  subtasks: { id: string; description: string; placeholder?: string }[]
+  status: { title: string; id: string }
+}

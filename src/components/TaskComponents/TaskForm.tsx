@@ -3,7 +3,15 @@ import {
   useBoardDataContext,
   useBoardDispatchContext,
 } from '../../contexts/StateManagement'
+import { useOverlayContext } from '../../contexts/OverlayContext'
+import {
+  BoardAction,
+  DATA_ACTION,
+  TaskFormData,
+  TaskInterface,
+} from '../../interfaces/DataInterfaces'
 import keyGen from '../../utilities/keyGen'
+import { arrayToObject, extractSubtasks } from '../../utilities/dataUtilities'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import Label from '../FormElements/Label'
 import Input from '../FormElements/Input'
@@ -11,41 +19,65 @@ import TextArea from '../FormElements/TextArea'
 import DynamicInput from '../FormElements/DynamicInput'
 import ButtonSecondary from '../Buttons/ButtonSecondary'
 import ColumnSelector from './ColumnSelector'
-import { DATA_ACTION } from '../../interfaces/DataInterfaces'
-import { useOverlayContext } from '../../contexts/OverlayContext'
 
-export interface TaskFormData {
-  id: string
-  title: string
-  description: string
-  subtasks: { id: string; description: string; placeholder?: string }[]
-  status: { title: string; id: string }
-}
-
-export default function CreateTask() {
-  const { activeBoard, columns } = useBoardDataContext()
+export default function TaskForm({
+  taskToEdit,
+}: {
+  taskToEdit?: TaskInterface
+}) {
+  const { activeBoard, columns, subtasks } = useBoardDataContext()
   const dispatch = useBoardDispatchContext()
   const { setOverlayActive } = useOverlayContext()
-
-  const [task, setTask] = useState<TaskFormData>({
-    id: '',
-    title: '',
-    description: '',
-    subtasks: [
-      { id: '', description: '', placeholder: 'e.g. Make coffee' },
-      { id: '', description: '', placeholder: 'e.g. Drink coffee and smile' },
-    ],
-    status: {
-      title: Object.values(columns).filter(
-        (col) => col.boardId === activeBoard
-      )[0].title,
-      id: Object.values(columns).filter((col) => col.boardId === activeBoard)[0]
-        .id,
-    },
-  })
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorTimeout, setErrorTimeOut] = useState<NodeJS.Timeout | undefined>()
+
+  const formData = taskToEdit
+    ? {
+        id: taskToEdit.id,
+        title: taskToEdit.title,
+        description: taskToEdit.description,
+        subtasks: Object.values(subtasks).filter(
+          ({ taskId }) => taskId === taskToEdit.id
+        ),
+        status: {
+          title: columns[taskToEdit.columnId].title,
+          id: columns[taskToEdit.columnId].id,
+        },
+      }
+    : {
+        id: '',
+        title: '',
+        description: '',
+        subtasks: [
+          { id: '', description: '', placeholder: 'e.g. Make coffee' },
+          {
+            id: '',
+            description: '',
+            placeholder: 'e.g. Drink coffee and smile',
+          },
+        ],
+        status: {
+          title: Object.values(columns).filter(
+            (col) => col.boardId === activeBoard
+          )[0].title,
+          id: Object.values(columns).filter(
+            (col) => col.boardId === activeBoard
+          )[0].id,
+        },
+      }
+
+  const [task, setTask] = useState<TaskFormData>(formData)
+
+  const handleAddSubtask = () => {
+    setTask({
+      ...task,
+      subtasks: [
+        ...task.subtasks,
+        { id: keyGen('ST'), description: '', placeholder: '' },
+      ],
+    })
+  }
 
   const handleSubtaskChange = (
     e: FormEvent<HTMLInputElement>,
@@ -79,29 +111,11 @@ export default function CreateTask() {
       return
     }
 
-    const taskId = keyGen('T')
-
-    dispatch({
-      type: DATA_ACTION.CREATE_TASK,
-      payload: {
-        id: taskId,
-        title: task.title,
-        description: task.description,
-        columnId: task.status.id,
-      },
-    })
-
-    task.subtasks.forEach(({ description }) => {
-      dispatch({
-        type: DATA_ACTION.CREATE_SUBTASK,
-        payload: {
-          id: keyGen('ST'),
-          description,
-          complete: false,
-          taskId,
-        },
-      })
-    })
+    if (taskToEdit) {
+      updateTask(dispatch, task, subtasks)
+    } else {
+      createTask(dispatch, task)
+    }
 
     setOverlayActive(false)
   }
@@ -109,7 +123,7 @@ export default function CreateTask() {
   const isFormValid = (): boolean => {
     let result = true
     if (task.title.trim() === '') return false
-    if (task.description.trim() === '') return false
+    // if (task.description.trim() === '') return false
     if (task.status.title.trim() === '') return false
 
     task.subtasks.forEach(({ description }) => {
@@ -122,7 +136,7 @@ export default function CreateTask() {
     <div className='bg-white p-24px rounded-sm mx-[16px]'>
       <form onSubmit={handleSubmit}>
         <h2 className='task-form-title mb-24px font-bold text-18px'>
-          Add New Task
+          {taskToEdit ? 'Edit Task' : 'Add New Task'}
         </h2>
         <div className='mb-24px'>
           <Label htmlFor='task-title'>Title</Label>
@@ -172,15 +186,7 @@ export default function CreateTask() {
         <ButtonSecondary
           additionalStyling='mb-24px'
           type='button'
-          onClick={() => {
-            setTask({
-              ...task,
-              subtasks: [
-                ...task.subtasks,
-                { id: '', description: '', placeholder: '' },
-              ],
-            })
-          }}
+          onClick={handleAddSubtask}
         >
           {'+ Add New Subtask'}
         </ButtonSecondary>
@@ -189,8 +195,84 @@ export default function CreateTask() {
           changeStatus={handleStatusChange}
           additionalStyling={'mb-24px'}
         />
-        <ButtonPrimary type='submit'>Create Task</ButtonPrimary>
+        <ButtonPrimary type='submit'>
+          {taskToEdit ? 'Save Changes' : 'Create Task'}
+        </ButtonPrimary>
       </form>
     </div>
   )
+}
+
+export function createTask(
+  dispatch: React.Dispatch<BoardAction>,
+  task: TaskFormData
+) {
+  const taskId = keyGen('T')
+
+  dispatch({
+    type: DATA_ACTION.CREATE_TASK,
+    payload: {
+      id: taskId,
+      title: task.title,
+      description: task.description,
+      columnId: task.status.id,
+    },
+  })
+
+  task.subtasks.forEach(({ id, description }) => {
+    dispatch({
+      type: DATA_ACTION.CREATE_SUBTASK,
+      payload: {
+        id,
+        description,
+        complete: false,
+        taskId,
+      },
+    })
+  })
+}
+
+export function updateTask(
+  dispatch: React.Dispatch<BoardAction>,
+  task: TaskFormData,
+  subtasks: {
+    [key: string]: {
+      id: string
+      description: string
+      complete: boolean
+      taskId: string
+    }
+  }
+) {
+  const preEditSubtasks = extractSubtasks(task.id, subtasks) // <- current subtasks associated with taskid
+  const postEditSubtasks = arrayToObject(task.subtasks) // <-subtasks in state data
+
+  console.log(task)
+
+  // delete subtasks that are no longer present
+  for (let subtask of preEditSubtasks) {
+    if (!(subtask.id in postEditSubtasks)) {
+      dispatch({
+        type: DATA_ACTION.DELETE_SUBTASK,
+        payload: { id: subtask.id },
+      })
+    }
+  }
+
+  for (let subtask of task.subtasks) {
+    dispatch({
+      type: DATA_ACTION.CREATE_SUBTASK,
+      payload: { ...subtask, taskId: task.id },
+    })
+  }
+
+  dispatch({
+    type: DATA_ACTION.UPDATE_TASK,
+    payload: {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      columnId: task.status.id,
+    },
+  })
 }

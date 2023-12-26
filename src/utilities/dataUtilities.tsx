@@ -10,9 +10,9 @@ import {
 } from '../interfaces/DataInterfaces'
 import keyGen from './keyGen'
 
-export function arrayToObject<T extends { id: string; title: string }>(
-  data: T[]
-): { [key: string]: T } {
+export function arrayToObject<
+  T extends { id: string; title?: string; description?: string }
+>(data: T[]): { [key: string]: T } {
   let obj: { [key: string]: T } = {}
   for (let entry of data) {
     obj[entry.id] = entry

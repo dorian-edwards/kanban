@@ -5,7 +5,7 @@ import { MainNavProps } from '../../interfaces/PropInterfaces'
 import { extractColumns } from '../../utilities/dataUtilities'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import Edit from '../Edit'
-import CreateTask from '../TaskComponents/CreateTask'
+import TaskForm from '../TaskComponents/TaskForm'
 import NavDark from '../icons/NavDark'
 
 export default function MainNav({ sidePanelVisible }: MainNavProps) {
@@ -34,7 +34,7 @@ export default function MainNav({ sidePanelVisible }: MainNavProps) {
           disabled={!(activeBoard && activeColumns.length !== 0)}
           additionalStyling='px-[2.5rem] text-med !py-[1.4rem]'
           onClick={() => {
-            setModal(<CreateTask />)
+            setModal(<TaskForm />)
             setOverlayActive(true)
           }}
         >

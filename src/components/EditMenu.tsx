@@ -5,12 +5,15 @@ import { useOverlayContext } from '../contexts/OverlayContext'
 import DeleteConfirmation from './DeleteConfirmation'
 import EditTask from './TaskComponents/EditTask'
 import BoardForm from './BoardComponents/BoardForm'
+import TaskForm from './TaskComponents/TaskForm'
+import { useBoardDataContext } from '../contexts/StateManagement'
 
 const EditMenu = forwardRef<Ref, EditMenuProps>(function EditMenu(
   { type, taskId, setMenuActive },
   ref
 ) {
   const { setModal, setOverlayActive } = useOverlayContext()
+  const { tasks } = useBoardDataContext()
 
   const menuPosition =
     type === EditType.board
@@ -29,7 +32,7 @@ const EditMenu = forwardRef<Ref, EditMenuProps>(function EditMenu(
             type === EditType.board ? (
               <BoardForm editMode={true} />
             ) : (
-              <EditTask />
+              <TaskForm taskToEdit={tasks[taskId!]} />
             )
           )
           setOverlayActive(true)

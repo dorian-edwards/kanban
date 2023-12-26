@@ -140,6 +140,31 @@ function reducer(
       }
     }
 
+    case DATA_ACTION.DELETE_SUBTASK: {
+      const { id } = action.payload
+      const { subtasks } = stateCopy
+      return {
+        ...stateCopy,
+        subtasks: Object.fromEntries(
+          Object.entries(subtasks).filter(
+            ([key, val]) => (val as SubtaskInterface).id !== id
+          )
+        ),
+      }
+    }
+
+    case DATA_ACTION.UPDATE_SUBTASK: {
+      const { id } = action.payload
+      const { subtasks } = stateCopy
+      return {
+        ...stateCopy,
+        subtasks: {
+          ...subtasks,
+          [id]: action.payload as SubtaskInterface,
+        },
+      }
+    }
+
     case DATA_ACTION.TOGGLE_SUBTASK_COMPLETE: {
       const { id, complete } = action.payload as SubtaskInterface
       const { subtasks } = stateCopy

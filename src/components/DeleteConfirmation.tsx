@@ -30,13 +30,12 @@ export default function DeleteConfirmation({
         type: DATA_ACTION.DELETE_TASK,
         payload: { id: taskId },
       })
-      return
+    } else {
+      dispatch({
+        type: DATA_ACTION.DELETE_BOARD,
+        payload: { id: activeBoard },
+      })
     }
-
-    dispatch({
-      type: DATA_ACTION.DELETE_BOARD,
-      payload: { id: activeBoard },
-    })
     setOverlayActive(false)
   }
 

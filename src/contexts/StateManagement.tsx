@@ -90,9 +90,10 @@ function reducer(
     }
 
     case DATA_ACTION.DELETE_BOARD: {
+      const updatedData = deleteBoard(action.payload.id, stateCopy)
       return {
-        ...deleteBoard(action.payload.id, stateCopy),
-        activeBoard: Object.keys(stateCopy.boards)[0],
+        ...updatedData,
+        activeBoard: Object.keys(updatedData.boards)[0],
       }
     }
 
@@ -109,12 +110,58 @@ function reducer(
       return deleteColumn(id, stateCopy)
     }
 
+    case DATA_ACTION.CREATE_TASK: {
+      const { id } = action.payload
+      const { tasks } = stateCopy
+      return {
+        ...stateCopy,
+        tasks: { ...tasks, [id]: { ...(action.payload as TaskInterface) } },
+      }
+    }
+
     case DATA_ACTION.UPDATE_TASK: {
       const { id } = action.payload as TaskInterface
       const { tasks } = stateCopy
       return {
         ...stateCopy,
         tasks: { ...tasks, [id]: { ...tasks[id], ...action.payload } },
+      }
+    }
+
+    case DATA_ACTION.CREATE_SUBTASK: {
+      const { id } = action.payload
+      const { subtasks } = stateCopy
+      return {
+        ...stateCopy,
+        subtasks: {
+          ...subtasks,
+          [id]: { ...(action.payload as SubtaskInterface) },
+        },
+      }
+    }
+
+    case DATA_ACTION.DELETE_SUBTASK: {
+      const { id } = action.payload
+      const { subtasks } = stateCopy
+      return {
+        ...stateCopy,
+        subtasks: Object.fromEntries(
+          Object.entries(subtasks).filter(
+            ([key, val]) => (val as SubtaskInterface).id !== id
+          )
+        ),
+      }
+    }
+
+    case DATA_ACTION.UPDATE_SUBTASK: {
+      const { id } = action.payload
+      const { subtasks } = stateCopy
+      return {
+        ...stateCopy,
+        subtasks: {
+          ...subtasks,
+          [id]: action.payload as SubtaskInterface,
+        },
       }
     }
 

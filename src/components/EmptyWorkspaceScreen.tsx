@@ -1,6 +1,6 @@
 import { useOverlayContext } from '../contexts/OverlayContext'
 import ButtonPrimary from './Buttons/ButtonPrimary'
-import CreateBoard from './BoardComponents/CreateBoard'
+import BoardForm from './BoardComponents/BoardForm'
 
 // Display if there are no active boards
 export default function EmptyWorkspaceScreen() {
@@ -14,7 +14,7 @@ export default function EmptyWorkspaceScreen() {
         </h2>
         <ButtonPrimary
           onClick={() => {
-            setModal(<CreateBoard />)
+            setModal(<BoardForm editMode={false} />)
             setOverlayActive(true)
           }}
           additionalStyling='max-w-[17.4rem] text-med'

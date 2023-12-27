@@ -3,7 +3,6 @@ import { EditType } from '../interfaces/DataInterfaces'
 import { EditMenuProps, Ref } from '../interfaces/PropInterfaces'
 import { useOverlayContext } from '../contexts/OverlayContext'
 import DeleteConfirmation from './DeleteConfirmation'
-import EditTask from './TaskComponents/EditTask'
 import BoardForm from './BoardComponents/BoardForm'
 import TaskForm from './TaskComponents/TaskForm'
 import { useBoardDataContext } from '../contexts/StateManagement'
@@ -22,7 +21,7 @@ const EditMenu = forwardRef<Ref, EditMenuProps>(function EditMenu(
 
   return (
     <div
-      className={`task-menu bg-white p-16px absolute w-[19.2rem] rounded-sm shadow-md h-[9.4rem] ${menuPosition}`}
+      className={`task-menu bg-white dark:bg-very-dark-gray dark:shadow-none p-16px absolute w-[19.2rem] rounded-sm shadow-md h-[9.4rem] ${menuPosition}`}
       ref={ref}
     >
       <button

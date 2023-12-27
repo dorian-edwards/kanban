@@ -6,6 +6,7 @@ import {
   ColumnInterface,
   DATA_ACTION,
   SubtaskInterface,
+  TaskFormData,
   TaskInterface,
 } from '../interfaces/DataInterfaces'
 import keyGen from './keyGen'
@@ -148,5 +149,79 @@ export function createBoard(
   dispatch({
     type: DATA_ACTION.SET_ACTIVE_BOARD,
     payload: { id: boardId },
+  })
+}
+
+export function createTask(
+  dispatch: React.Dispatch<BoardAction>,
+  task: TaskFormData
+) {
+  const taskId = keyGen('T')
+
+  dispatch({
+    type: DATA_ACTION.CREATE_TASK,
+    payload: {
+      id: taskId,
+      title: task.title,
+      description: task.description,
+      columnId: task.status.id,
+    },
+  })
+
+  task.subtasks.forEach(({ id, description }) => {
+    dispatch({
+      type: DATA_ACTION.CREATE_SUBTASK,
+      payload: {
+        id,
+        description,
+        complete: false,
+        taskId,
+      },
+    })
+  })
+}
+
+export function updateTask(
+  dispatch: React.Dispatch<BoardAction>,
+  task: TaskFormData,
+  subtasks: {
+    [key: string]: {
+      id: string
+      description: string
+      complete: boolean
+      taskId: string
+    }
+  }
+) {
+  const preEditSubtasks = extractSubtasks(task.id, subtasks) // <- current subtasks associated with taskid
+  const postEditSubtasks = arrayToObject(task.subtasks) // <-subtasks in state data
+
+  console.log(task)
+
+  // delete subtasks that are no longer present
+  for (let subtask of preEditSubtasks) {
+    if (!(subtask.id in postEditSubtasks)) {
+      dispatch({
+        type: DATA_ACTION.DELETE_SUBTASK,
+        payload: { id: subtask.id },
+      })
+    }
+  }
+
+  for (let subtask of task.subtasks) {
+    dispatch({
+      type: DATA_ACTION.CREATE_SUBTASK,
+      payload: { ...subtask, taskId: task.id },
+    })
+  }
+
+  dispatch({
+    type: DATA_ACTION.UPDATE_TASK,
+    payload: {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      columnId: task.status.id,
+    },
   })
 }

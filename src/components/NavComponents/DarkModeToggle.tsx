@@ -1,17 +1,13 @@
 import { useTheme } from '../../contexts/ThemeContext'
 
 export default function DarkModeToggle() {
-  const toggleDarkMode = useTheme()
-
-  function handleClick() {
-    if (toggleDarkMode) toggleDarkMode()
-  }
+  const { toggleDarkMode } = useTheme()
 
   return (
     <div className='darkmode-toggle'>
       <button
         className='toggle w-32px bg-primary-purple h-16px rounded-xl flex items-center'
-        onClick={handleClick}
+        onClick={toggleDarkMode}
       >
         <div className='toggle-button w-12px h-12px bg-white rounded-xl transition-[left] duration-1000 relative left-[2px]  dark:left-[18px]' />
       </button>

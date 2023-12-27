@@ -1,5 +1,6 @@
 import { useOverlayContext } from '../../contexts/OverlayContext'
 import { useBoardDataContext } from '../../contexts/StateManagement'
+import { useTheme } from '../../contexts/ThemeContext'
 import { EditType } from '../../interfaces/DataInterfaces'
 import { MainNavProps } from '../../interfaces/PropInterfaces'
 import { extractColumns } from '../../utilities/dataUtilities'
@@ -7,24 +8,26 @@ import ButtonPrimary from '../Buttons/ButtonPrimary'
 import Edit from '../Edit'
 import TaskForm from '../TaskComponents/TaskForm'
 import NavDark from '../icons/NavDark'
+import NavLight from '../icons/NavLight'
 
 export default function MainNav({ sidePanelVisible }: MainNavProps) {
   const { activeBoard, boards, columns } = useBoardDataContext()
   const activeColumns = extractColumns(activeBoard, columns)
   const { setModal, setOverlayActive } = useOverlayContext()
+  const { darkMode } = useTheme()
 
   return (
-    <nav className='main-nav flex justify-between bg-white'>
+    <nav className='main-nav flex justify-between bg-white dark:bg-dark-gray transition-colors duration-1000'>
       <div className='flex'>
         <div
-          className={`logo-wrapper py-[2.5rem] pl-[2.6rem] border-r-[1px] border-lavender transition-[padding] duration-1000 ${
+          className={`logo-wrapper py-[2.5rem] pl-[2.6rem] border-r-[1px] border-lavender dark:border-lines-dark transition-all duration-1000 ${
             sidePanelVisible ? 'pr-[8rem] desktop:pr-[12rem]' : 'pr-24px'
           }`}
         >
-          <NavDark />
+          {darkMode ? <NavLight /> : <NavDark />}
         </div>
         {activeBoard ? (
-          <h1 className='py-[2.5rem] pl-[2.5rem] font-sans font-bold text-xl'>
+          <h1 className='py-[2.5rem] pl-[2.5rem] font-sans font-bold text-xl dark:text-white transition-colors duration-1000'>
             {boards[activeBoard].title}
           </h1>
         ) : null}

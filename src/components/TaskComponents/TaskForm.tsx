@@ -4,14 +4,9 @@ import {
   useBoardDispatchContext,
 } from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
-import {
-  BoardAction,
-  DATA_ACTION,
-  TaskFormData,
-  TaskInterface,
-} from '../../interfaces/DataInterfaces'
+import { TaskFormData, TaskInterface } from '../../interfaces/DataInterfaces'
 import keyGen from '../../utilities/keyGen'
-import { arrayToObject, extractSubtasks } from '../../utilities/dataUtilities'
+import { createTask, updateTask } from '../../utilities/dataUtilities'
 import ButtonPrimary from '../Buttons/ButtonPrimary'
 import Label from '../FormElements/Label'
 import Input from '../FormElements/Input'
@@ -133,9 +128,9 @@ export default function TaskForm({
   }
 
   return (
-    <div className='bg-white p-24px rounded-sm mx-[16px]'>
+    <div className='bg-white dark:bg-dark-gray  p-24px rounded-sm mx-[16px] transition-colors duration-1000'>
       <form onSubmit={handleSubmit}>
-        <h2 className='task-form-title mb-24px font-bold text-18px'>
+        <h2 className='task-form-title mb-24px font-bold text-18px dark:text-white'>
           {taskToEdit ? 'Edit Task' : 'Add New Task'}
         </h2>
         <div className='mb-24px'>
@@ -201,78 +196,4 @@ export default function TaskForm({
       </form>
     </div>
   )
-}
-
-export function createTask(
-  dispatch: React.Dispatch<BoardAction>,
-  task: TaskFormData
-) {
-  const taskId = keyGen('T')
-
-  dispatch({
-    type: DATA_ACTION.CREATE_TASK,
-    payload: {
-      id: taskId,
-      title: task.title,
-      description: task.description,
-      columnId: task.status.id,
-    },
-  })
-
-  task.subtasks.forEach(({ id, description }) => {
-    dispatch({
-      type: DATA_ACTION.CREATE_SUBTASK,
-      payload: {
-        id,
-        description,
-        complete: false,
-        taskId,
-      },
-    })
-  })
-}
-
-export function updateTask(
-  dispatch: React.Dispatch<BoardAction>,
-  task: TaskFormData,
-  subtasks: {
-    [key: string]: {
-      id: string
-      description: string
-      complete: boolean
-      taskId: string
-    }
-  }
-) {
-  const preEditSubtasks = extractSubtasks(task.id, subtasks) // <- current subtasks associated with taskid
-  const postEditSubtasks = arrayToObject(task.subtasks) // <-subtasks in state data
-
-  console.log(task)
-
-  // delete subtasks that are no longer present
-  for (let subtask of preEditSubtasks) {
-    if (!(subtask.id in postEditSubtasks)) {
-      dispatch({
-        type: DATA_ACTION.DELETE_SUBTASK,
-        payload: { id: subtask.id },
-      })
-    }
-  }
-
-  for (let subtask of task.subtasks) {
-    dispatch({
-      type: DATA_ACTION.CREATE_SUBTASK,
-      payload: { ...subtask, taskId: task.id },
-    })
-  }
-
-  dispatch({
-    type: DATA_ACTION.UPDATE_TASK,
-    payload: {
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      columnId: task.status.id,
-    },
-  })
 }

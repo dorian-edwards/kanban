@@ -13,13 +13,13 @@ export default function TaskPreview({ task }: { task: TaskInterface }) {
 
   return (
     <button
-      className='task-card block bg-white px-16px py-[2.3rem] rounded-sm w-full max-w-[28rem] min-w-[28rem] shadow-sm mb-[2rem]'
+      className='task-card block bg-white dark:bg-dark-gray px-16px py-[2.3rem] rounded-sm w-full max-w-[28rem] min-w-[28rem] shadow-sm mb-[2rem] transition-colors duration-1000'
       onClick={() => {
         setModal(<TaskDetails task={task} />)
         setOverlayActive(true)
       }}
     >
-      <h4 className='task-title font-bold text-[1.5rem] mb-[0.8rem]'>
+      <h4 className='task-title font-bold text-[1.5rem] mb-[0.8rem] dark:text-white transition-colors duration-1000'>
         {task.title}
       </h4>
       <p className='task-count text-med-gray text-xs'>{`${complete} of ${activeSubtasks.length} substasks`}</p>

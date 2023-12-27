@@ -34,6 +34,7 @@ export default function Edit({ type, taskId, disabled }: EditProps) {
   return (
     <div className='edit-menu'>
       <button
+        className='w-[25px] flex justify-center'
         onClick={() => setMenuActive((prev) => !prev)}
         disabled={disabled}
       >

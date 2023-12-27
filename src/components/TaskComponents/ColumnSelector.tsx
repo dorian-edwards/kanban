@@ -59,16 +59,18 @@ export default function ColumnSelector({
 
   return (
     <div className={`column-selector-wrapper ${additionalStyling}`}>
-      <h3 className='column-selector-title text-med-gray text-xs font-bold mb-[0.8rem]'>
+      <h3 className='column-selector-title text-med-gray dark:text-white text-xs font-bold mb-[0.8rem]'>
         {`${task ? 'Current ' : ''}Status`}
       </h3>
       <div className='relative'>
         <button
           type='button'
-          className='flex items-center justify-between w-full px-16px py-[0.8rem] border border-cool-gray rounded-sm'
+          className={`flex items-center justify-between w-full px-16px py-[0.8rem] border border-cool-gray rounded-sm ${
+            selectColumnActive ? 'border-primary-purple' : ''
+          }`}
           onClick={() => setSelectColumnActive((prev) => !prev)}
         >
-          <span className='text-sm font-medium leading-extra-loose'>
+          <span className='text-sm font-medium leading-extra-loose dark:text-white'>
             {/* {columnTitle} */}
             {currentStatus}
           </span>

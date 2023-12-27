@@ -32,7 +32,7 @@ export const ColumnSelect = forwardRef<HTMLDivElement, { task: TaskInterface }>(
 
     return (
       <div
-        className='column-choices rounded-sm bg-white p-16px absolute w-full mt-[0.8rem] text-sm font-medium leading-extra-loose text-med-gray'
+        className='column-choices rounded-sm bg-white dark:bg-very-dark-gray p-16px absolute w-full mt-[0.8rem] text-sm font-medium leading-extra-loose text-med-gray'
         ref={ref}
       >
         <ul className='flex flex-col gap-[0.8rem]'>

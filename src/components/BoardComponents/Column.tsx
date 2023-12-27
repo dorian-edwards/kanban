@@ -1,5 +1,4 @@
 import { useBoardDataContext } from '../../contexts/StateManagement'
-import { ColumnInterface } from '../../interfaces/DataInterfaces'
 import colors from '../../utilities/columnColors'
 import { extractTasks } from '../../utilities/dataUtilities'
 import TaskPreview from '../TaskComponents/TaskPreview'

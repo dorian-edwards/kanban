@@ -20,7 +20,7 @@ export default function MobileNavMenu() {
   return (
     <div className='flex items-center'>
       <MobileNavIcon />
-      <h1 className='font-bold font-sans text-xl mr-[1rem]'>
+      <h1 className='font-bold font-sans text-xl mr-[1rem] dark:text-white transition-colors duration-1000'>
         {activeBoard && boards[activeBoard].title}
       </h1>
       <button

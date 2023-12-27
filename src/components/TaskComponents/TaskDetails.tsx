@@ -12,9 +12,9 @@ export default function TaskDetails({ task }: { task: TaskInterface }) {
   const complete = activeSubtasks.reduce(reduceSubtasks, 0)
 
   return (
-    <div className='task-details p-32px bg-white rounded-sm'>
+    <div className='task-details p-32px bg-white dark:bg-dark-gray transition-colors duration-1000 rounded-sm w-11/12 mx-auto'>
       <div className='heading mb-24px flex justify-between items-center relative'>
-        <h2 className='task-title text-black text-18px font-bold'>
+        <h2 className='task-title text-black dark:text-white text-18px font-bold'>
           {task.title}
         </h2>
         <Edit type={EditType.task} taskId={task.id} disabled={false} />
@@ -25,7 +25,7 @@ export default function TaskDetails({ task }: { task: TaskInterface }) {
       </p>
 
       <div className='subtasks-wrapper'>
-        <h3 className='subtasks-counter text-med-gray text-xs font-bold mb-16px'>{`Subtasks (${complete} of ${activeSubtasks.length})`}</h3>
+        <h3 className='subtasks-counter text-med-gray dark:text-white text-xs font-bold mb-16px'>{`Subtasks (${complete} of ${activeSubtasks.length})`}</h3>
         <ul className='flex flex-col gap-[0.8rem] mb-24px'>
           {activeSubtasks.map((subtask) => (
             <li key={subtask.id}>

@@ -22,7 +22,7 @@ export default function SubtaskCard({ id }: { id: string }) {
 
   return (
     <button
-      className='subtask-card bg-lgt-gray py-12px pl-12px pr-16px flex gap-16px items-center rounded-sm w-full'
+      className='subtask-card bg-lgt-gray dark:bg-very-dark-gray dark:text-white py-12px pl-12px pr-16px flex gap-16px items-center rounded-sm w-full'
       onClick={handleToggle}
     >
       <div

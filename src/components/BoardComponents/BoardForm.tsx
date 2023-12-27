@@ -92,9 +92,9 @@ export default function BoardTest({ editMode }: { editMode: boolean }) {
   }
 
   return (
-    <div className='bg-white p-24px rounded-sm mx-[16px]'>
+    <div className='bg-white dark:bg-dark-gray p-24px rounded-sm mx-[16px]'>
       <form onSubmit={handleSubmit}>
-        <h2 className='mb-24px font-bold text-18px'>
+        <h2 className='mb-24px font-bold text-18px dark:text-white'>
           {editMode ? 'Edit Board' : 'Add New Board'}
         </h2>
         <div className='board-title-input-wrapper mb-24px'>

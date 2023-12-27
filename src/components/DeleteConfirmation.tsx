@@ -6,6 +6,7 @@ import {
 import { DATA_ACTION, EditType } from '../interfaces/DataInterfaces'
 import ButtonDelete from './Buttons/ButtonDelete'
 import ButtonSecondary from './Buttons/ButtonSecondary'
+import useScreenMonitor from './Hooks/useScreenMonitor'
 
 export default function DeleteConfirmation({
   type,
@@ -17,6 +18,7 @@ export default function DeleteConfirmation({
   const dispatch = useBoardDispatchContext()
   const { setOverlayActive } = useOverlayContext()
   const { tasks, boards, activeBoard } = useBoardDataContext()
+  const mobile = useScreenMonitor()
 
   const target = taskId ? tasks[taskId].title : boards[activeBoard].title
 
@@ -40,14 +42,14 @@ export default function DeleteConfirmation({
   }
 
   return (
-    <div className='delete-confirmation w-full max-w-[48rem] bg-white p-32px pb-[4rem] rounded-sm'>
+    <div className='delete-confirmation w-11/12 mx-auto max-w-[48rem] bg-white dark:bg-dark-gray p-24px rounded-sm'>
       <h2 className='delete-heading text-red font-bold text-lg mb-24px'>
         {`Delete this ${type}?`}
       </h2>
       <p className='delete-prompt text-med-gray text-sm font-medium leading-extra-loose mb-24px'>
         {type === EditType.board ? boardText : taskText}
       </p>
-      <div className='btn-wrapper flex gap-16px'>
+      <div className={`btn-wrapper flex gap-16px ${mobile ? 'flex-col' : ''}`}>
         <ButtonDelete onClick={handleDelete}>Delete</ButtonDelete>
         <ButtonSecondary onClick={() => setOverlayActive(false)}>
           Cancel

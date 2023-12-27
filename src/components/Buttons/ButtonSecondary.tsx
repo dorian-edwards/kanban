@@ -9,7 +9,7 @@ export default function ButtonSecondary({
 }: ButtonProps) {
   return (
     <button
-      className={`w-full py-8px text-sm text-center rounded-lg text-primary-purple bg-secondary-purple hover:bg-secondary-purple-hover disabled:bg-primary-purple-disabled ${additionalStyling}`}
+      className={`w-full py-8px text-sm text-center rounded-lg text-primary-purple bg-secondary-purple hover:bg-secondary-purple-hover dark:bg-white dark:hover:bg-white disabled:bg-primary-purple-disabled ${additionalStyling}`}
       disabled={disabled}
       onClick={onClick}
       type={type}

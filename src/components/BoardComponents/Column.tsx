@@ -26,7 +26,7 @@ export default function Column({
           className='column-color inline-block h-[1.5rem] w-[1.5rem] rounded-xl bg-primary-purple-hover'
           style={{ backgroundColor: colors[color % colors.length] }}
         />
-        {`${title} ${
+        {`${title.toUpperCase()} ${
           activeTasks.length !== 0 ? `(${activeTasks.length})` : ''
         }`}
       </h3>

@@ -4,107 +4,164 @@ export function populateBoardObject(populate: boolean): BoardData {
   return !populate
     ? { activeBoard: '', boards: {}, columns: {}, tasks: {}, subtasks: {} }
     : {
-        activeBoard: '',
+        activeBoard: 'BAIF1685',
         boards: {
-          BOSN4590: { id: 'BOSN4590', title: 'Platform Launch' },
-          BWTM1785: { id: 'BWTM1785', title: 'Marketing' },
+          BOSX2837: {
+            id: 'BOSX2837',
+            title: 'Platform Launch',
+          },
+          BQJP8590: {
+            id: 'BQJP8590',
+            title: 'Marketing Plan',
+          },
+          BAIF1685: {
+            id: 'BAIF1685',
+            title: 'Roadmap',
+          },
         },
         columns: {
-          CATU4720: { id: 'CATU4720', title: 'Todo', boardId: 'BOSN4590' },
-          CEHE6807: { id: 'CEHE6807', title: 'Done', boardId: 'BOSN4590' },
-          CDDU7226: {
-            id: 'CDDU7226',
-            title: 'Nice to haves',
-            boardId: 'BWTM1785',
+          CIEF8839: {
+            id: 'CIEF8839',
+            title: 'Todo',
+            boardId: 'BOSX2837',
+          },
+          CEAB6733: {
+            id: 'CEAB6733',
+            title: 'Doing',
+            boardId: 'BOSX2837',
+          },
+          CQFO9181: {
+            id: 'CQFO9181',
+            title: 'Done',
+            boardId: 'BOSX2837',
           },
         },
         tasks: {
-          TQCL1142: {
-            id: 'TQCL1142',
+          TTUY9128: {
+            id: 'TTUY9128',
             title: 'Build UI for onboarding flow',
-            description:
-              "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-            columnId: 'CATU4720',
+            description: '',
+            columnId: 'CIEF8839',
           },
-          TIQA2420: {
-            id: 'TIQA2420',
+          TIWU3896: {
+            id: 'TIWU3896',
             title: 'Build UI for search',
-            description: 'Task 2 Description',
-            columnId: 'CATU4720',
+            description: '',
+            columnId: 'CIEF8839',
           },
-          TSDC2880: {
-            id: 'TSDC2880',
-            title: 'Create template structures',
-            description: 'Task 2 Description',
-            columnId: 'CATU4720',
+          TAUS8244: {
+            id: 'TAUS8244',
+            title: 'Build settings UI',
+            description: '',
+            columnId: 'CIEF8839',
           },
-          TPUG5702: {
-            id: 'TPUG5702',
+          TFNA9223: {
+            id: 'TFNA9223',
             title: 'QA and test all major user journeys',
-            description: 'Task 2 Description',
-            columnId: 'CATU4720',
+            description: '',
+            columnId: 'CIEF8839',
           },
-          TENM6695: {
-            id: 'TENM6695',
-            title: 'Task 3',
-            description: 'Task 3 Description',
-            columnId: 'CEHE6807',
+          TDHN6081: {
+            id: 'TDHN6081',
+            title: 'Design settings and search pages',
+            description: '',
+            columnId: 'CEAB6733',
           },
-          TIEE8843: {
-            id: 'TIEE8843',
-            title: 'Task 4',
-            description: 'Task 4 Description',
-            columnId: 'CDDU7226',
+          TVCB7191: {
+            id: 'TVCB7191',
+            title: 'Add account management endpoints',
+            description: '',
+            columnId: 'CEAB6733',
+          },
+          TJZI2545: {
+            id: 'TJZI2545',
+            title: 'Design onboarding flow',
+            description: '',
+            columnId: 'CEAB6733',
+          },
+          TFRZ8332: {
+            id: 'TFRZ8332',
+            title: 'Add search enpoints',
+            description: '',
+            columnId: 'CEAB6733',
+          },
+          TMEX4735: {
+            id: 'TMEX4735',
+            title: 'Add authentication endpoints',
+            description: '',
+            columnId: 'CEAB6733',
+          },
+          TFVV5640: {
+            id: 'TFVV5640',
+            title:
+              'Research pricing points of various competitors and trial different business models',
+            description:
+              "We know what we're planning to build for version one. Now we need to finalize the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
+            columnId: 'CEAB6733',
+          },
+          TUBX3699: {
+            id: 'TUBX3699',
+            title: 'Conduct 5 wireframe tests',
+            description: '',
+            columnId: 'CQFO9181',
+          },
+          TMDJ9027: {
+            id: 'TMDJ9027',
+            title: 'Create wireframe prototype',
+            description: '',
+            columnId: 'CQFO9181',
+          },
+          TQLK9629: {
+            id: 'TQLK9629',
+            title: 'Review results of usability tests and iterate',
+            description: '',
+            columnId: 'CQFO9181',
+          },
+          THYO8069: {
+            id: 'THYO8069',
+            title:
+              'Create paper prototypes and conduct 10 usability tests with potential customers',
+            description: '',
+            columnId: 'CQFO9181',
+          },
+          TMHK1655: {
+            id: 'TMHK1655',
+            title: 'Market discovery',
+            description: '',
+            columnId: 'CQFO9181',
+          },
+          THHP9396: {
+            id: 'THHP9396',
+            title: 'Competitor analysis',
+            description: '',
+            columnId: 'CQFO9181',
+          },
+          TAWP8134: {
+            id: 'TAWP8134',
+            title: 'Research the market',
+            description: '',
+            columnId: 'CQFO9181',
           },
         },
         subtasks: {
-          STOQH7877: {
-            id: 'STOQH7877',
-            description: 'SubTask 1',
+          STSVH9345: {
+            id: 'STSVH9345',
+            description: 'Research competitor pricing and business models',
+            taskId: 'TFVV5640',
             complete: true,
-            taskId: 'TQCL1142',
           },
-          STXSG3450: {
-            id: 'STXSG3450',
-            description: 'SubTask 2',
+          STOCS6452: {
+            id: 'STOCS6452',
+            description: 'Outline a business model that works for our solution',
+            taskId: 'TFVV5640',
             complete: true,
-            taskId: 'TQCL1142',
           },
-          STOHC9173: {
-            id: 'STOHC9173',
-            description: 'SubTask 3',
+          STVRL7629: {
+            id: 'STVRL7629',
+            description:
+              'Talk to potential customers about our proposed solution and ask for fair price expectancy',
+            taskId: 'TFVV5640',
             complete: false,
-            taskId: 'TQCL1142',
-          },
-          STGAA6650: {
-            id: 'STGAA6650',
-            description: 'SubTask 3',
-            complete: false,
-            taskId: 'TIQA2420',
-          },
-          STHJJ4224: {
-            id: 'STHJJ4224',
-            description: 'SubTask 3',
-            complete: false,
-            taskId: 'TSDC2880',
-          },
-          STCYA7381: {
-            id: 'STCYA7381',
-            description: 'SubTask 3',
-            complete: true,
-            taskId: 'TPUG5702',
-          },
-          STGWH8043: {
-            id: 'STGWH8043',
-            description: 'SubTask 4',
-            complete: true,
-            taskId: 'TENM6695',
-          },
-          STDGS9653: {
-            id: 'STDGS9653',
-            description: 'SubTask 5',
-            complete: false,
-            taskId: 'TIEE8843',
           },
         },
       }

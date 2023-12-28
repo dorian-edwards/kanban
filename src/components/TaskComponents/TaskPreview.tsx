@@ -13,7 +13,7 @@ export default function TaskPreview({ task }: { task: TaskInterface }) {
 
   return (
     <button
-      className='task-card block bg-white dark:bg-dark-gray px-16px py-[2.3rem] rounded-sm w-full max-w-[28rem] min-w-[28rem] shadow-sm mb-[2rem] transition-colors duration-1000'
+      className='task-card block bg-white dark:bg-dark-gray px-16px py-[2.3rem] rounded-sm w-full max-w-[28rem] min-w-[28rem] shadow-sm mb-[2rem] transition-all duration-1000 hover:translate-x-[-5px] hover:translate-y-[-5px] hover:shadow-md'
       onClick={() => {
         setModal(<TaskDetails task={task} />)
         setOverlayActive(true)

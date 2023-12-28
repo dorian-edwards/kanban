@@ -27,7 +27,7 @@ export default function App() {
       )}
       {mobile ? <MobileNav /> : <MainNav sidePanelVisible={sidePanelVisible} />}
 
-      <section className='primary-display flex tablet:h-[calc(100vh-8rem)] h-[calc(100vh-6.4rem)]'>
+      <section className='primary-display flex tablet:h-[calc(100vh-7.6rem)] h-[calc(100vh-6.4rem)]'>
         {!mobile && <SidePanel sidePanelVisible={sidePanelVisible} />}
         <main className='board-display flex flex-grow justify-center items-center border-t-[1px] border-lavender dark:border-lines-dark bg-lgt-gray dark:bg-very-dark-gray overflow-x-hidden transition-colors duration-1000'>
           {!mobile && <ShowSidePanel showSidePanel={toggleSidePanel} />}

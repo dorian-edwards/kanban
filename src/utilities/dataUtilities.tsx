@@ -1,7 +1,7 @@
 import {
   BoardAction,
   BoardData,
-  BoardForm,
+  BoardFormInterface,
   BoardInterface,
   ColumnInterface,
   DATA_ACTION,
@@ -99,7 +99,7 @@ export function filter<T>(
 
 export function updateBoard(
   dispatch: React.Dispatch<BoardAction>,
-  board: BoardForm,
+  board: BoardFormInterface,
   preEditColumns: ColumnInterface[]
 ) {
   const postEditColumns = arrayToObject<{ id: string; title: string }>(
@@ -130,7 +130,7 @@ export function updateBoard(
 
 export function createBoard(
   dispatch: React.Dispatch<BoardAction>,
-  board: BoardForm
+  board: BoardFormInterface
 ) {
   const boardId = keyGen('B')
 

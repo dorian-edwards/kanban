@@ -4,7 +4,7 @@ export interface BoardInterface {
   title: string
 }
 
-export interface BoardForm {
+export interface BoardFormInterface {
   id: string
   title: string
   columns: { id: string; title: string }[]

@@ -21,7 +21,7 @@ const EditMenu = forwardRef<Ref, EditMenuProps>(function EditMenu(
 
   return (
     <div
-      className={`task-menu bg-white dark:bg-very-dark-gray dark:shadow-none p-16px absolute w-[19.2rem] rounded-sm shadow-md h-[9.4rem] ${menuPosition}`}
+      className={`task-menu bg-white dark:bg-very-dark-gray dark:shadow-none p-16px absolute w-[19.2rem] rounded-sm shadow-md h-[9.4rem] z-50 ${menuPosition}`}
       ref={ref}
     >
       <button

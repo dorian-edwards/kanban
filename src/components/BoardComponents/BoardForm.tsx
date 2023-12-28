@@ -7,7 +7,7 @@ import {
   useBoardDispatchContext,
 } from '../../contexts/StateManagement'
 import { useOverlayContext } from '../../contexts/OverlayContext'
-import { BoardForm } from '../../interfaces/DataInterfaces'
+import { BoardFormInterface } from '../../interfaces/DataInterfaces'
 import DynamicInput from '../FormElements/DynamicInput'
 import Input from '../FormElements/Input'
 import Label from '../FormElements/Label'
@@ -23,15 +23,17 @@ export default function BoardTest({ editMode }: { editMode: boolean }) {
   const state = useBoardDataContext()
   const dispatch = useBoardDispatchContext()
   const activeBoard = state.boards[state.activeBoard]
-  const preEditColumns = extractColumns(activeBoard.id, state.columns)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorTimeout, setErrorTimeOut] = useState<NodeJS.Timeout | undefined>()
 
-  const [board, setBoard] = useState<BoardForm>({
+  const [board, setBoard] = useState<BoardFormInterface>({
     id: editMode ? activeBoard.id : '',
     title: editMode ? activeBoard.title : '',
     columns: editMode
-      ? [...preEditColumns.map(({ id, title }) => ({ id, title }))]
+      ? extractColumns(activeBoard.id, state.columns).map(({ id, title }) => ({
+          id,
+          title,
+        }))
       : [],
   })
 
@@ -83,7 +85,11 @@ export default function BoardTest({ editMode }: { editMode: boolean }) {
     }
 
     if (editMode) {
-      updateBoard(dispatch, board, preEditColumns)
+      updateBoard(
+        dispatch,
+        board,
+        extractColumns(activeBoard.id, state.columns)
+      )
     } else {
       createBoard(dispatch, board)
     }

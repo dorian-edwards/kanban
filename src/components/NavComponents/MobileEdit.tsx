@@ -1,12 +1,15 @@
+import { useOverlayContext } from '../../contexts/OverlayContext'
 import { useBoardDataContext } from '../../contexts/StateManagement'
 import { EditType } from '../../interfaces/DataInterfaces'
 import { extractColumns } from '../../utilities/dataUtilities'
 import Edit from '../Edit'
+import TaskForm from '../TaskComponents/TaskForm'
 import AddTask from '../icons/AddTask'
 
 export default function MobileEdit() {
   const { activeBoard, columns } = useBoardDataContext()
   const activeColumns = extractColumns(activeBoard, columns)
+  const { setModal, setOverlayActive } = useOverlayContext()
 
   return (
     <div className='mobile-nav-options flex items-center relative'>
@@ -18,8 +21,8 @@ export default function MobileEdit() {
         }`}
         disabled={!activeBoard || activeColumns.length === 0}
         onClick={() => {
-          // setFullScreen(true)
-          // setOverlayActive(true)
+          setModal(<TaskForm />)
+          setOverlayActive(true)
         }}
       >
         <AddTask />

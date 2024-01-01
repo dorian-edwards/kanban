@@ -24,6 +24,7 @@ export default function MobileNavMenu() {
         {activeBoard && boards[activeBoard].title}
       </h1>
       <button
+        className='mobile-nav-toggle w-[25px] h-[25px] flex items-center justify-center'
         onClick={() => {
           setModal(
             <MobileControlPanel

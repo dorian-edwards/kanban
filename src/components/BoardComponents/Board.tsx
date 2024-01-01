@@ -14,11 +14,14 @@ export default function Board() {
   return (
     <>
       {activeBoard && activeColumns.length !== 0 ? (
-        <div className='w-full h-full pt-24px px-16px  overflow-x-scroll'>
+        <div className='w-full h-full pt-24px px-16px  overflow-x-scroll snap-x'>
           <ul className='flex gap-x-24px'>
             {activeColumns.map(({ id, title, boardId }, index) => {
               return (
-                <li key={id} className='display-block min-w-[28rem]'>
+                <li
+                  key={id}
+                  className='display-block min-w-[28rem] snap-center'
+                >
                   <Column
                     id={id}
                     title={title}
@@ -28,7 +31,7 @@ export default function Board() {
                 </li>
               )
             })}
-            <li>
+            <li className='add-column snap-end'>
               <button
                 className='h-[79.49vh] w-[28rem] text-center display-block mt-[4.2rem] rounded-[.6rem] bg-[#E4EBFA] dark:bg-[rgb(34,35,45)] text-med-gray transition-colors duration-1000 hover:text-primary-purple'
                 onClick={() => {

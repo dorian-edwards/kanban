@@ -12,7 +12,7 @@ export default function TaskDetails({ task }: { task: TaskInterface }) {
   const complete = activeSubtasks.reduce(reduceSubtasks, 0)
 
   return (
-    <div className='task-details p-32px bg-white dark:bg-dark-gray transition-colors duration-1000 rounded-sm w-11/12 mx-auto'>
+    <div className='task-details p-32px bg-white dark:bg-dark-gray transition-colors duration-500 rounded-sm w-11/12 mx-auto'>
       <div className='heading mb-24px flex justify-between items-center relative'>
         <h2 className='task-title text-black dark:text-white text-18px font-bold'>
           {task.title}

@@ -33,7 +33,7 @@ export default function Board() {
             })}
             <li className='add-column snap-end'>
               <button
-                className='h-[79.49vh] w-[28rem] text-center display-block mt-[4.2rem] rounded-[.6rem] bg-[#E4EBFA] dark:bg-[rgb(34,35,45)] text-med-gray transition-colors duration-1000 hover:text-primary-purple'
+                className='h-[79.49vh] w-[28rem] text-center display-block mt-[4.2rem] rounded-[.6rem] bg-[#E4EBFA] dark:bg-[rgb(34,35,45)] text-med-gray transition-colors duration-500 hover:text-primary-purple'
                 onClick={() => {
                   setModal(<BoardForm editMode={true} />)
                   setOverlayActive(true)

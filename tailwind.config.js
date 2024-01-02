@@ -12,7 +12,7 @@ module.exports = {
       },
       boxShadow: {
         sm: '2.5px 4px 6px 0px rgba(54, 78, 126, 0.10)',
-        md: '5px 10px 11px 5px rgba(54, 78, 126, 0.25)',
+        md: '5px 8px 12px 2.5px rgba(54, 78, 126, 0.25)',
       },
       spacing: {
         '8px': '0.8rem',

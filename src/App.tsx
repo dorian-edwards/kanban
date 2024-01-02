@@ -29,7 +29,7 @@ export default function App() {
 
       <section className='primary-display flex tablet:h-[calc(100vh-7.6rem)] h-[calc(100vh-6.4rem)]'>
         {!mobile && <SidePanel sidePanelVisible={sidePanelVisible} />}
-        <main className='board-display flex flex-grow justify-center items-center border-t-[1px] border-lavender dark:border-lines-dark bg-lgt-gray dark:bg-very-dark-gray overflow-x-hidden transition-colors duration-1000'>
+        <main className='board-display flex flex-grow justify-center items-center border-t-[1px] border-lavender dark:border-lines-dark bg-lgt-gray dark:bg-very-dark-gray overflow-x-hidden transition-colors duration-333'>
           {!mobile && <ShowSidePanel showSidePanel={toggleSidePanel} />}
           {activeBoard ? <Board /> : <EmptyWorkspaceScreen />}
         </main>

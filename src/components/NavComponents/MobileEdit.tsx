@@ -8,6 +8,7 @@ import AddTask from '../icons/AddTask'
 
 export default function MobileEdit() {
   const { activeBoard, columns } = useBoardDataContext()
+  const { setModal, setOverlayActive } = useOverlayContext()
   const activeColumns = extractColumns(activeBoard, columns)
   const { setModal, setOverlayActive } = useOverlayContext()
 

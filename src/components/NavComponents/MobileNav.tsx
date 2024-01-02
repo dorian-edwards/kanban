@@ -13,7 +13,7 @@ export default function MobileNav() {
       <nav
         className={`mobile-nav ${
           fullScreen ? '' : 'z-[101]'
-        } pl-24px pr-16px py-16px flex items-center justify-between bg-white dark:bg-dark-gray transition-colors duration-1000`}
+        } pl-24px pr-16px py-16px flex items-center justify-between bg-white dark:bg-dark-gray transition-colors duration-333`}
       >
         {activeBoard ? (
           <MobileNavMenu />

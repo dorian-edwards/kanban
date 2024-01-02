@@ -128,7 +128,7 @@ export default function TaskForm({
   }
 
   return (
-    <div className='bg-white dark:bg-dark-gray  p-24px rounded-sm mx-[16px] transition-colors duration-1000'>
+    <div className='bg-white dark:bg-dark-gray  p-24px rounded-sm mx-[16px] transition-colors duration-333'>
       <form onSubmit={handleSubmit}>
         <h2 className='task-form-title mb-24px font-bold text-18px dark:text-white'>
           {taskToEdit ? 'Edit Task' : 'Add New Task'}
